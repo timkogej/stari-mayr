@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Stari Mayr — Gostilna website
 
-## Getting Started
+Premium traditional restaurant & inn website for Gostilna Stari Mayr.
 
-First, run the development server:
+## Tech stack
+
+Next.js 16 · React 19 · TypeScript · Tailwind CSS v4 · Framer Motion · shadcn/ui (base-ui)
+
+## Setup
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Replacing placeholder images
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Every `<PlaceholderImage>` and `<VintageImage>` is a placeholder. To replace with a real photo:
 
-## Learn More
+1. Add the image to `/public/images/` (e.g. `hero.jpg`)
+2. Replace the component with Next.js `<Image>`:
 
-To learn more about Next.js, take a look at the following resources:
+```tsx
+import Image from 'next/image';
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<Image
+  src="/images/hero.jpg"
+  alt="Descriptive alt text"
+  fill
+  className="object-cover"
+/>
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Wrap in a `div` with `relative` and the desired aspect ratio class.
 
-## Deploy on Vercel
+For vintage-effect real photos, wrap the image in `.vintage-photo`:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```tsx
+<div className="vintage-photo relative aspect-[4/3] overflow-hidden">
+  <Image src="/images/atrij-1987.jpg" alt="Atrij, 1987" fill className="object-cover" />
+</div>
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Adding a new language
+
+1. Duplicate `/messages/sl.json` to `/messages/en.json` and translate all values.
+2. Update `/src/i18n/config.ts`:
+   ```ts
+   export const locales = ['sl', 'en'] as const;
+   ```
+3. Move all pages under `app/[locale]/` route segment.
+4. Add a language switcher to the Header component.
+5. Wire up `next-intl` middleware for locale detection.
+
+## TODO
+
+- [ ] Replace all `<PlaceholderImage>` with real photos
+- [ ] Confirm exact address for Stari Mayr (update in messages/sl.json and Google Maps embed in kontakt/page.tsx)
+- [ ] Add phone number to messages/sl.json
+- [ ] Find exact Facebook page URL and update Footer.tsx and kontakt/page.tsx
+- [ ] Hook up reservation buttons to a booking system
+- [ ] Hook up contact form submission

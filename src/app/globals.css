@@ -1,26 +1,135 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-body);
   --font-mono: var(--font-geist-mono);
+
+  /* Custom brand colors */
+  --color-cream: #F5EFE6;
+  --color-parchment: #FAF6F0;
+  --color-sand: #E8DCC4;
+  --color-bronze: #8B6F47;
+  --color-honey: #C9A961;
+  --color-terracotta: #B85C3C;
+  --color-forest: #3B4A3F;
+  --color-coffee: #2C1F17;
+  --color-walnut: #5C4530;
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --cream: #F5EFE6;
+  --parchment: #FAF6F0;
+  --sand: #E8DCC4;
+  --bronze: #8B6F47;
+  --honey: #C9A961;
+  --terracotta: #B85C3C;
+  --forest: #3B4A3F;
+  --coffee: #2C1F17;
+  --walnut: #5C4530;
+
+  --background: #F5EFE6;
+  --foreground: #2C1F17;
+  --card: #FAF6F0;
+  --card-foreground: #2C1F17;
+  --popover: #FAF6F0;
+  --popover-foreground: #2C1F17;
+  --primary: #8B6F47;
+  --primary-foreground: #F5EFE6;
+  --secondary: #E8DCC4;
+  --secondary-foreground: #2C1F17;
+  --muted: #E8DCC4;
+  --muted-foreground: #5C4530;
+  --accent: #C9A961;
+  --accent-foreground: #2C1F17;
+  --destructive: #B85C3C;
+  --border: #E8DCC4;
+  --input: #E8DCC4;
+  --ring: #C9A961;
+  --radius: 0.375rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-cream text-coffee;
+    font-family: var(--font-body), sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display), serif;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .font-display { font-family: var(--font-display), serif; }
+  .font-body { font-family: var(--font-body), sans-serif; }
+  .font-script { font-family: var(--font-script), cursive; }
+}
+
+/* Vintage photo effect */
+.vintage-photo {
+  filter: sepia(0.35) contrast(1.08) brightness(0.95) saturate(0.85);
+  position: relative;
+}
+.vintage-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 55%, rgba(60, 40, 20, 0.25) 100%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.18'/></svg>");
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #F5EFE6; }
+::-webkit-scrollbar-thumb { background: #E8DCC4; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #8B6F47; }
+
+@keyframes mayr-marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.mayr-marquee {
+  display: flex;
+  width: max-content;
+  animation: mayr-marquee-scroll 68s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mayr-marquee {
+    animation: none;
+  }
 }
