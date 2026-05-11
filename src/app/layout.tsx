@@ -1,3 +1,4 @@
+// v1.0.1
 import type { Metadata } from 'next';
 import { Cormorant_Garamond, Inter, Italianno } from 'next/font/google';
 import './globals.css';
