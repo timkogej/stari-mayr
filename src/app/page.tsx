@@ -1,15 +1,15 @@
 import { Hero } from '@/components/sections/Hero';
 import { HomeIntro } from '@/components/sections/HomeIntro';
-import { HomeMenuPreview } from '@/components/sections/HomeMenuPreview';
+import { HomeRoomsPreview } from '@/components/sections/HomeRoomsPreview';
 import { HomeGalleryPreview } from '@/components/sections/HomeGalleryPreview';
-import { HomeRoomsTeaser } from '@/components/sections/HomeRoomsTeaser';
+import { HomeAtriumShowcase } from '@/components/sections/HomeAtriumShowcase';
 import { HomeContactCTA } from '@/components/sections/HomeContactCTA';
 import { SectionDivider } from '@/components/shared/SectionDivider';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Domov',
-  description: 'Dobrodošli v Stari Mayr — tradicionalni gostilni z več kot stoletno tradicijo v starem mestnem jedru Kranja.',
+  description: 'Dobrodošli v Stari Mayr — sobe in tradicija v starem mestnem jedru Kranja.',
 };
 
 export default function HomePage() {
@@ -19,11 +19,11 @@ export default function HomePage() {
       <SectionDivider className="mt-0" />
       <HomeIntro />
       <SectionDivider />
-      <HomeMenuPreview />
+      <HomeRoomsPreview />
       <SectionDivider />
       <HomeGalleryPreview />
       <SectionDivider />
-      <HomeRoomsTeaser />
+      <HomeAtriumShowcase />
       <HomeContactCTA />
     </>
   );

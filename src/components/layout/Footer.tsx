@@ -1,4 +1,5 @@
 import { Share2 } from 'lucide-react';
+import { ReservationButtons } from '@/components/shared/ReservationButtons';
 import { getMessages } from '@/lib/content';
 
 const messages = getMessages();
@@ -9,7 +10,7 @@ export function Footer() {
   return (
     <footer className="bg-coffee text-cream/80">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-8">
           {/* Column 1: Wordmark */}
           <div>
             <p className="font-display italic text-2xl text-cream tracking-wide mb-2">
@@ -47,6 +48,11 @@ export function Footer() {
               {f.facebookLabel}
             </a>
           </div>
+        </div>
+
+        {/* Reservation button row */}
+        <div className="mt-8 lg:mt-10 flex justify-center lg:justify-start mb-10">
+          <ReservationButtons />
         </div>
 
         <div className="border-t border-cream/10 pt-6 text-xs font-body text-cream/40">

@@ -27,13 +27,13 @@ const fontScript = Italianno({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Stari Mayr — Gostilna z več kot stoletno tradicijo',
+    default: 'Stari Mayr — Sobe in tradicija v starem mestnem jedru',
     template: '%s · Stari Mayr',
   },
-  description: 'Tradicionalna slovenska gostilna v starem mestnem jedru Kranja. Domače jedi, prenočišča in atrij z dušo.',
+  description: 'Tradicionalna gostilna in prenočišče v starem mestnem jedru Kranja. Sobe, atrij in domača kuhinja z dušo.',
   openGraph: {
-    title: 'Stari Mayr — Gostilna z več kot stoletno tradicijo',
-    description: 'Tradicionalna slovenska gostilna v starem mestnem jedru Kranja. Domače jedi, prenočišča in atrij z dušo.',
+    title: 'Stari Mayr — Sobe in tradicija v starem mestnem jedru',
+    description: 'Tradicionalna gostilna in prenočišče v starem mestnem jedru Kranja. Sobe, atrij in domača kuhinja z dušo.',
     locale: 'sl_SI',
     type: 'website',
   },

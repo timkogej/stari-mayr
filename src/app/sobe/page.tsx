@@ -116,7 +116,7 @@ export default function SobePage() {
                     ))}
                   </div>
                   <p className="font-display italic text-xl text-honey mb-6">{room.price}</p>
-                  <ReservationButtons variant="room" />
+                  <ReservationButtons />
                 </div>
               </div>
 
@@ -147,7 +147,7 @@ export default function SobePage() {
         <FadeIn className="mt-20 text-center">
           <h3 className="font-display italic text-2xl text-coffee mb-6">{rooms.cta.title}</h3>
           <div className="flex justify-center">
-            <ReservationButtons variant="room" />
+            <ReservationButtons />
           </div>
         </FadeIn>
       </div>

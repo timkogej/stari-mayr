@@ -1,23 +1,22 @@
 {
   "site": {
     "name": "Stari Mayr",
-    "tagline": "Gostilna z več kot stoletno tradicijo",
-    "description": "Tradicionalna slovenska gostilna v starem mestnem jedru Kranja. Domače jedi, prenočišča in atrij z dušo."
+    "tagline": "Sobe in tradicija v starem mestnem jedru",
+    "description": "Tradicionalna gostilna in prenočišče v starem mestnem jedru Kranja. Sobe, atrij in domača kuhinja z dušo."
   },
   "nav": {
     "home": "Domov",
-    "menu": "Meni",
+    "ponudba": "Ponudba",
     "gallery": "Galerija",
     "about": "O nas",
     "rooms": "Sobe",
     "contact": "Kontakt"
   },
   "cta": {
-    "reserveTable": "Rezerviraj mizo",
     "reserveRoom": "Rezerviraj sobo"
   },
   "footer": {
-    "tagline": "Gostilna z več kot stoletno tradicijo",
+    "tagline": "Več kot stoletna tradicija v starem mestnem jedru",
     "contact": "Kontakt",
     "address": "Glavni trg 16, 4000 Kranj",
     "addressNote": "Staro mestno jedro Kranja",
@@ -31,46 +30,39 @@
   "home": {
     "hero": {
       "eyebrow": "Od leta 1920",
-      "title": "GOSTILNA",
       "wordmark": "Stari Mayr",
-      "tagline": "Prava slovenska kuhinja v srcu Kranja",
+      "tagline": "Sobe in tradicija v starem mestnem jedru",
       "scrollLabel": "Odkrijte"
     },
     "intro": {
       "eyebrow": "Naša zgodba",
       "title": "Več kot sto let toplega doma",
-      "body": "V samem srcu starega mestnega jedra Kranja že več kot sto let gostimo goste, ki iščejo pristen okus domače kuhinje. Gostilna Stari Mayr je ostala zvesta svojemu poslanstvu skozi generacije — jed pripravljena z ljubeznijo, vzdušje ki ogreje, in prostor kjer se čas upočasni. Prihajajte na golaž, vampe ali štruklji, in odkrijte naš skrivni atrij.",
+      "body": "V samem srcu starega mestnega jedra Kranja že več kot sto let gostimo goste, ki iščejo pristen stik s tradicijo. Stari Mayr je ostal zvest svojemu poslanstvu skozi generacije — topel sprejem, vzdušje ki ogreje, in prostor kjer se čas upočasni. Odkrijte naš skrivni atrij in pet sob s svojo zgodbo.",
       "link": "Spoznajte nas"
     },
-    "dishes": {
-      "eyebrow": "Iz naše kuhinje",
-      "title": "Jedi z dušo",
-      "lead": "Vsak dan sveže, iz lokalnih sestavin, po receptih ki so se prenašali skozi generacije.",
-      "menuLink": "Celotni meni",
-      "items": [
+    "rooms_preview": {
+      "eyebrow": "Prenočišče",
+      "title": "Pet sob, pet zgodb",
+      "lead": "V zgodovinski stavbi v srcu starega mestnega jedra je pet sob, vsaka s svojim značajem in pogledom. V vsako smo vtkali topel materialni svet in sodobno udobje, ki ohranja duh stoletne hiše.",
+      "link": "Spoznajte vse naše sobe",
+      "cards": [
         {
-          "name": "Goveji golaž z domačim kruhom",
-          "description": "Počasi kuhan, bogat, pravi gostilniški golaž",
-          "price": "11.00 €",
-          "imageLabel": "JED — goveji golaž"
+          "eyebrow": "Soba 02",
+          "name": "Tradicija",
+          "description": "Zakonska postelja, originalne lesene tramove smo ohranili, pogled na staro mestno jedro. Ena izmed naših klasičnih sob.",
+          "imageLabel": "Soba Tradicija"
         },
         {
-          "name": "Štruklji s skuto in smetano",
-          "description": "Domači skutni štruklji po stari recepturi",
-          "price": "7.50 €",
-          "imageLabel": "JED — štruklji s skuto"
+          "eyebrow": "Soba 03",
+          "name": "Atrij",
+          "description": "Zakonska postelja, miren pogled v notranji atrij hiše, idealna za tiste ki si želijo umaknitev od mestnega vrveža.",
+          "imageLabel": "Soba Atrij"
         },
         {
-          "name": "Tržaška obara",
-          "description": "Gosta, dišeča obara po tržaško iz morskih sadežev",
-          "price": "11.50 €",
-          "imageLabel": "JED — tržaška obara"
-        },
-        {
-          "name": "Govedina v hrenovi omaki",
-          "description": "Mehka govedina v pikantni domači hrenovi omaki",
-          "price": "14.50 €",
-          "imageLabel": "JED — govedina v hrenovi omaki"
+          "eyebrow": "Soba 05",
+          "name": "Apartma Stari Mayr",
+          "description": "Apartma z dnevno sobo in spalnico, kuhinjski kotiček, ohranjeni detajli iz dvajsetih let. Naša najprostornejša izbira.",
+          "imageLabel": "Apartma Stari Mayr"
         }
       ]
     },
@@ -79,12 +71,12 @@
       "title": "Trenutki iz Stari Mayr",
       "link": "Vsa galerija"
     },
-    "rooms": {
-      "eyebrow": "Prenočišče",
-      "title": "Soba s pogledom v zgodovino",
-      "body": "Pet sob v zgodovinski stavbi v samem srcu starega mestnega jedra Kranja. Vsaka soba nosi svojo zgodbo, obenem pa ponuja sodobno udobje — zasebna kopalnica, brezžični internet in zajtrk vključen v ceno. Parkirišče v bližini. Prebudite se v mestu, ki diha zgodovino.",
-      "link": "Več o sobah",
-      "imageLabel": "SOBE — zunanjost stavbe"
+    "atrium": {
+      "eyebrow": "Naš atrij",
+      "title": "Skrit dragulj starega mestnega jedra",
+      "body": "Za stenami stoletne hiše se odpre tih notranji atrij — arkade, ki so prestale več kot eno stoletje, kamnita tla, ki jih je oblikoval čas. V toplih mesecih to postane prostor počasnih večerov, dolgih obrokov in pogovora, ki ne pozna ure. To je morda najlepši kotiček naše hiše — kot da bi vstopil v drug čas.",
+      "imageLabel": "Atrij — naš skriti dragulj",
+      "link": "Več o ponudbi"
     },
     "contact": {
       "eyebrow": "Vabljeni",
@@ -95,158 +87,30 @@
       "email": "mayr.doo@siol.net"
     }
   },
-  "menu": {
+  "ponudba": {
     "hero": {
-      "eyebrow": "Iz naše kuhinje",
-      "title": "Meni",
-      "lead": "Sestavine iz lokalnih virov, sveže vsak dan, po receptih ki so se prenašali skozi generacije. Meni se sezonsko spreminja."
+      "eyebrow": "Kaj ponujamo",
+      "title": "Ponudba",
+      "lead": "Domača kuhinja, atrij in prenočišča — vse v eni zgodovinski hiši v srcu Kranja."
     },
-    "intro": "Kuhamo iz lokalnih sestavin, ki jih izbiramo vsak dan. Naši recepti so se prenašali skozi generacije in ostajajo zvesti tradiciji. Meni se sezonsko prilagaja temu, kar je najboljšega na voljo.",
-    "reserveTable": "Rezerviraj mizo",
-    "categories": [
-      {
-        "name": "Predjedi",
-        "items": [
-          {
-            "name": "Pršut s sirom in olivami",
-            "price": "9.50 €"
-          },
-          {
-            "name": "Domača šunka in hren",
-            "price": "8.00 €"
-          },
-          {
-            "name": "Teletina v majonezi",
-            "price": "8.50 €"
-          }
-        ]
-      },
-      {
-        "name": "Juhe",
-        "items": [
-          {
-            "name": "Goveja juha z domačimi rezanci",
-            "price": "4.50 €"
-          },
-          {
-            "name": "Gobova juha s prosenimi žganci",
-            "price": "5.00 €"
-          },
-          {
-            "name": "Jota po starem",
-            "price": "5.50 €"
-          }
-        ]
-      },
-      {
-        "name": "Jedi na žlico",
-        "accent": true,
-        "items": [
-          {
-            "name": "Goveji golaž z domačim kruhom",
-            "price": "11.00 €"
-          },
-          {
-            "name": "Vampi v paradižnikovi omaki",
-            "price": "10.50 €"
-          },
-          {
-            "name": "Tržaška obara",
-            "price": "11.50 €"
-          },
-          {
-            "name": "Pasulj s klobaso",
-            "price": "10.00 €"
-          }
-        ]
-      },
-      {
-        "name": "Glavne jedi",
-        "items": [
-          {
-            "name": "Dunajski zrezek z mlado solato",
-            "price": "14.50 €"
-          },
-          {
-            "name": "Goveji file v omaki iz pravih jurčkov",
-            "price": "22.00 €"
-          },
-          {
-            "name": "Pražene gobe in žličniki",
-            "price": "13.00 €"
-          },
-          {
-            "name": "Telečji medaljoni v gorčični omaki",
-            "price": "18.50 €"
-          },
-          {
-            "name": "Domača svinjska pečenka z mlinci",
-            "price": "13.50 €"
-          }
-        ]
-      },
-      {
-        "name": "Žar",
-        "note": "Poletni meni — atrij",
-        "items": [
-          {
-            "name": "Mešani žar za dva",
-            "price": "28.00 €"
-          },
-          {
-            "name": "Pleskavica v lepinji",
-            "price": "11.00 €"
-          },
-          {
-            "name": "Piščančji file z zelenjavo",
-            "price": "12.50 €"
-          }
-        ]
-      },
-      {
-        "name": "Štruklji & domače specialitete",
-        "items": [
-          {
-            "name": "Skutni štruklji s smetano",
-            "price": "7.50 €"
-          },
-          {
-            "name": "Orehovi štruklji z drobtinami",
-            "price": "7.50 €"
-          },
-          {
-            "name": "Idrijski žlikrofi z bakalco",
-            "price": "12.00 €"
-          }
-        ]
-      },
-      {
-        "name": "Sladice",
-        "items": [
-          {
-            "name": "Prekmurska gibanica",
-            "price": "5.50 €"
-          },
-          {
-            "name": "Domači jabolčni zavitek",
-            "price": "4.50 €"
-          },
-          {
-            "name": "Kremšnita po starem",
-            "price": "4.50 €"
-          },
-          {
-            "name": "Skutina pita",
-            "price": "4.50 €"
-          }
-        ]
-      },
-      {
-        "name": "Vinska karta",
-        "note": "Ponujamo izbor slovenskih vin iz Vipavske doline, Goriških Brd in Štajerske. Polna vinska karta na voljo v gostilni.",
-        "items": []
-      }
-    ]
+    "cuisine": {
+      "title": "Doma kuhana tradicija",
+      "body": "V naši kuhinji se vsak dan pripravljajo jedi, ki so se prenašale iz rok v roke skozi generacije. Sestavine prihajajo od lokalnih kmetov in tržnice, meni pa se prilagaja sezonam — tako kot je vedno bilo. Na jedilniku so jedi na žlico, ki ogrejejo dušo: goveji golaž, jota, obara. Domači štruklji, pripravljeni po stari recepturi, in slovenske sladice, ki zaokrožijo obrok. Vsaka jed je pripravljena od začetka, tistega dne — brez bližnjic in brez kompromisov.",
+      "imageLabel": "PONUDBA — domača kuhinja"
+    },
+    "courtyard": {
+      "title": "Atrij za poletne dni",
+      "body": "Za vhodnimi vrati se skriva tih notranji atrij z arkadirano kolonado, ki je prestala več kot eno stoletje. V toplih mesecih tu postrežemo obroke na prostem — med starimi kamnitimi zidovi, daleč od mestnega hrupa. Prostor je intimen in umirjen, primeren za počasen kosilo ali večerjo pod odprtim nebom."
+    },
+    "accommodation": {
+      "title": "Prenočišče",
+      "body": "V zgodovinski stavbi je pet skrbno urejenih sob, vsaka s svojo zgodbo in značajem. Idealne za goste, ki obiščejo staro mestno jedro ali širšo okolico Kranja. Lastna kopalnica, zajtrk in topel sprejem so del vsakega bivanja.",
+      "link": "Več o sobah"
+    },
+    "closing": {
+      "title": "Za prihajajoče goste",
+      "body": "Stari Mayr sprejema goste v duhu več kot sto let tradicije. Za rezervacije in povpraševanja v zvezi z gostinsko ponudbo so gostje prisrčno vabljeni, da nas kontaktirajo neposredno — z veseljem vas bomo sprejeli."
+    }
   },
   "gallery": {
     "hero": {
@@ -381,7 +245,7 @@
     },
     "section1": {
       "title": "Začetki",
-      "body": "Gostilna Stari Mayr je odprla svoja vrata v zgodnjih dvajsetih letih prejšnjega stoletja v samem srcu starega mestnega jedra Kranja. Stavba, ki jo danes poznamo, je bila že takrat dom gostinstva in toplega sprejema. Ustanovitelji so verjeli, da je dobra jed tista, ki ogreje dušo — in ta prepričanje se je ohranilo do danes. Skozi desetletja je gostilna postala nepogrešljiv del mestnega tkiva, prostor kjer so se srečevali meščani, popotniki in romarji."
+      "body": "Stari Mayr je odprl svoja vrata v zgodnjih dvajsetih letih prejšnjega stoletja v samem srcu starega mestnega jedra Kranja. Stavba, ki jo danes poznamo, je bila že takrat dom gostinstva in toplega sprejema. Ustanovitelji so verjeli, da je dobra jed tista, ki ogreje dušo — in ta prepričanje se je ohranilo do danes. Skozi desetletja je gostilna postala nepogrešljiv del mestnega tkiva, prostor kjer so se srečevali meščani, popotniki in romarji."
     },
     "section3": {
       "title": "Skozi generacije",
@@ -491,7 +355,7 @@
         "eyebrow": "Soba 05",
         "name": "Apartma Stari Mayr",
         "type": "Apartma",
-        "description": "Dnevna soba in spalnica, kuhinjski kotiček, original detajli iz leta 1920 skrbno obnovljeni. Zgodovinska suita za tiste, ki iščejo več kot prenočišče — iščejo izkušnjo.",
+        "description": "Dnevna soba in spalnica, kuhinjski kotiček, originalni detajli iz leta 1920 skrbno obnovljeni. Zgodovinska suita za tiste, ki iščejo več kot prenočišče — iščejo izkušnjo.",
         "price": "od 165 € / noč",
         "amenities": [
           "Lastna kopalnica",

@@ -92,7 +92,7 @@ export default function KontaktPage() {
 
         {/* Reservation buttons */}
         <FadeIn className="flex justify-center mb-20">
-          <ReservationButtons variant="both" />
+          <ReservationButtons />
         </FadeIn>
 
         {/* Contact form */}

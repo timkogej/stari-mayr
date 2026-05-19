@@ -17,7 +17,7 @@ function getReviewsByPathname(pathname: string): { sectionTitle: string; items: 
   if (pathname.startsWith('/sobe')) {
     return { sectionTitle: 'Mnenja o sobah', items: reviews.byPage.rooms };
   }
-  if (pathname.startsWith('/meni')) {
+  if (pathname.startsWith('/ponudba')) {
     return { sectionTitle: 'Mnenja o hrani', items: reviews.byPage.menu };
   }
   if (pathname.startsWith('/o-nas')) {

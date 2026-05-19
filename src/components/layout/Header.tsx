@@ -12,7 +12,7 @@ const nav = messages.nav;
 
 const links = [
   { label: nav.home, href: '/' },
-  { label: nav.menu, href: '/meni' },
+  { label: nav.ponudba, href: '/ponudba' },
   { label: nav.gallery, href: '/galerija' },
   { label: nav.about, href: '/o-nas' },
   { label: nav.rooms, href: '/sobe' },
@@ -67,9 +67,9 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Desktop reservation buttons */}
-        <div className="hidden lg:flex items-center">
-          <ReservationButtons variant="both" context={scrolled ? 'light' : 'dark'} />
+        {/* Desktop reservation button */}
+        <div className="hidden lg:flex items-center pr-1">
+          <ReservationButtons />
         </div>
 
         {/* Mobile hamburger */}
@@ -103,8 +103,8 @@ export function Header() {
                   </Link>
                 ))}
               </nav>
-              <div className="pt-6 border-t border-sand/80 flex flex-col gap-3">
-                <ReservationButtons variant="both" context="light" />
+              <div className="pt-6 border-t border-sand/80 flex justify-center py-6">
+                <ReservationButtons />
               </div>
             </div>
           </SheetContent>

@@ -49,7 +49,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-          className="font-script text-honey text-2xl mb-6"
+          className="font-script text-honey text-2xl mb-10"
         >
           {h.eyebrow}
         </motion.p>
@@ -58,37 +58,16 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-          className="font-display font-light text-cream tracking-[0.4em] text-5xl md:text-7xl"
-        >
-          {h.title}
-        </motion.h1>
-
-        {/* Ornament divider */}
-        <motion.div
-          initial={{ opacity: 0, scaleX: 0 }}
-          animate={{ opacity: 1, scaleX: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex items-center gap-4 my-6"
-        >
-          <div className="h-px w-16 bg-honey/60" />
-          <span className="text-honey text-xs">◆</span>
-          <div className="h-px w-16 bg-honey/60" />
-        </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-          className="font-display italic font-medium text-cream text-6xl md:text-8xl"
+          className="font-display italic font-medium text-cream text-7xl md:text-8xl lg:text-9xl"
         >
           {h.wordmark}
-        </motion.p>
+        </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
-          className="font-body text-cream/70 uppercase tracking-widest text-xs mt-6 mb-8"
+          transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+          className="font-body text-cream/80 uppercase tracking-widest text-xs mt-8 mb-8"
         >
           {h.tagline}
         </motion.p>
@@ -96,9 +75,9 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.1, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ duration: 0.8, delay: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
         >
-          <ReservationButtons variant="both" context="dark" />
+          <ReservationButtons />
         </motion.div>
       </div>
 
@@ -106,7 +85,7 @@ export function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.5 }}
+        transition={{ duration: 1, delay: 1.2 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-cream/50"
       >
         <span className="font-script text-sm">{h.scrollLabel}</span>

@@ -7,7 +7,7 @@ const contact = messages.home.contact;
 
 export function HomeContactCTA() {
   return (
-    <section className="bg-forest text-cream py-20 lg:py-32">
+    <section className="bg-walnut text-cream py-20 lg:py-32">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <FadeIn className="text-center max-w-xl mx-auto">
           <p className="font-display uppercase tracking-[0.3em] text-xs text-honey mb-4">
@@ -25,7 +25,7 @@ export function HomeContactCTA() {
             <p>{contact.email}</p>
           </div>
           <div className="flex justify-center">
-            <ReservationButtons variant="table" context="dark" />
+            <ReservationButtons />
           </div>
         </FadeIn>
       </div>
