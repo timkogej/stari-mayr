@@ -1,4 +1,4 @@
-import { Hero } from '@/components/sections/Hero';
+import { ScrollVideoHero } from '@/components/sections/ScrollVideoHero';
 import { HomeIntro } from '@/components/sections/HomeIntro';
 import { HomeRoomsPreview } from '@/components/sections/HomeRoomsPreview';
 import { HomeGalleryPreview } from '@/components/sections/HomeGalleryPreview';
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      <Hero />
+      <ScrollVideoHero />
       <SectionDivider className="mt-0" />
       <HomeIntro />
       <SectionDivider />

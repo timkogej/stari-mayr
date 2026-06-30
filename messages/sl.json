@@ -34,6 +34,18 @@
       "tagline": "Sobe in tradicija v starem mestnem jedru",
       "scrollLabel": "Odkrijte"
     },
+    "scrollHero": {
+      "scrollLabel": "Podrsajte za zgodbo",
+      "introEyebrow": "Od leta 1920",
+      "introTitle": "Stari Mayr",
+      "introSubtitle": "Sobe in tradicija v starem mestnem jedru",
+      "midpointTitle": "Več kot sto let zgodovine",
+      "midpointSubtitle": "Zgodovinska hiša v srcu starega Kranja.",
+      "finalTitle": "Sobe v središču Kranja",
+      "finalSubtitle": "Udobno bivanje, topel ambient in pristna mestna zgodba.",
+      "ctaPrimary": "Oglej si sobe",
+      "ctaSecondary": "Rezerviraj bivanje"
+    },
     "intro": {
       "eyebrow": "Naša zgodba",
       "title": "Več kot sto let toplega doma",
