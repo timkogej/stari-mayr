@@ -2,25 +2,37 @@
 
 import { useSyncExternalStore } from 'react';
 
-const QUERY = '(prefers-reduced-motion: reduce)';
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
+// Touch / coarse-pointer devices (phones, most tablets). Scroll-scrubbing a video
+// via `currentTime` is unreliable on these — iOS Safari in particular won't paint
+// a frame while seeking a non-playing video — so we serve a plain playing video.
+const TOUCH_QUERY = '(hover: none) and (pointer: coarse)';
 
-function subscribe(callback: () => void): () => void {
-  const mq = window.matchMedia(QUERY);
-  mq.addEventListener('change', callback);
-  return () => mq.removeEventListener('change', callback);
+function makeMediaHook(query: string) {
+  return function useMediaQuery(): boolean {
+    return useSyncExternalStore(
+      (callback) => {
+        const mq = window.matchMedia(query);
+        mq.addEventListener('change', callback);
+        return () => mq.removeEventListener('change', callback);
+      },
+      () => window.matchMedia(query).matches,
+      () => false
+    );
+  };
 }
 
 /**
  * Returns whether the user has requested reduced motion.
  * Used to swap the cinematic scroll-scrub hero for a calm static fallback.
  */
-export function usePrefersReducedMotion(): boolean {
-  return useSyncExternalStore(
-    subscribe,
-    () => window.matchMedia(QUERY).matches,
-    () => false
-  );
-}
+export const usePrefersReducedMotion = makeMediaHook(REDUCED_MOTION_QUERY);
+
+/**
+ * Returns whether the device is a touch / coarse-pointer device (phones, tablets),
+ * where scroll-scrubbing a video does not work reliably.
+ */
+export const useIsTouchDevice = makeMediaHook(TOUCH_QUERY);
 
 /** Clamp a number into the [min, max] range. */
 export function clamp(value: number, min = 0, max = 1): number {

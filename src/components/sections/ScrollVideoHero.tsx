@@ -6,6 +6,7 @@ import { ChevronDown } from 'lucide-react';
 import { getMessages } from '@/lib/content';
 import {
   usePrefersReducedMotion,
+  useIsTouchDevice,
   clamp,
   ramp,
   smooth,
@@ -36,9 +37,12 @@ const SCRUB_EASE = 0.1;
 
 export function ScrollVideoHero() {
   const reducedMotion = usePrefersReducedMotion();
+  const isTouch = useIsTouchDevice();
 
-  if (reducedMotion) {
-    return <StaticHeroFallback />;
+  // Scroll-scrubbing is desktop-only. On touch devices (and when the user asks
+  // for reduced motion) we serve a plain playing video instead.
+  if (reducedMotion || isTouch) {
+    return <StaticHeroFallback autoPlayLoop={!reducedMotion} />;
   }
 
   return <ScrubHero />;
@@ -355,12 +359,21 @@ function ScrubHero() {
 /*  Static fallback for prefers-reduced-motion                                */
 /* -------------------------------------------------------------------------- */
 
-function StaticHeroFallback() {
+function StaticHeroFallback({ autoPlayLoop = false }: { autoPlayLoop?: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
+    if (autoPlayLoop) {
+      // Muted + playsInline autoplay is allowed inline on iOS/Android. Kick it
+      // off explicitly too, since some browsers ignore the autoplay attribute
+      // when it's set after hydration.
+      const tryPlay = () => v.play().catch(() => {});
+      if (v.readyState >= 2) tryPlay();
+      else v.addEventListener('canplay', tryPlay, { once: true });
+      return () => v.removeEventListener('canplay', tryPlay);
+    }
     const onMeta = () => {
       try {
         v.currentTime = 0;
@@ -370,7 +383,7 @@ function StaticHeroFallback() {
     };
     if (v.readyState >= 1) onMeta();
     else v.addEventListener('loadedmetadata', onMeta, { once: true });
-  }, []);
+  }, [autoPlayLoop]);
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-coffee">
@@ -381,6 +394,8 @@ function StaticHeroFallback() {
         muted
         playsInline
         preload="auto"
+        autoPlay={autoPlayLoop}
+        loop={autoPlayLoop}
         aria-hidden="true"
         tabIndex={-1}
       />
