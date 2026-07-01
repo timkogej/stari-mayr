@@ -13,8 +13,15 @@ function makeMediaHook(query: string) {
     return useSyncExternalStore(
       (callback) => {
         const mq = window.matchMedia(query);
+        let active = true;
         mq.addEventListener('change', callback);
-        return () => mq.removeEventListener('change', callback);
+        queueMicrotask(() => {
+          if (active) callback();
+        });
+        return () => {
+          active = false;
+          mq.removeEventListener('change', callback);
+        };
       },
       () => window.matchMedia(query).matches,
       () => false

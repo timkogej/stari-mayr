@@ -19,10 +19,11 @@ const c = messages.home.scrollHero;
 
 const VIDEO_1 = '/videos/stari-mayr-scroll-01.mp4';
 const VIDEO_2 = '/videos/stari-mayr-scroll-02.mp4';
-const MOBILE_VIDEO = '/videos/stari-mayr-mobile-hero.mp4';
 const VIDEO_1_POSTER = '/images/stari-mayr-scroll-poster.jpg';
 const VIDEO_2_POSTER = '/images/stari-mayr-scroll-02-poster.jpg';
-const AUTOPLAY_EVENTS = ['loadedmetadata', 'loadeddata', 'canplay', 'canplaythrough'] as const;
+const MOBILE_FRAME_COUNT = 50;
+const MOBILE_FRAMES_1 = makeMobileFrames('/frames/stari-mayr-mobile/v1/frame-');
+const MOBILE_FRAMES_2 = makeMobileFrames('/frames/stari-mayr-mobile/v2/frame-');
 
 /**
  * Scroll timeline (fraction of total section scroll):
@@ -48,48 +49,45 @@ export function ScrollVideoHero() {
     return <StillHeroFallback />;
   }
 
-  // Scroll-scrubbing is desktop-only. On touch devices we serve a normal
-  // autoplaying clip because iOS Safari is unreliable with currentTime scrubbing.
+  // Scroll-scrubbing MP4 with currentTime is unreliable on iOS Safari. Touch
+  // devices get a canvas frame sequence driven by scroll instead.
   if (isTouch) {
-    return <TouchVideoHero />;
+    return <MobileCanvasHero />;
   }
 
   return <ScrubHero />;
 }
 
-function useMutedInlineAutoplay(videoRef: { current: HTMLVideoElement | null }) {
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+function makeMobileFrames(basePath: string) {
+  return Array.from(
+    { length: MOBILE_FRAME_COUNT },
+    (_, i) => `${basePath}${String(i + 1).padStart(3, '0')}.jpg`
+  );
+}
 
-    video.muted = true;
-    video.defaultMuted = true;
-    video.playsInline = true;
+function imageForProgress(images: HTMLImageElement[], progress: number) {
+  const index = Math.round(clamp(progress) * (images.length - 1));
+  const image = images[index];
+  return image?.complete && image.naturalWidth > 0 ? image : null;
+}
 
-    const tryPlay = () => {
-      const play = video.play();
-      if (play) play.catch(() => {});
-    };
+function drawCover(
+  ctx: CanvasRenderingContext2D,
+  image: HTMLImageElement,
+  width: number,
+  height: number,
+  alpha = 1
+) {
+  const scale = Math.max(width / image.naturalWidth, height / image.naturalHeight);
+  const drawWidth = image.naturalWidth * scale;
+  const drawHeight = image.naturalHeight * scale;
+  const x = (width - drawWidth) / 2;
+  const y = (height - drawHeight) / 2;
 
-    const playWhenVisible = () => {
-      if (document.visibilityState === 'visible') tryPlay();
-    };
-
-    tryPlay();
-    AUTOPLAY_EVENTS.forEach((event) => video.addEventListener(event, tryPlay));
-    document.addEventListener('visibilitychange', playWhenVisible);
-    document.addEventListener('touchstart', tryPlay, { passive: true });
-    document.addEventListener('pointerdown', tryPlay);
-    window.addEventListener('pageshow', tryPlay);
-
-    return () => {
-      AUTOPLAY_EVENTS.forEach((event) => video.removeEventListener(event, tryPlay));
-      document.removeEventListener('visibilitychange', playWhenVisible);
-      document.removeEventListener('touchstart', tryPlay);
-      document.removeEventListener('pointerdown', tryPlay);
-      window.removeEventListener('pageshow', tryPlay);
-    };
-  }, [videoRef]);
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.drawImage(image, x, y, drawWidth, drawHeight);
+  ctx.restore();
 }
 
 /* -------------------------------------------------------------------------- */
@@ -405,50 +403,265 @@ function ScrubHero() {
 /*  Touch / reduced-motion fallbacks                                          */
 /* -------------------------------------------------------------------------- */
 
-function TouchVideoHero() {
-  const videoRef = useRef<HTMLVideoElement>(null);
+function MobileCanvasHero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const gradientRef = useRef<HTMLDivElement>(null);
+  const introRef = useRef<HTMLDivElement>(null);
+  const midpointRef = useRef<HTMLDivElement>(null);
+  const finalRef = useRef<HTMLDivElement>(null);
+  const hintRef = useRef<HTMLDivElement>(null);
 
-  useMutedInlineAutoplay(videoRef);
+  useEffect(() => {
+    const section = sectionRef.current;
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext('2d');
+    if (!section || !canvas || !ctx) return;
+
+    let rafId = 0;
+    let active = false;
+    let lastDrawn: HTMLImageElement | null = null;
+
+    const frames1 = MOBILE_FRAMES_1.map((src) => {
+      const image = new window.Image();
+      image.decoding = 'async';
+      image.src = src;
+      return image;
+    });
+    const frames2 = MOBILE_FRAMES_2.map((src) => {
+      const image = new window.Image();
+      image.decoding = 'async';
+      image.src = src;
+      return image;
+    });
+
+    const computeProgress = () => {
+      const rect = section.getBoundingClientRect();
+      const scrollable = section.offsetHeight - window.innerHeight;
+      if (scrollable <= 0) return 0;
+      return clamp(-rect.top / scrollable);
+    };
+
+    const resizeCanvas = () => {
+      const rect = canvas.getBoundingClientRect();
+      const width = Math.max(1, Math.round(rect.width));
+      const height = Math.max(1, Math.round(rect.height));
+      if (canvas.width !== width || canvas.height !== height) {
+        canvas.width = width;
+        canvas.height = height;
+      }
+    };
+
+    const draw = (p: number) => {
+      resizeCanvas();
+
+      const width = canvas.width;
+      const height = canvas.height;
+      const v1 = imageForProgress(frames1, ramp(p, 0, V1_END));
+      const v2 = imageForProgress(frames2, ramp(p, V2_START, V2_END));
+      const v2Opacity = smooth(ramp(p, V1_END + 0.13, V2_START));
+
+      ctx.clearRect(0, 0, width, height);
+
+      const base = v1 ?? lastDrawn;
+      if (base) {
+        drawCover(ctx, base, width, height);
+        lastDrawn = base;
+      }
+
+      if (v2 && v2Opacity > 0.01) {
+        drawCover(ctx, v2, width, height, v2Opacity);
+        if (v2Opacity > 0.98) lastDrawn = v2;
+      }
+    };
+
+    const render = () => {
+      const p = computeProgress();
+
+      draw(p);
+
+      const introLeave = smooth(ramp(p, 0.04, 0.22));
+      const introOpacity = 1 - introLeave;
+      const introY = -introLeave * 42;
+      if (introRef.current) {
+        introRef.current.style.opacity = String(introOpacity);
+        introRef.current.style.transform = `translate3d(0, ${introY}px, 0)`;
+        introRef.current.style.pointerEvents = introOpacity < 0.05 ? 'none' : 'auto';
+      }
+
+      const midEnter = smooth(ramp(p, V1_END, 0.43));
+      const midExit = smooth(ramp(p, V2_START, 0.64));
+      const midOpacity = midEnter * (1 - midExit);
+      const midY = (1 - midEnter) * 24 - midExit * 24;
+      if (midpointRef.current) {
+        midpointRef.current.style.opacity = String(midOpacity);
+        midpointRef.current.style.transform = `translate3d(0, ${midY}px, 0)`;
+      }
+
+      const finalEnter = smooth(ramp(p, 0.84, 0.92));
+      const finalY = (1 - finalEnter) * 24;
+      if (finalRef.current) {
+        finalRef.current.style.opacity = String(finalEnter);
+        finalRef.current.style.transform = `translate3d(0, ${finalY}px, 0)`;
+        finalRef.current.style.pointerEvents = finalEnter > 0.5 ? 'auto' : 'none';
+      }
+
+      if (gradientRef.current) {
+        const boost = Math.max(introOpacity, midOpacity, finalEnter);
+        gradientRef.current.style.opacity = String(0.36 + 0.36 * boost);
+      }
+
+      if (hintRef.current) {
+        hintRef.current.style.opacity = String(1 - smooth(ramp(p, 0.02, 0.1)));
+      }
+
+      rafId = requestAnimationFrame(render);
+    };
+
+    const start = () => {
+      if (active) return;
+      active = true;
+      rafId = requestAnimationFrame(render);
+    };
+    const stop = () => {
+      active = false;
+      cancelAnimationFrame(rafId);
+    };
+
+    frames1[0].addEventListener('load', () => draw(computeProgress()), { once: true });
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) start();
+        else stop();
+      },
+      { rootMargin: '200px 0px' }
+    );
+    io.observe(section);
+    window.addEventListener('resize', resizeCanvas);
+
+    return () => {
+      io.disconnect();
+      window.removeEventListener('resize', resizeCanvas);
+      stop();
+    };
+  }, []);
 
   return (
     <section
-      className="relative h-[100svh] min-h-[620px] w-full overflow-hidden bg-coffee"
-      aria-label={`${c.introTitle}. ${c.introSubtitle}.`}
+      ref={sectionRef}
+      className="relative h-[560svh] bg-coffee"
+      aria-label={`${c.midpointTitle}. ${c.finalTitle}.`}
     >
-      <Image
-        className="warm-analog object-cover"
-        src={VIDEO_1_POSTER}
-        alt=""
-        fill
-        preload
-        sizes="100vw"
-        aria-hidden="true"
-      />
-      <video
-        ref={videoRef}
-        className="warm-analog absolute inset-0 h-full w-full object-cover"
-        src={MOBILE_VIDEO}
-        poster={VIDEO_1_POSTER}
-        muted
-        playsInline
-        preload="auto"
-        autoPlay
-        loop
-        aria-hidden="true"
-        tabIndex={-1}
-      />
-      <div className="warm-analog-wash absolute inset-0" aria-hidden="true" />
-      <div className="warm-analog-grain absolute inset-0" aria-hidden="true" />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0"
-        style={{
-          background:
-            'linear-gradient(to top, rgba(44,31,23,0.82) 0%, rgba(44,31,23,0.3) 50%, rgba(44,31,23,0.55) 100%)',
-        }}
-      />
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-        <IntroFallbackContent />
+      <div className="sticky top-0 h-[100svh] min-h-[620px] w-full overflow-hidden bg-coffee">
+        <Image
+          className="warm-analog object-cover"
+          src={VIDEO_1_POSTER}
+          alt=""
+          fill
+          preload
+          sizes="100vw"
+          aria-hidden="true"
+        />
+        <canvas
+          ref={canvasRef}
+          className="warm-analog absolute inset-0 h-full w-full"
+          aria-hidden="true"
+        />
+        <div className="warm-analog-wash absolute inset-0" aria-hidden="true" />
+        <div className="warm-analog-grain absolute inset-0" aria-hidden="true" />
+        <div
+          ref={gradientRef}
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{
+            opacity: 0.36,
+            background:
+              'linear-gradient(to top, rgba(44,31,23,0.82) 0%, rgba(44,31,23,0.26) 42%, rgba(44,31,23,0.18) 62%, rgba(44,31,23,0.58) 100%)',
+          }}
+        />
+
+        <div
+          ref={introRef}
+          className="absolute inset-0 flex items-center justify-center px-6 text-center will-change-[opacity,transform]"
+          style={{ opacity: 1 }}
+        >
+          <div className="relative w-full max-w-[min(88vw,34rem)] border border-honey/45 bg-coffee/50 px-7 py-9 backdrop-blur-[2px]">
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-[9px] border border-cream/20"
+            />
+            <p className="font-script text-honey text-xl mb-5">
+              {c.introEyebrow}
+            </p>
+            <h1 className="font-display italic font-medium text-cream text-5xl drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)]">
+              {c.introTitle}
+            </h1>
+            <p className="font-body text-cream/85 uppercase tracking-[0.18em] text-xs mt-6">
+              {c.introSubtitle}
+            </p>
+          </div>
+        </div>
+
+        <div
+          ref={midpointRef}
+          className="absolute inset-0 flex items-center justify-center px-6 text-center will-change-[opacity,transform]"
+          style={{ opacity: 0 }}
+        >
+          <div className="relative w-full max-w-[min(88vw,34rem)] border border-honey/45 bg-coffee/50 px-7 py-9 backdrop-blur-[2px]">
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-[9px] border border-cream/20"
+            />
+            <h2 className="font-display italic font-medium text-cream text-4xl drop-shadow-[0_2px_24px_rgba(0,0,0,0.55)]">
+              {c.midpointTitle}
+            </h2>
+            <p className="font-body text-cream/85 mt-5 text-base tracking-wide">
+              {c.midpointSubtitle}
+            </p>
+          </div>
+        </div>
+
+        <div
+          ref={finalRef}
+          className="absolute inset-0 flex items-center justify-center px-6 text-center will-change-[opacity,transform]"
+          style={{ opacity: 0, pointerEvents: 'none' }}
+        >
+          <div className="relative w-full max-w-[min(88vw,34rem)] border border-honey/45 bg-coffee/50 px-7 py-9 backdrop-blur-[2px]">
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-[9px] border border-cream/20"
+            />
+            <h2 className="font-display italic font-medium text-cream text-4xl drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)]">
+              {c.finalTitle}
+            </h2>
+            <p className="font-body text-cream/85 mt-5 text-base tracking-wide">
+              {c.finalSubtitle}
+            </p>
+            <div className="mt-8 flex flex-col items-center justify-center gap-4">
+              <Link
+                href="/sobe"
+                className="font-body uppercase tracking-[0.15em] text-xs px-6 py-3.5 transition-colors duration-300 bg-terracotta hover:bg-terracotta/90 text-cream"
+              >
+                {c.ctaPrimary}
+              </Link>
+              <Link
+                href="/kontakt"
+                className="font-body uppercase tracking-[0.15em] text-xs px-6 py-3.5 transition-colors duration-300 border border-cream/50 text-cream hover:bg-cream/10"
+              >
+                {c.ctaSecondary}
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <div
+          ref={hintRef}
+          aria-hidden="true"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-cream/60"
+        >
+          <span className="font-script text-sm">{c.scrollLabel}</span>
+          <ChevronDown className="h-5 w-5 animate-bounce" />
+        </div>
       </div>
     </section>
   );
