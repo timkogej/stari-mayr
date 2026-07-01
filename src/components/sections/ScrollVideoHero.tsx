@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronDown } from 'lucide-react';
 import { getMessages } from '@/lib/content';
@@ -18,6 +19,10 @@ const c = messages.home.scrollHero;
 
 const VIDEO_1 = '/videos/stari-mayr-scroll-01.mp4';
 const VIDEO_2 = '/videos/stari-mayr-scroll-02.mp4';
+const MOBILE_VIDEO = '/videos/stari-mayr-mobile-hero.mp4';
+const VIDEO_1_POSTER = '/images/stari-mayr-scroll-poster.jpg';
+const VIDEO_2_POSTER = '/images/stari-mayr-scroll-02-poster.jpg';
+const AUTOPLAY_EVENTS = ['loadedmetadata', 'loadeddata', 'canplay', 'canplaythrough'] as const;
 
 /**
  * Scroll timeline (fraction of total section scroll):
@@ -39,13 +44,52 @@ export function ScrollVideoHero() {
   const reducedMotion = usePrefersReducedMotion();
   const isTouch = useIsTouchDevice();
 
-  // Scroll-scrubbing is desktop-only. On touch devices (and when the user asks
-  // for reduced motion) we serve a plain playing video instead.
-  if (reducedMotion || isTouch) {
-    return <StaticHeroFallback autoPlayLoop={!reducedMotion} />;
+  if (reducedMotion) {
+    return <StillHeroFallback />;
+  }
+
+  // Scroll-scrubbing is desktop-only. On touch devices we serve a normal
+  // autoplaying clip because iOS Safari is unreliable with currentTime scrubbing.
+  if (isTouch) {
+    return <TouchVideoHero />;
   }
 
   return <ScrubHero />;
+}
+
+function useMutedInlineAutoplay(videoRef: { current: HTMLVideoElement | null }) {
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+
+    const tryPlay = () => {
+      const play = video.play();
+      if (play) play.catch(() => {});
+    };
+
+    const playWhenVisible = () => {
+      if (document.visibilityState === 'visible') tryPlay();
+    };
+
+    tryPlay();
+    AUTOPLAY_EVENTS.forEach((event) => video.addEventListener(event, tryPlay));
+    document.addEventListener('visibilitychange', playWhenVisible);
+    document.addEventListener('touchstart', tryPlay, { passive: true });
+    document.addEventListener('pointerdown', tryPlay);
+    window.addEventListener('pageshow', tryPlay);
+
+    return () => {
+      AUTOPLAY_EVENTS.forEach((event) => video.removeEventListener(event, tryPlay));
+      document.removeEventListener('visibilitychange', playWhenVisible);
+      document.removeEventListener('touchstart', tryPlay);
+      document.removeEventListener('pointerdown', tryPlay);
+      window.removeEventListener('pageshow', tryPlay);
+    };
+  }, [videoRef]);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -229,6 +273,7 @@ function ScrubHero() {
           ref={video1Ref}
           className="warm-analog absolute inset-0 h-full w-full object-cover"
           src={VIDEO_1}
+          poster={VIDEO_1_POSTER}
           muted
           playsInline
           preload="auto"
@@ -240,6 +285,7 @@ function ScrubHero() {
           ref={video2Ref}
           className="warm-analog absolute inset-0 h-full w-full object-cover opacity-0 will-change-[opacity]"
           src={VIDEO_2}
+          poster={VIDEO_2_POSTER}
           muted
           playsInline
           preload="auto"
@@ -356,46 +402,38 @@ function ScrubHero() {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Static fallback for prefers-reduced-motion                                */
+/*  Touch / reduced-motion fallbacks                                          */
 /* -------------------------------------------------------------------------- */
 
-function StaticHeroFallback({ autoPlayLoop = false }: { autoPlayLoop?: boolean }) {
+function TouchVideoHero() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    if (autoPlayLoop) {
-      // Muted + playsInline autoplay is allowed inline on iOS/Android. Kick it
-      // off explicitly too, since some browsers ignore the autoplay attribute
-      // when it's set after hydration.
-      const tryPlay = () => v.play().catch(() => {});
-      if (v.readyState >= 2) tryPlay();
-      else v.addEventListener('canplay', tryPlay, { once: true });
-      return () => v.removeEventListener('canplay', tryPlay);
-    }
-    const onMeta = () => {
-      try {
-        v.currentTime = 0;
-      } catch {
-        /* ignored */
-      }
-    };
-    if (v.readyState >= 1) onMeta();
-    else v.addEventListener('loadedmetadata', onMeta, { once: true });
-  }, [autoPlayLoop]);
+  useMutedInlineAutoplay(videoRef);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-coffee">
+    <section
+      className="relative h-[100svh] min-h-[620px] w-full overflow-hidden bg-coffee"
+      aria-label={`${c.introTitle}. ${c.introSubtitle}.`}
+    >
+      <Image
+        className="warm-analog object-cover"
+        src={VIDEO_1_POSTER}
+        alt=""
+        fill
+        preload
+        sizes="100vw"
+        aria-hidden="true"
+      />
       <video
         ref={videoRef}
         className="warm-analog absolute inset-0 h-full w-full object-cover"
-        src={VIDEO_1}
+        src={MOBILE_VIDEO}
+        poster={VIDEO_1_POSTER}
         muted
         playsInline
         preload="auto"
-        autoPlay={autoPlayLoop}
-        loop={autoPlayLoop}
+        autoPlay
+        loop
         aria-hidden="true"
         tabIndex={-1}
       />
@@ -410,27 +448,74 @@ function StaticHeroFallback({ autoPlayLoop = false }: { autoPlayLoop?: boolean }
         }}
       />
       <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-        <h1 className="font-display italic font-medium text-cream text-4xl sm:text-6xl lg:text-7xl drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)]">
-          {c.finalTitle}
-        </h1>
-        <p className="font-body text-cream/85 mt-6 max-w-xl text-base sm:text-lg tracking-wide">
-          {c.finalSubtitle}
-        </p>
-        <div className="mt-10 flex flex-col sm:flex-row items-center gap-4">
-          <Link
-            href="/sobe"
-            className="font-body uppercase tracking-[0.15em] text-xs px-6 py-3.5 transition-colors duration-300 bg-terracotta hover:bg-terracotta/90 text-cream"
-          >
-            {c.ctaPrimary}
-          </Link>
-          <Link
-            href="/kontakt"
-            className="font-body uppercase tracking-[0.15em] text-xs px-6 py-3.5 transition-colors duration-300 border border-cream/50 text-cream hover:bg-cream/10"
-          >
-            {c.ctaSecondary}
-          </Link>
-        </div>
+        <IntroFallbackContent />
       </div>
     </section>
+  );
+}
+
+function StillHeroFallback() {
+  return (
+    <section
+      className="relative h-[100svh] min-h-[620px] w-full overflow-hidden bg-coffee"
+      aria-label={`${c.introTitle}. ${c.introSubtitle}.`}
+    >
+      <Image
+        className="warm-analog object-cover"
+        src={VIDEO_1_POSTER}
+        alt=""
+        fill
+        preload
+        sizes="100vw"
+        aria-hidden="true"
+      />
+      <div className="warm-analog-wash absolute inset-0" aria-hidden="true" />
+      <div className="warm-analog-grain absolute inset-0" aria-hidden="true" />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          background:
+            'linear-gradient(to top, rgba(44,31,23,0.82) 0%, rgba(44,31,23,0.3) 50%, rgba(44,31,23,0.55) 100%)',
+        }}
+      />
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+        <IntroFallbackContent />
+      </div>
+    </section>
+  );
+}
+
+function IntroFallbackContent() {
+  return (
+    <div className="relative w-full max-w-[min(90vw,42rem)] border border-honey/45 bg-coffee/50 px-7 py-9 backdrop-blur-[2px] sm:px-16 sm:py-14">
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-[9px] border border-cream/20"
+      />
+      <p className="font-script text-honey text-xl sm:text-2xl mb-5">
+        {c.introEyebrow}
+      </p>
+      <h1 className="font-display italic font-medium text-cream text-5xl sm:text-7xl drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)]">
+        {c.introTitle}
+      </h1>
+      <p className="font-body text-cream/85 uppercase tracking-[0.18em] text-xs sm:text-sm mt-6">
+        {c.introSubtitle}
+      </p>
+      <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <Link
+          href="/sobe"
+          className="font-body uppercase tracking-[0.15em] text-xs px-6 py-3.5 transition-colors duration-300 bg-terracotta hover:bg-terracotta/90 text-cream"
+        >
+          {c.ctaPrimary}
+        </Link>
+        <Link
+          href="/kontakt"
+          className="font-body uppercase tracking-[0.15em] text-xs px-6 py-3.5 transition-colors duration-300 border border-cream/50 text-cream hover:bg-cream/10"
+        >
+          {c.ctaSecondary}
+        </Link>
+      </div>
+    </div>
   );
 }
