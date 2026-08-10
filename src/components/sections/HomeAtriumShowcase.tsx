@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { PlaceholderImage } from '@/components/shared/PlaceholderImage';
+import Image from 'next/image';
 import { FadeIn } from '@/components/shared/FadeIn';
 import { SectionHeading } from '@/components/shared/SectionHeading';
 import { getMessages } from '@/lib/content';
@@ -14,8 +14,14 @@ export function HomeAtriumShowcase() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left: image */}
           <FadeIn>
-            <div className="border border-sand shadow-sm">
-              <PlaceholderImage label={atrium.imageLabel} aspect="landscape" />
+            <div className="home-heritage-frame relative overflow-hidden aspect-[4/3] border border-sand shadow-sm">
+              <Image
+                src="/images/mayr-domov-atrij.jpeg"
+                alt={atrium.imageLabel}
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="home-heritage-image home-heritage-image--atrium object-cover"
+              />
             </div>
           </FadeIn>
 

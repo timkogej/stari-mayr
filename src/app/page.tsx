@@ -1,27 +1,26 @@
 import { ScrollVideoHero } from '@/components/sections/ScrollVideoHero';
 import { HomeIntro } from '@/components/sections/HomeIntro';
 import { HomeRoomsPreview } from '@/components/sections/HomeRoomsPreview';
-import { HomeGalleryPreview } from '@/components/sections/HomeGalleryPreview';
 import { HomeAtriumShowcase } from '@/components/sections/HomeAtriumShowcase';
 import { HomeContactCTA } from '@/components/sections/HomeContactCTA';
 import { SectionDivider } from '@/components/shared/SectionDivider';
+import { StructuredData } from '@/components/shared/StructuredData';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Domov',
-  description: 'Dobrodošli v Stari Mayr — sobe in tradicija v starem mestnem jedru Kranja.',
+  description:
+    'Deset klimatiziranih sob v stoletni hiši v središču Kranja. Brezplačen WiFi, zajtrk, vrt in notranji atrij. 8 km od letališča, 30 km od Bleda.',
 };
 
 export default function HomePage() {
   return (
     <>
+      <StructuredData />
       <ScrollVideoHero />
       <SectionDivider className="mt-0" />
       <HomeIntro />
       <SectionDivider />
       <HomeRoomsPreview />
-      <SectionDivider />
-      <HomeGalleryPreview />
       <SectionDivider />
       <HomeAtriumShowcase />
       <HomeContactCTA />

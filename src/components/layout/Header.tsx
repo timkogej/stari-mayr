@@ -13,7 +13,6 @@ const nav = messages.nav;
 const links = [
   { label: nav.home, href: '/' },
   { label: nav.ponudba, href: '/ponudba' },
-  { label: nav.gallery, href: '/galerija' },
   { label: nav.about, href: '/o-nas' },
   { label: nav.rooms, href: '/sobe' },
   { label: nav.contact, href: '/kontakt' },

@@ -37,9 +37,9 @@ export function Footer() {
             <p className="font-body uppercase text-xs tracking-[0.2em] text-honey mb-4">
               {f.follow}
             </p>
-            {/* TODO: Verify exact Facebook URL for Gostilna Stari Mayr */}
+            {/* TODO: Verify exact Facebook URL for Stari Mayr */}
             <a
-              href="https://www.facebook.com/search/top?q=gostilna%20stari%20mayr"
+              href="https://www.facebook.com/search/top?q=stari%20mayr%20kranj"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-sm font-body hover:text-honey transition-colors"

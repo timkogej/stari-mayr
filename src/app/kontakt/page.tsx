@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { MapPin, Phone, Mail, Clock, Share2 } from 'lucide-react';
 import { FadeIn } from '@/components/shared/FadeIn';
 import { ReservationButtons } from '@/components/shared/ReservationButtons';
@@ -10,15 +11,24 @@ const contact = messages.contact;
 
 export const metadata: Metadata = {
   title: 'Kontakt',
-  description: 'Obiščite gostilno Stari Mayr v starem mestnem jedru Kranja. Naslov, telefon, e-pošta in delovni čas.',
+  description: 'Kontakt, lokacija in delovni čas — Stari Mayr, staro mestno jedro Kranja.',
 };
 
 export default function KontaktPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-coffee flex items-center justify-center min-h-[35vh]">
-        <div className="text-center py-20 px-6">
+      <section className="relative bg-coffee flex items-center justify-center min-h-[50vh] overflow-hidden">
+        <Image
+          src="/images/mayr-kontakt-hero.jpeg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-50"
+        />
+        <div className="absolute inset-0 bg-coffee/40" />
+        <div className="relative z-10 text-center py-20 px-6">
           <h1 className="font-display italic text-cream text-5xl md:text-7xl tracking-wide">
             {contact.hero.title}
           </h1>
@@ -58,7 +68,7 @@ export default function KontaktPage() {
                 <div className="flex items-center gap-4">
                   <Share2 className="w-4 h-4 text-honey shrink-0" />
                   <a
-                    href="https://www.facebook.com/search/top?q=gostilna%20stari%20mayr"
+                    href="https://www.facebook.com/search/top?q=stari%20mayr%20kranj"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-body text-coffee text-sm hover:text-bronze transition-colors"

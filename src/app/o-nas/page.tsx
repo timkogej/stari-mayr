@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { VintageImage } from '@/components/shared/VintageImage';
-import { Polaroid } from '@/components/shared/Polaroid';
 import { FadeIn } from '@/components/shared/FadeIn';
 import { SectionDivider } from '@/components/shared/SectionDivider';
 import { getMessages } from '@/lib/content';
@@ -11,22 +9,22 @@ const about = messages.about;
 
 export const metadata: Metadata = {
   title: 'O nas',
-  description: 'Zgodba gostilne Stari Mayr — tradicija, generacije in srce starega mestnega jedra Kranja.',
+  description: 'Zgodba hiše Stari Mayr v starem mestnem jedru Kranja — več kot stoletje gostoljubja.',
 };
 
 export default function ONasPage() {
   return (
     <>
       {/* Hero with image */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-coffee">
         <div className="absolute inset-0">
           <Image
-            src="/images/mayr-onas-hero.jpg"
+            src="/images/mayr-o-nas-hero.jpeg"
             alt=""
             fill
             priority
             sizes="100vw"
-            className="object-cover"
+            className="object-cover object-center"
           />
           <div className="absolute inset-0 bg-coffee/50" />
         </div>
@@ -66,20 +64,12 @@ export default function ONasPage() {
       <div className="max-w-3xl mx-auto px-6 lg:px-12 py-20 lg:py-32">
         {/* Section 3: Skozi generacije */}
         <FadeIn>
-          <div className="relative">
-            <div className="float-right ml-8 mb-4 w-40 hidden md:block">
-              <Polaroid caption={about.section3.polaroidCaption} rotation={3}>
-                <VintageImage label="kuhinja 1962" aspect="square" />
-              </Polaroid>
-            </div>
-            <h2 className="font-display text-3xl md:text-4xl text-bronze tracking-wide mb-6">
-              {about.section3.title}
-            </h2>
-            <p className="font-body text-walnut leading-relaxed">
-              {about.section3.body}
-            </p>
-            <div className="clear-both" />
-          </div>
+          <h2 className="font-display text-3xl md:text-4xl text-bronze tracking-wide mb-6">
+            {about.section3.title}
+          </h2>
+          <p className="font-body text-walnut leading-relaxed">
+            {about.section3.body}
+          </p>
         </FadeIn>
 
         <SectionDivider className="my-16" />

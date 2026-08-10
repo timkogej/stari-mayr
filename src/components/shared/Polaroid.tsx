@@ -2,7 +2,7 @@
 import { cn } from '@/lib/utils';
 
 type Props = {
-  caption: string;
+  caption?: string;
   rotation?: number;
   className?: string;
   children: React.ReactNode;
@@ -24,7 +24,7 @@ export function Polaroid({ caption, rotation = 0, className, children }: Props) 
         className="relative"
         style={{
           background: '#FDFCF7',
-          padding: '12px 12px 50px',
+          padding: caption ? '12px 12px 50px' : '12px',
           boxShadow: '0 12px 30px -10px rgba(0,0,0,0.25)',
         }}
       >
@@ -37,9 +37,11 @@ export function Polaroid({ caption, rotation = 0, className, children }: Props) 
           }}
         />
         <div className="relative">{children}</div>
-        <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center h-[50px]">
-          <span className="font-script text-walnut text-base">{caption}</span>
-        </div>
+        {caption && (
+          <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center h-[50px]">
+            <span className="font-script text-walnut text-base">{caption}</span>
+          </div>
+        )}
       </div>
     </div>
   );

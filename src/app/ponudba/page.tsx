@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { PlaceholderImage } from '@/components/shared/PlaceholderImage';
 import { FadeIn } from '@/components/shared/FadeIn';
 import { SectionDivider } from '@/components/shared/SectionDivider';
 import { ReservationButtons } from '@/components/shared/ReservationButtons';
@@ -12,7 +11,7 @@ const ponudba = messages.ponudba;
 
 export const metadata: Metadata = {
   title: 'Ponudba',
-  description: 'Domača slovenska kuhinja, atrij in prenočišča v Stari Mayr.',
+  description: 'Zajtrk, vrt, notranji atrij in prenočišče v stoletni hiši v starem mestnem jedru Kranja.',
 };
 
 export default function PonudbaPage() {
@@ -21,7 +20,7 @@ export default function PonudbaPage() {
       {/* Hero strip */}
       <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-coffee">
         <Image
-          src="/images/mayr-hero-meni.jpg"
+          src="/images/mayr-ponudba-hero.jpeg"
           alt=""
           fill
           priority
@@ -43,13 +42,13 @@ export default function PonudbaPage() {
       </section>
 
       <div className="max-w-4xl mx-auto px-6 lg:px-12 py-20 lg:py-32">
-        {/* Section 1: Cuisine */}
+        {/* Section 1: Pod isto streho */}
         <FadeIn className="mb-16">
           <h2 className="font-display text-3xl md:text-4xl text-coffee tracking-wide mb-6">
-            {ponudba.cuisine.title}
+            {ponudba.roof.title}
           </h2>
           <p className="font-body text-walnut leading-relaxed">
-            {ponudba.cuisine.body}
+            {ponudba.roof.body}
           </p>
         </FadeIn>
 
@@ -57,54 +56,82 @@ export default function PonudbaPage() {
 
         {/* Section 2: Full-width image break */}
         <FadeIn className="mb-16">
-          <PlaceholderImage label={ponudba.cuisine.imageLabel} aspect="video" />
-        </FadeIn>
-
-        <SectionDivider className="mb-16" />
-
-        {/* Section 3: Atrium */}
-        <FadeIn className="mb-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="font-display text-3xl md:text-4xl text-coffee tracking-wide mb-6">
-                {ponudba.courtyard.title}
-              </h2>
-              <p className="font-body text-walnut leading-relaxed">
-                {ponudba.courtyard.body}
-              </p>
-            </div>
-            <PlaceholderImage label="PONUDBA — atrij" aspect="square" />
+          <div className="relative overflow-hidden aspect-video border border-sand shadow-sm">
+            <Image
+              src="/images/mayr-ponudba-vibe.jpeg"
+              alt={ponudba.roof.imageLabel}
+              fill
+              sizes="(max-width: 1024px) 100vw, 896px"
+              className="object-cover object-[center_88%]"
+            />
           </div>
         </FadeIn>
 
         <SectionDivider className="mb-16" />
 
-        {/* Section 4: Accommodation */}
+        {/* Section 3: Zajtrk */}
         <FadeIn className="mb-16">
           <h2 className="font-display text-3xl md:text-4xl text-coffee tracking-wide mb-6">
-            {ponudba.accommodation.title}
+            {ponudba.zajtrk.title}
+          </h2>
+          <p className="font-body text-walnut leading-relaxed">
+            {ponudba.zajtrk.body}
+          </p>
+        </FadeIn>
+
+        <SectionDivider className="mb-16" />
+
+        {/* Section 4: Atrij */}
+        <FadeIn className="mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="font-display text-3xl md:text-4xl text-coffee tracking-wide mb-6">
+                {ponudba.atrij.title}
+              </h2>
+              <p className="font-body text-walnut leading-relaxed">
+                {ponudba.atrij.body}
+              </p>
+            </div>
+            <div className="relative overflow-hidden aspect-[4/3] border border-sand shadow-sm">
+              <Image
+                src="/images/mayr-domov-atrij.jpeg"
+                alt={messages.home.atrium.imageLabel}
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </FadeIn>
+
+        <SectionDivider className="mb-16" />
+
+        {/* Section 5: Kranj */}
+        <FadeIn className="mb-16">
+          <h2 className="font-display text-3xl md:text-4xl text-coffee tracking-wide mb-6">
+            {ponudba.kranj.title}
+          </h2>
+          <p className="font-body text-walnut leading-relaxed">
+            {ponudba.kranj.body}
+          </p>
+        </FadeIn>
+
+        <SectionDivider className="mb-16" />
+
+        {/* Section 6: Closing */}
+        <FadeIn className="mb-16">
+          <h2 className="font-display text-3xl md:text-4xl text-coffee tracking-wide mb-6">
+            {ponudba.closing.title}
           </h2>
           <p className="font-body text-walnut leading-relaxed mb-4">
-            {ponudba.accommodation.body}
+            {ponudba.closing.body}
           </p>
           <Link
             href="/sobe"
             className="font-body text-sm text-bronze border-b border-bronze/40 hover:border-bronze transition-colors pb-0.5"
           >
-            {ponudba.accommodation.link} →
+            {ponudba.closing.link} →
           </Link>
-        </FadeIn>
-
-        <SectionDivider className="mb-16" />
-
-        {/* Section 5: Closing */}
-        <FadeIn className="mb-16">
-          <h2 className="font-display text-3xl md:text-4xl text-coffee tracking-wide mb-6">
-            {ponudba.closing.title}
-          </h2>
-          <p className="font-body text-walnut leading-relaxed">
-            {ponudba.closing.body}
-          </p>
         </FadeIn>
 
         {/* Bottom CTA */}

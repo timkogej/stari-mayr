@@ -1,46 +1,42 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { Wifi, Coffee, Bath, Car, Bed, BadgeCheck, Clock } from 'lucide-react';
+import { Wind, Bath, Wifi, PenLine, VolumeX } from 'lucide-react';
+import { PlaceholderImage } from '@/components/shared/PlaceholderImage';
 import { FadeIn } from '@/components/shared/FadeIn';
 import { SectionDivider } from '@/components/shared/SectionDivider';
 import { ReservationButtons } from '@/components/shared/ReservationButtons';
+import { BookingRating } from '@/components/shared/BookingRating';
+import { Testimonials } from '@/components/sections/Testimonials';
 import { getMessages } from '@/lib/content';
-import type { ReactNode } from 'react';
 
 const messages = getMessages();
 const rooms = messages.rooms;
 
 export const metadata: Metadata = {
   title: 'Sobe',
-  description: 'Pet sob v zgodovinski stavbi v starem mestnem jedru Kranja. Zajtrk vključen, lastna kopalnica, brezžični internet.',
+  description:
+    'Dvoposteljne, troposteljne in družinske štiriposteljne sobe v središču Kranja. Vse klimatizirane, z lastno kopalnico in brezplačnim WiFi.',
 };
 
-const amenityIcons: Record<string, ReactNode> = {
-  'WiFi': <Wifi className="w-4 h-4" />,
-  'Zajtrk vključen': <Coffee className="w-4 h-4" />,
-  'Lastna kopalnica': <Bath className="w-4 h-4" />,
-  'Parkirišče v bližini': <Car className="w-4 h-4" />,
-  'Zakonska postelja': <Bed className="w-4 h-4" />,
-  'Enojna postelja': <Bed className="w-4 h-4" />,
-  'Dve postelji': <Bed className="w-4 h-4" />,
-};
-
-const includedIcons: Record<string, ReactNode> = {
-  'Zajtrk': <Coffee className="w-4 h-4 text-bronze" />,
-  'Brezžični internet': <Wifi className="w-4 h-4 text-bronze" />,
-  'DDV': <BadgeCheck className="w-4 h-4 text-bronze" />,
-  'Posteljnina in brisače': <Bath className="w-4 h-4 text-bronze" />,
-  'Parkirišče v bližini': <Car className="w-4 h-4 text-bronze" />,
-  'Jutranja kava': <Clock className="w-4 h-4 text-bronze" />,
-};
-
-const roomImages = [
-  '/images/mayr-soba-1.jpg',
-  '/images/mayr-soba-2.jpg',
-  '/images/mayr-soba-3.jpg',
-  '/images/mayr-soba-4.jpg',
-  '/images/mayr-soba-5.jpg',
+const roomAmenities = [
+  { icon: Wind, label: 'Klima' },
+  { icon: Bath, label: 'Lastna kopalnica' },
+  { icon: Wifi, label: 'Brezplačen WiFi' },
+  { icon: PenLine, label: 'Pisalna miza' },
+  { icon: VolumeX, label: 'Zvočna izolacija' },
 ];
+
+const roomTypeImages: Record<string, string> = {
+  dvoposteljna: '/images/mayr-sobe-dvoposteljna.jpeg',
+  troposteljna: '/images/mayr-sobe-troposteljna.jpeg',
+  stiriposteljna: '/images/mayr-sobe-stiriposteljna.jpeg',
+};
+
+const roomImageFilters: Record<string, string> = {
+  dvoposteljna: 'room-heritage-image--double',
+  troposteljna: 'room-heritage-image--triple',
+  stiriposteljna: 'room-heritage-image--family',
+};
 
 export default function SobePage() {
   return (
@@ -49,12 +45,12 @@ export default function SobePage() {
       <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-coffee">
         <div className="absolute inset-0 opacity-30">
           <Image
-            src="/images/mayr-sobe-hero.jpg"
+            src="/images/mayr-sobe-hero-closeup.jpeg"
             alt=""
             fill
             priority
             sizes="100vw"
-            className="object-cover"
+            className="object-cover object-[center_65%]"
           />
         </div>
         <div className="relative z-10 text-center py-24 px-6">
@@ -72,26 +68,34 @@ export default function SobePage() {
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-20 lg:py-32">
         <FadeIn>
-          <p className="font-body text-walnut text-center max-w-xl mx-auto mb-16 leading-relaxed">
+          <p className="font-body text-walnut text-center max-w-xl mx-auto mb-10 leading-relaxed">
             {rooms.intro}
           </p>
         </FadeIn>
 
-        {/* Room cards: zigzag */}
+        <FadeIn className="flex justify-center mb-16">
+          <BookingRating />
+        </FadeIn>
+
+        {/* Room type cards: zigzag */}
         <div className="space-y-24">
-          {rooms.items.map((room, i) => (
+          {rooms.types.map((room, i) => (
             <FadeIn key={room.id}>
               <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${i % 2 === 1 ? 'lg:[&>*:first-child]:order-2' : ''}`}>
                 {/* Image */}
-                <div className="relative overflow-hidden aspect-[4/3] border border-sand/80 bg-coffee/5">
-                  <Image
-                    src={roomImages[i] || '/images/mayr-soba-1.jpg'}
-                    alt={room.name}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover"
-                  />
-                </div>
+                {roomTypeImages[room.id] ? (
+                  <div className="room-heritage-frame relative overflow-hidden aspect-[4/3] border border-sand shadow-sm">
+                    <Image
+                      src={roomTypeImages[room.id]}
+                      alt={room.imageLabel}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className={`room-heritage-image ${roomImageFilters[room.id] ?? ''} object-cover`}
+                    />
+                  </div>
+                ) : (
+                  <PlaceholderImage label={room.imageLabel} aspect="landscape" />
+                )}
 
                 {/* Text */}
                 <div>
@@ -102,25 +106,24 @@ export default function SobePage() {
                     {room.name}
                   </h2>
                   <p className="font-body text-walnut/60 text-xs uppercase tracking-widest mb-4">
-                    {room.type}
+                    {room.count}
                   </p>
                   <p className="font-body text-walnut leading-relaxed mb-6">
                     {room.description}
                   </p>
-                  <div className="flex flex-wrap gap-3 mb-6">
-                    {room.amenities.map((amenity) => (
-                      <div key={amenity} className="flex items-center gap-1.5 text-xs font-body text-walnut bg-parchment px-3 py-1.5 border border-sand">
-                        {amenityIcons[amenity] || <Bed className="w-4 h-4" />}
-                        <span>{amenity}</span>
+                  <div className="flex flex-wrap gap-4 mb-8">
+                    {roomAmenities.map(({ icon: Icon, label }) => (
+                      <div key={label} className="flex items-center gap-1.5 text-xs font-body text-bronze">
+                        <Icon className="w-4 h-4" />
+                        <span>{label}</span>
                       </div>
                     ))}
                   </div>
-                  <p className="font-display italic text-xl text-honey mb-6">{room.price}</p>
                   <ReservationButtons />
                 </div>
               </div>
 
-              {i < rooms.items.length - 1 && <SectionDivider className="mt-24" />}
+              {i < rooms.types.length - 1 && <SectionDivider className="mt-24" />}
             </FadeIn>
           ))}
         </div>
@@ -128,24 +131,58 @@ export default function SobePage() {
         {/* Included section */}
         <FadeIn className="mt-24">
           <SectionDivider className="mb-12" />
-          <h2 className="font-display text-2xl md:text-3xl text-bronze text-center tracking-wide mb-8">
-            {rooms.included.title}
+          <h2 className="font-display text-2xl md:text-3xl text-bronze text-center tracking-wide mb-12">
+            {rooms.amenities.title}
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-3xl mx-auto">
-            {rooms.included.items.map((item) => (
-              <div key={item} className="flex flex-col items-center gap-2 text-center">
-                <div className="w-8 h-8 rounded-full bg-sand flex items-center justify-center">
-                  {includedIcons[item] || <BadgeCheck className="w-4 h-4 text-bronze" />}
-                </div>
-                <span className="font-body text-xs text-walnut">{item}</span>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto">
+            {rooms.amenities.groups.map((group) => (
+              <div key={group.heading}>
+                <h3 className="font-display uppercase tracking-[0.25em] text-xs text-bronze mb-4">
+                  {group.heading}
+                </h3>
+                <ul className="space-y-2">
+                  {group.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2 font-body text-sm text-walnut leading-relaxed">
+                      <span className="text-honey mt-0.5">◆</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
+
+          {/* Accessibility note */}
+          <div className="max-w-3xl mx-auto mt-12 bg-sand/40 border-l-2 border-bronze px-5 py-4">
+            <p className="font-body text-sm text-walnut">{rooms.accessibilityNote}</p>
+          </div>
+        </FadeIn>
+
+        <Testimonials />
+
+        {/* V bližini */}
+        <FadeIn className="mt-8">
+          <SectionDivider className="mb-12" />
+          <h2 className="font-display text-2xl md:text-3xl text-bronze text-center tracking-wide mb-8">
+            {rooms.nearby.title}
+          </h2>
+          <div className="max-w-xl mx-auto space-y-0">
+            {rooms.nearby.items.map((item) => (
+              <div key={item.label} className="flex items-center justify-between border-b border-sand py-3">
+                <span className="font-body text-sm text-walnut">{item.label}</span>
+                <span className="font-body text-sm text-honey">{item.distance}</span>
+              </div>
+            ))}
+          </div>
+          <p className="font-body text-xs text-walnut/70 text-center mt-4">{rooms.nearby.note}</p>
         </FadeIn>
 
         {/* Bottom CTA */}
         <FadeIn className="mt-20 text-center">
-          <h3 className="font-display italic text-2xl text-coffee mb-6">{rooms.cta.title}</h3>
+          <h3 className="font-display italic text-2xl text-coffee mb-4">{rooms.cta.title}</h3>
+          <p className="font-body text-sm text-walnut mb-6">{rooms.cta.lead}</p>
+          {/* TODO: dodaj prave cene ko bodo znane */}
+          <p className="font-display italic text-lg text-honey mb-6">{rooms.priceNote}</p>
           <div className="flex justify-center">
             <ReservationButtons />
           </div>

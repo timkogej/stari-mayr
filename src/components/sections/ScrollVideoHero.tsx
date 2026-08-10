@@ -391,7 +391,6 @@ function ScrubHero() {
           aria-hidden="true"
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-cream/60"
         >
-          <span className="font-script text-sm">{c.scrollLabel}</span>
           <ChevronDown className="h-5 w-5 animate-bounce" />
         </div>
       </div>
@@ -659,7 +658,6 @@ function MobileCanvasHero() {
           aria-hidden="true"
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-cream/60"
         >
-          <span className="font-script text-sm">{c.scrollLabel}</span>
           <ChevronDown className="h-5 w-5 animate-bounce" />
         </div>
       </div>

@@ -4,7 +4,6 @@ import { Cormorant_Garamond, Inter, Italianno } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import { TestimonialsMarquee } from '@/components/sections/TestimonialsMarquee';
 
 const fontDisplay = Cormorant_Garamond({
   subsets: ['latin'],
@@ -25,17 +24,28 @@ const fontScript = Italianno({
   variable: '--font-script',
 });
 
+const defaultTitle = 'Stari Mayr — Prenočišče v starem mestnem jedru Kranja';
+const defaultDescription =
+  'Deset klimatiziranih sob v stoletni hiši v središču Kranja. Brezplačen WiFi, zajtrk, vrt in notranji atrij. 8 km od letališča, 30 km od Bleda.';
+
 export const metadata: Metadata = {
   title: {
-    default: 'Stari Mayr — Sobe in tradicija v starem mestnem jedru',
+    default: defaultTitle,
     template: '%s · Stari Mayr',
   },
-  description: 'Tradicionalna gostilna in prenočišče v starem mestnem jedru Kranja. Sobe, atrij in domača kuhinja z dušo.',
+  description: defaultDescription,
   openGraph: {
-    title: 'Stari Mayr — Sobe in tradicija v starem mestnem jedru',
-    description: 'Tradicionalna gostilna in prenočišče v starem mestnem jedru Kranja. Sobe, atrij in domača kuhinja z dušo.',
-    locale: 'sl_SI',
     type: 'website',
+    locale: 'sl_SI',
+    siteName: 'Stari Mayr',
+    url: 'https://stari-mayr.si',
+    title: defaultTitle,
+    description: defaultDescription,
+    // TODO: dodaj /public/og-image.jpg (1200x630)
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Stari Mayr, Kranj' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
   },
 };
 
@@ -45,7 +55,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${fontDisplay.variable} ${fontBody.variable} ${fontScript.variable} font-body antialiased`}>
         <Header />
         <main>{children}</main>
-        <TestimonialsMarquee />
         <Footer />
       </body>
     </html>
