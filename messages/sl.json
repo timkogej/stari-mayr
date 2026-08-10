@@ -125,7 +125,8 @@
   "about": {
     "hero": {
       "eyebrow": "Naša zgodba",
-      "title": "O nas"
+      "title": "O nas",
+      "lead": "Od odprtja vrat leta 1920 do danes — zgodba hiše na Glavnem trgu v Kranju."
     },
     "section1": {
       "title": "Začetki",
@@ -140,7 +141,7 @@
       "title": "Danes",
       "body": "Danes so v zgornjem nadstropju sobe s klimo, lastnimi kopalnicami in zvočno izolacijo. Spodaj so obokani hodniki takšni, kot so bili pred sto leti. Poleti se zajtrkuje v atriju. Pridete lahko za eno noč, za vikend ali za dlje."
     },
-    "quote": "»Hiša ostane. Menjajo se le tisti, ki v njej prespijo.«",
+    "quote": "»Hiša ostaja. Menjajo se le zgodbe ljudi, ki v njej prenočijo.«",
     "imageLabel1": "O NAS — header",
     "imageLabel2": "TERASA — terasa hiše"
   },
@@ -260,7 +261,8 @@
   },
   "contact": {
     "hero": {
-      "title": "Kontakt"
+      "title": "Kontakt",
+      "lead": "Naslov, telefon, e-pošta in obrazec — za rezervacijo ali vprašanje nas kontaktirajte po katerikoli poti."
     },
     "address": "Glavni trg 16, 4000 Kranj",
     "addressNote": "Staro mestno jedro Kranja",

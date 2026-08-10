@@ -19,7 +19,7 @@ export default function ONasPage() {
       <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-coffee">
         <div className="absolute inset-0">
           <Image
-            src="/images/mayr-o-nas-hero.jpeg"
+            src="/images/mayr-o-nas-hero-2.jpeg"
             alt=""
             fill
             priority
@@ -32,9 +32,12 @@ export default function ONasPage() {
           <p className="font-display uppercase tracking-[0.3em] text-xs text-honey mb-4">
             {about.hero.eyebrow}
           </p>
-          <h1 className="font-display italic text-cream text-5xl md:text-7xl tracking-wide">
+          <h1 className="font-display italic text-cream text-5xl md:text-7xl tracking-wide mb-4">
             {about.hero.title}
           </h1>
+          <p className="font-body text-cream/70 text-sm max-w-lg mx-auto">
+            {about.hero.lead}
+          </p>
         </div>
       </section>
 

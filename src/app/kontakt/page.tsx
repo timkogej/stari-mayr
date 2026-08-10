@@ -29,9 +29,12 @@ export default function KontaktPage() {
         />
         <div className="absolute inset-0 bg-coffee/40" />
         <div className="relative z-10 text-center py-20 px-6">
-          <h1 className="font-display italic text-cream text-5xl md:text-7xl tracking-wide">
+          <h1 className="font-display italic text-cream text-5xl md:text-7xl tracking-wide mb-4">
             {contact.hero.title}
           </h1>
+          <p className="font-body text-cream/70 text-sm max-w-lg mx-auto">
+            {contact.hero.lead}
+          </p>
         </div>
       </section>
 
