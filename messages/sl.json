@@ -2,7 +2,7 @@
   "site": {
     "name": "Stari Mayr",
     "tagline": "Prenočišče v starem mestnem jedru Kranja",
-    "description": "Deset klimatiziranih sob v stoletni hiši v središču Kranja. Brezplačen WiFi, zajtrk, vrt in notranji atrij. 8 km od letališča, 30 km od Bleda."
+    "description": "Sobe v stoletni hiši v središču Kranja. Brezplačen WiFi, zajtrk, vrt in notranji atrij. 8 km od letališča, 30 km od Bleda."
   },
   "nav": {
     "home": "Domov",
@@ -19,9 +19,8 @@
     "contact": "Kontakt",
     "address": "Glavni trg 16, 4000 Kranj",
     "addressNote": "Staro mestno jedro Kranja",
-    "phone": "(04) 280 00 20",
+    "phone": "+386 40 420 262",
     "email": "mayr.doo@siol.net",
-    "hours": "Vsak dan od 10. do 23. ure",
     "follow": "Sledite nam",
     "facebookLabel": "Stari Mayr",
     "copyright": "Mayr d.o.o. · Vse pravice pridržane"
@@ -39,28 +38,28 @@
       "introTitle": "Stari Mayr",
       "introSubtitle": "Sobe v starem mestnem jedru Kranja",
       "midpointTitle": "Od leta 1920 na Glavnem trgu",
-      "midpointSubtitle": "Debeli zidovi, leseni stropovi, kamnita tla.",
+      "midpointSubtitle": "Hiša z zgodovino in tisočerimi zgodbami.",
       "finalTitle": "Sobe v središču Kranja",
-      "finalSubtitle": "Klimatizirane sobe, tih atrij in Glavni trg pred vrati.",
+      "finalSubtitle": "Prenočišča ob Glavnem trgu, s starim mestom pred vrati.",
       "ctaPrimary": "Oglej si sobe",
       "ctaSecondary": "Rezerviraj bivanje"
     },
     "intro": {
       "eyebrow": "Naša zgodba",
       "title": "Sto let pod isto streho",
-      "body": "Stari Mayr sprejema goste v starem mestnem jedru Kranja že od dvajsetih let prejšnjega stoletja. Kar so takrat postavili — debele zidove, lesene strope, kamnita tla — stoji še danes, le da so za njimi zdaj sobe s klimo in tiho nočjo. Za hišo se skriva notranji atrij.",
+      "body": "Stari Mayr sprejema goste v starem mestnem jedru Kranja že od dvajsetih let prejšnjega stoletja. Skozi generacije je hiša ostala to, kar je vedno bila — prenočišče za popotnike in meščane, prostor s svojo zgodovino.",
       "link": "Spoznajte nas"
     },
     "rooms_preview": {
       "eyebrow": "Prenočišče",
       "title": "Sobe nad starim trgom",
-      "lead": "V zgornjem nadstropju hiše so dvoposteljne, troposteljna in družinske štiriposteljne sobe. Vse s klimo, vse z lastno kopalnico, vse zvočno izolirane — hrup s trga ostane na trgu.",
+      "lead": "Hiša ponuja dvoposteljne, troposteljne in štiriposteljne sobe. Vsaka ima svojo kopalnico, prijetno zasebnost in toplino stare hiše, v kateri se po dnevu v mestu zlahka umirite.",
       "link": "Vse o sobah",
       "cards": [
         {
-          "eyebrow": "4 sobe",
+          "eyebrow": "3 sobe",
           "name": "Dvoposteljna soba",
-          "description": "Zakonska ali dve ločeni postelji in pisalna miza ob oknu. Naš najpogostejši tip sobe.",
+          "description": "Prostorne sobe z zakonsko ali dvema ločenima posteljama, glede na sobo. Vsaka ima svojo kopalnico.",
           "imageLabel": "Dvoposteljna soba, Stari Mayr Kranj"
         },
         {
@@ -70,9 +69,9 @@
           "imageLabel": "Troposteljna soba, Stari Mayr Kranj"
         },
         {
-          "eyebrow": "5 sob",
+          "eyebrow": "4 sobe",
           "name": "Štiriposteljna soba",
-          "description": "Naše največje sobe, s štirimi posteljami in prostorom za vso družino.",
+          "description": "Naše največje sobe, primerne za do štiri osebe — dovolj prostora za družino ali skupino prijateljev. Po potrebi lahko uredimo tudi dodatno ležišče, če kapaciteta sobe to dopušča.",
           "imageLabel": "Štiriposteljna soba, Stari Mayr Kranj"
         }
       ]
@@ -80,7 +79,7 @@
     "atrium": {
       "eyebrow": "Naš atrij",
       "title": "Za vhodnimi vrati",
-      "body": "Notranje dvorišče s kamnitimi tlemi in obokano kolonado je od ulice ločeno z enim samim prehodom. Poleti tam zajtrkujemo, pozno popoldne pa je najtišji kotiček hiše.",
+      "body": "Notranje dvorišče je miren kotiček hiše, od ulice ločen z enim samim prehodom. Poleti tam zajtrkujemo, čez dan pa lahko v prijetnem vzdušju in ambientu uživate v tišini starega mestnega jedra.",
       "imageLabel": "Atrij hiše Stari Mayr",
       "link": "Več o ponudbi"
     },
@@ -89,7 +88,7 @@
       "title": "Pridite k nam",
       "body": "Sobe so na voljo vse leto. Pišite ali pokličite — z veseljem vam povemo, kaj je prosto.",
       "address": "Glavni trg 16, 4000 Kranj",
-      "phone": "(04) 280 00 20",
+      "phone": "+386 40 420 262",
       "email": "mayr.doo@siol.net"
     }
   },
@@ -101,24 +100,24 @@
     },
     "roof": {
       "title": "Pod isto streho",
-      "body": "Stavba na Glavnem trgu stoji tu od začetka prejšnjega stoletja in je ves ta čas sprejemala goste. Zidovi so debeli, stropi leseni, tla kamnita — in po sto letih hoje po njih so stopnice na sredini vidno uglajene.",
+      "body": "Stavba na Glavnem trgu stoji tu od začetka prejšnjega stoletja in je ves ta čas sprejemala goste, ki so iskali prenočišče v starem mestnem jedru Kranja. V njenih sobah se prepletajo mir stare hiše, bližina trga in občutek, da ste del mestne zgodbe.",
       "imageLabel": "PONUDBA — STAVBA"
     },
     "zajtrk": {
       "title": "Zajtrk",
-      "body": "Zajtrk pripravimo vsako jutro za goste, ki pri nas prespijo — samopostrežnega, à la carte ali kontinentalnega. Če potrebujete brezglutensko, vegetarijansko ali kakšno drugo posebno različico, nam sporočite ob rezervaciji in bo pripravljena."
+      "body": "Zajtrk pripravimo vsako jutro za goste, ki pri nas prespijo — samopostrežnega, à la carte ali kontinentalnega. Če potrebujete brezglutensko, vegetarijansko ali kakšno drugo posebno različico, nam sporočite ob rezervaciji in bo pripravljeno za vas."
     },
     "atrij": {
       "title": "Atrij",
-      "body": "Notranje dvorišče z obokano kolonado je staro toliko kot hiša. Poleti tam postrežemo zajtrk, čez dan pa je odprto gostom, ki si želijo sedeti zunaj, ne da bi šli na ulico. Ob njem sta vrt in skupni prostor za druženje."
+      "body": "Notranje dvorišče z obokano kolonado je miren kotiček za hišo, kjer se mestni utrip umakne tišini. Poleti tam postrežemo zajtrk, čez dan pa lahko posedite v prijetnem ambientu, med vrtom in skupnim prostorom za druženje."
     },
     "kranj": {
       "title": "Kranj",
-      "body": "Hiša stoji na Glavnem trgu, nekaj korakov od Prešernove hiše in gradu Khislstein. Do kanjona Kokre je pet minut peš. Letališče je osem kilometrov stran, Bled in Ljubljana pa vsak približno trideset."
+      "body": "Hiša stoji na Glavnem trgu, nekaj korakov od Prešernove hiše in gradu Khislstein, zato se lahko iz sobe naravnost odpravite med ulice starega Kranja. Do kanjona Kokre je le pet minut hoje, letališče je osem kilometrov stran, Bled in Ljubljana pa sta vsak približno trideset kilometrov od nas."
     },
     "closing": {
       "title": "Pridite k nam",
-      "body": "Za rezervacijo sobe ali karkoli drugega nam pišite oziroma pokličite.",
+      "body": "Za rezervacijo sobe kliknite spodnji gumb za rezervacijo, za dodatna vprašanja pa nam pišite oziroma pokličite.",
       "link": "Oglejte si sobe"
     }
   },
@@ -130,16 +129,16 @@
     },
     "section1": {
       "title": "Začetki",
-      "body": "Stari Mayr je odprl vrata v zgodnjih dvajsetih letih prejšnjega stoletja, na trgu, kjer stoji še danes. Kranj je bil takrat mesto obrtnikov in trgovcev, hiša ob trgu pa naravna postaja za vsakogar, ki je prišel od drugod. Prenočišče, topla jed, jutro naprej."
+      "body": "Stari Mayr je odprl vrata v zgodnjih dvajsetih letih prejšnjega stoletja, na trgu, kjer stoji še danes. Kranj je bil takrat mesto obrtnikov in trgovcev, hiša ob trgu pa naravna postaja za vsakogar, ki je prišel od drugod. Prenočišče, topla jed in miren začetek novega dne."
     },
     "section3": {
       "title": "Skozi generacije",
-      "body": "Hiša je menjala roke in vsak rod je pustil svojo sled — nova okna, drugačno pohištvo, prenovljene kopalnice. Obokani hodniki, kamnita tla in leseni tramovi so ostali takšni, kot so bili. Kar se je spremenilo, se je spremenilo zaradi udobja, ne zaradi videza.",
+      "body": "Hiša je menjala roke in vsak rod je pustil svojo sled — nova okna, drugačno pohištvo, prenovljene kopalnice. Skozi leta so se menjali oprema, sobe in drobni detajli, vendar je vse ostalo zvesto istemu namenu: da se gost pri nas počuti prijetno in domače.",
       "polaroidCaption": "Hiša, 1962"
     },
     "section4": {
       "title": "Danes",
-      "body": "Danes so v zgornjem nadstropju sobe s klimo, lastnimi kopalnicami in zvočno izolacijo. Spodaj so obokani hodniki takšni, kot so bili pred sto leti. Poleti se zajtrkuje v atriju. Pridete lahko za eno noč, za vikend ali za dlje."
+      "body": "Danes hiša ponuja dvoposteljne, troposteljne in štiriposteljne sobe v prvem in drugem nadstropju. Vsaka ima svojo kopalnico, prijetno zasebnost in toplino stare hiše, v kateri se po dnevu v mestu zlahka umirite. Poleti se zajtrkuje v atriju, k nam pa lahko pridete za eno noč, za vikend ali za dlje."
     },
     "quote": "»Hiša ostaja. Menjajo se le zgodbe ljudi, ki v njej prenočijo.«",
     "imageLabel1": "O NAS — header",
@@ -149,16 +148,16 @@
     "hero": {
       "eyebrow": "Prenočišče",
       "title": "Sobe",
-      "lead": "Deset sob v zgornjem nadstropju stoletne hiše v srcu Kranja."
+      "lead": "Mirne sobe v stoletni hiši, nekaj korakov od utripa starega Kranja."
     },
-    "intro": "Deset sob leži v zgornjem nadstropju stoletne hiše v starem mestnem jedru Kranja. Vsaka je klimatizirana in ima lastno kopalnico, mirna in zvočno izolirana od mestnega vrveža zunaj. Le nekaj minut hoje od vsega, kar staro mestno jedro Kranja ponuja.",
+    "intro": "Stari Mayr ponuja osem sob v prvem in drugem nadstropju stoletne hiše. Vsaka ima svojo kopalnico, prijetno zasebnost in toplino stare hiše, le nekaj korakov od Glavnega trga in vsega, kar ponuja staro mestno jedro Kranja.",
     "types": [
       {
         "id": "dvoposteljna",
         "eyebrow": "Za dva",
         "name": "Dvoposteljna soba",
-        "count": "4 sobe",
-        "description": "Naš najpogostejši tip sobe. Zakonska ali dve ločeni postelji, pisalna miza ob oknu in dovolj prostora, da se dva ne spotikata drug ob drugega. Zvočna izolacija drži hrup s trga zunaj.",
+        "count": "3 sobe",
+        "description": "Dvoposteljne sobe so prostorne in mirne, z zakonsko ali dvema ločenima posteljama, glede na sobo. Vsaka ima svojo kopalnico in dovolj prostora za udoben oddih v središču starega Kranja.",
         "imageLabel": "Dvoposteljna soba, Stari Mayr Kranj"
       },
       {
@@ -166,15 +165,15 @@
         "eyebrow": "Za tri",
         "name": "Troposteljna soba",
         "count": "1 soba",
-        "description": "Edina te vrste v hiši. Tri postelje, nekoliko več tlorisa kot dvoposteljne sobe — primerna za tri prijatelje, starše z otrokom ali koga, ki si želi nekaj več prostora.",
+        "description": "Troposteljna soba je edina te vrste v hiši, s tremi posteljami in nekoliko več tlorisa kot dvoposteljne sobe. Primerna je za tri prijatelje, starše z otrokom ali goste, ki si želijo malo več prostora.",
         "imageLabel": "Troposteljna soba, Stari Mayr Kranj"
       },
       {
         "id": "stiriposteljna",
         "eyebrow": "Za družine",
         "name": "Štiriposteljna soba",
-        "count": "5 sob",
-        "description": "Naše družinske sobe in največje v hiši. Štiri postelje, prostor za prtljago in mesto, kjer se otroci lahko igrajo, ne da bi bili vsi drug drugemu na poti. Nekatere imajo tudi kuhinjski kotiček s hladilnikom.",
+        "count": "4 sobe",
+        "description": "Štiriposteljne sobe so naše največje sobe, primerne za do štiri osebe, z dovolj prostora za družino ali skupino prijateljev. Če kapaciteta sobe to dopušča, lahko po potrebi uredimo tudi dodatno ležišče.",
         "imageLabel": "Štiriposteljna soba, Stari Mayr Kranj"
       }
     ],
@@ -184,14 +183,11 @@
         {
           "heading": "V sobi",
           "items": [
-            "Klimatizirano",
             "Lastna kopalnica s prho",
             "Brezplačen toaletni pribor",
             "Sušilec za lase",
-            "Pisalna miza",
             "Posteljnina in brisače",
             "Garderoba ali omara",
-            "Zvočna izolacija",
             "Vtičnica ob postelji",
             "Nekatere sobe s kuhinjo in hladilnikom"
           ]
@@ -199,15 +195,12 @@
         {
           "heading": "V hiši",
           "items": [
-            "Brezplačen WiFi (39 Mbps)",
+            "Brezplačen WiFi",
             "Vrt in notranje dvorišče",
             "Skupni prostor za druženje",
             "Vrtno pohištvo",
-            "Shramba za smuči",
             "Ogrevanje",
             "Dnevno čiščenje",
-            "Sef (doplačilo)",
-            "Pralnica (doplačilo)",
             "Prostori za sestanke"
           ]
         },
@@ -215,19 +208,16 @@
           "heading": "Storitve",
           "items": [
             "Zajtrk — samopostrežni, à la carte ali kontinentalni",
-            "Concierge",
-            "Zgodnja/pozna prijava in odjava",
-            "Organizacija izletov",
-            "Izposoja koles (doplačilo)",
+            "Zgodnji check-in je možen glede na razpoložljivost in po predhodnem dogovoru. Pozni check-out (do 12.30) je prav tako možen glede na razpoložljivost in po dogovoru, doplačilo znaša 15 € na sobo.",
             "Letališki prevoz (doplačilo)",
             "Hišni ljubljenčki dovoljeni (možno doplačilo)",
-            "Sobe za alergike",
             "Meni za posebne diete na zahtevo"
           ]
         }
       ]
     },
-    "accessibilityNote": "Sobe so v zgornjem nadstropju in dostopne po stopnicah. Če potrebujete dostop brez stopnic, nam pišite — svetovali vam bomo, kaj je mogoče.",
+    "airConditioningNote": "Trenutno so klimatizirane štiri od osmih sob. Če vam je klima pri bivanju pomembna, nam pred rezervacijo pišite ali nas pokličite in vam z veseljem povemo, katere sobe jo imajo.",
+    "accessibilityNote": "Sobe so v prvem in drugem nadstropju in dostopne po stopnicah. Če potrebujete dostop brez stopnic, nam pišite — svetovali vam bomo, kaj je mogoče.",
     "nearby": {
       "title": "V bližini",
       "items": [
@@ -241,7 +231,7 @@
     "priceNote": "Cene na povpraševanje",
     "cta": {
       "title": "Rezervirajte vašo sobo",
-      "lead": "Za prosto termine in cene nas kontaktirajte ali rezervirajte neposredno."
+      "lead": "Za proste termine in cene nas kontaktirajte, sobo pa lahko rezervirate tudi s klikom na spodnji gumb za rezervacijo."
     }
   },
   "bookingRating": {
@@ -261,14 +251,14 @@
   },
   "contact": {
     "hero": {
+      "eyebrow": "Pišite ali pokličite",
       "title": "Kontakt",
-      "lead": "Naslov, telefon, e-pošta in obrazec — za rezervacijo ali vprašanje nas kontaktirajte po katerikoli poti."
+      "lead": "Za vprašanja smo vam na voljo po telefonu, e-pošti ali prek spodnjega obrazca. Sobo lahko rezervirate tudi s klikom na gumb za rezervacijo."
     },
     "address": "Glavni trg 16, 4000 Kranj",
     "addressNote": "Staro mestno jedro Kranja",
-    "phone": "(04) 280 00 20",
+    "phone": "+386 40 420 262",
     "email": "mayr.doo@siol.net",
-    "hours": "Vsak dan od 10. do 23. ure",
     "facebookLabel": "Stari Mayr",
     "form": {
       "name": "Ime in priimek",

@@ -5,16 +5,16 @@ export function StructuredData() {
     name: 'Stari Mayr',
     description: 'Prenočišče v stoletni hiši v starem mestnem jedru Kranja.',
     url: 'https://stari-mayr.si',
+    telephone: '+386 40 420 262',
     address: {
       '@type': 'PostalAddress',
-      // TODO: dopolni streetAddress, postalCode, telephone, geo koordinate
+      // TODO: dopolni streetAddress, postalCode, geo koordinate
       addressLocality: 'Kranj',
       addressCountry: 'SI',
     },
-    numberOfRooms: 10,
+    numberOfRooms: 8,
     amenityFeature: [
       { '@type': 'LocationFeatureSpecification', name: 'Brezplačen WiFi', value: true },
-      { '@type': 'LocationFeatureSpecification', name: 'Klimatska naprava', value: true },
       { '@type': 'LocationFeatureSpecification', name: 'Zajtrk', value: true },
       { '@type': 'LocationFeatureSpecification', name: 'Vrt', value: true },
       { '@type': 'LocationFeatureSpecification', name: 'Hišni ljubljenčki dovoljeni', value: true },

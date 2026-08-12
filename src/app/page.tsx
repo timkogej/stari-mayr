@@ -9,7 +9,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   description:
-    'Deset klimatiziranih sob v stoletni hiši v središču Kranja. Brezplačen WiFi, zajtrk, vrt in notranji atrij. 8 km od letališča, 30 km od Bleda.',
+    'Sobe v stoletni hiši v središču Kranja. Brezplačen WiFi, zajtrk, vrt in notranji atrij. 8 km od letališča, 30 km od Bleda.',
 };
 
 export default function HomePage() {

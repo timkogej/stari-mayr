@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { MapPin, Phone, Mail, Clock, Share2 } from 'lucide-react';
+import { MapPin, Phone, Mail, Share2 } from 'lucide-react';
 import { FadeIn } from '@/components/shared/FadeIn';
 import { ReservationButtons } from '@/components/shared/ReservationButtons';
 import { ContactForm } from './ContactForm';
@@ -11,7 +11,7 @@ const contact = messages.contact;
 
 export const metadata: Metadata = {
   title: 'Kontakt',
-  description: 'Kontakt, lokacija in delovni čas — Stari Mayr, staro mestno jedro Kranja.',
+  description: 'Kontakt in lokacija — Stari Mayr, staro mestno jedro Kranja.',
 };
 
 export default function KontaktPage() {
@@ -29,6 +29,9 @@ export default function KontaktPage() {
         />
         <div className="absolute inset-0 bg-coffee/40" />
         <div className="relative z-10 text-center py-20 px-6">
+          <p className="font-display uppercase tracking-[0.3em] text-xs text-honey mb-4">
+            {contact.hero.eyebrow}
+          </p>
           <h1 className="font-display italic text-cream text-5xl md:text-7xl tracking-wide mb-4">
             {contact.hero.title}
           </h1>
@@ -63,10 +66,6 @@ export default function KontaktPage() {
                   <a href={`mailto:${contact.email}`} className="font-body text-coffee text-sm hover:text-bronze transition-colors">
                     {contact.email}
                   </a>
-                </div>
-                <div className="flex items-center gap-4">
-                  <Clock className="w-4 h-4 text-honey shrink-0" />
-                  <p className="font-body text-coffee text-sm">{messages.footer.hours}</p>
                 </div>
                 <div className="flex items-center gap-4">
                   <Share2 className="w-4 h-4 text-honey shrink-0" />

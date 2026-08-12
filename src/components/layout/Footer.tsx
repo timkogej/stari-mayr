@@ -28,7 +28,6 @@ export function Footer() {
               <p>{f.address}</p>
               <p>{f.phone}</p>
               <p>{f.email}</p>
-              <p className="text-cream/60 text-xs mt-3">{f.hours}</p>
             </div>
           </div>
 

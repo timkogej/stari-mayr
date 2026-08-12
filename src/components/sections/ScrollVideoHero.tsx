@@ -318,7 +318,7 @@ function ScrubHero() {
               aria-hidden="true"
               className="pointer-events-none absolute inset-[9px] border border-cream/20"
             />
-            <p className="font-script text-honey text-xl sm:text-2xl mb-5">
+            <p className="font-display uppercase tracking-[0.3em] text-xs text-honey mb-5">
               {c.introEyebrow}
             </p>
             <h1 className="font-display italic font-medium text-cream text-6xl sm:text-8xl lg:text-9xl drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)]">
@@ -589,7 +589,7 @@ function MobileCanvasHero() {
               aria-hidden="true"
               className="pointer-events-none absolute inset-[9px] border border-cream/20"
             />
-            <p className="font-script text-honey text-xl mb-5">
+            <p className="font-display uppercase tracking-[0.3em] text-xs text-honey mb-5">
               {c.introEyebrow}
             </p>
             <h1 className="font-display italic font-medium text-cream text-5xl drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)]">
@@ -704,7 +704,7 @@ function IntroFallbackContent() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-[9px] border border-cream/20"
       />
-      <p className="font-script text-honey text-xl sm:text-2xl mb-5">
+      <p className="font-display uppercase tracking-[0.3em] text-xs text-honey mb-5">
         {c.introEyebrow}
       </p>
       <h1 className="font-display italic font-medium text-cream text-5xl sm:text-7xl drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)]">

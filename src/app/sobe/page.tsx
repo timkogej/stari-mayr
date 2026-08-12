@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { Wind, Bath, Wifi, PenLine, VolumeX } from 'lucide-react';
+import { Bath, Wifi } from 'lucide-react';
 import { PlaceholderImage } from '@/components/shared/PlaceholderImage';
 import { FadeIn } from '@/components/shared/FadeIn';
 import { SectionDivider } from '@/components/shared/SectionDivider';
@@ -15,15 +15,12 @@ const rooms = messages.rooms;
 export const metadata: Metadata = {
   title: 'Sobe',
   description:
-    'Dvoposteljne, troposteljne in družinske štiriposteljne sobe v središču Kranja. Vse klimatizirane, z lastno kopalnico in brezplačnim WiFi.',
+    'Osem sob v prvem in drugem nadstropju stoletne hiše v središču Kranja, z lastno kopalnico in brezplačnim WiFi.',
 };
 
 const roomAmenities = [
-  { icon: Wind, label: 'Klima' },
   { icon: Bath, label: 'Lastna kopalnica' },
   { icon: Wifi, label: 'Brezplačen WiFi' },
-  { icon: PenLine, label: 'Pisalna miza' },
-  { icon: VolumeX, label: 'Zvočna izolacija' },
 ];
 
 const roomTypeImages: Record<string, string> = {
@@ -152,8 +149,13 @@ export default function SobePage() {
             ))}
           </div>
 
+          {/* Air conditioning note */}
+          <div className="max-w-3xl mx-auto mt-12 bg-sand/40 border-l-2 border-bronze px-5 py-4 text-sm text-walnut">
+            <p className="font-body">{rooms.airConditioningNote}</p>
+          </div>
+
           {/* Accessibility note */}
-          <div className="max-w-3xl mx-auto mt-12 bg-sand/40 border-l-2 border-bronze px-5 py-4">
+          <div className="max-w-3xl mx-auto mt-4 bg-sand/40 border-l-2 border-bronze px-5 py-4">
             <p className="font-body text-sm text-walnut">{rooms.accessibilityNote}</p>
           </div>
         </FadeIn>

@@ -65,6 +65,7 @@ export default function ONasPage() {
       </div>
 
       <div className="max-w-3xl mx-auto px-6 lg:px-12 py-20 lg:py-32">
+        {/* TODO: zamenjaj z avtentično zgodovino hiše, ko jo pošlje lastnik */}
         {/* Section 3: Skozi generacije */}
         <FadeIn>
           <h2 className="font-display text-3xl md:text-4xl text-bronze tracking-wide mb-6">
