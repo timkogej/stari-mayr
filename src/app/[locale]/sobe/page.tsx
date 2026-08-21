@@ -1,27 +1,37 @@
 import type { Metadata } from 'next';
+import type { AppLocale } from '@/i18n/routing';
 import Image from 'next/image';
 import { Bath, Wifi } from 'lucide-react';
+import { getMessages, getTranslations } from 'next-intl/server';
 import { PlaceholderImage } from '@/components/shared/PlaceholderImage';
 import { FadeIn } from '@/components/shared/FadeIn';
 import { SectionDivider } from '@/components/shared/SectionDivider';
 import { ReservationButtons } from '@/components/shared/ReservationButtons';
 import { BookingRating } from '@/components/shared/BookingRating';
 import { Testimonials } from '@/components/sections/Testimonials';
-import { getMessages } from '@/lib/content';
+import { getAlternateLanguages } from '@/i18n/alternates';
 
-const messages = getMessages();
-const rooms = messages.rooms;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: AppLocale }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'rooms' });
 
-export const metadata: Metadata = {
-  title: 'Sobe',
-  description:
-    'Osem sob v prvem in drugem nadstropju stoletne hiše v središču Kranja, z lastno kopalnico in brezplačnim WiFi.',
-};
+  return {
+    title: t('hero.title'),
+    description: t('hero.lead'),
+    alternates: {
+      languages: getAlternateLanguages('/sobe'),
+    },
+  };
+}
 
 const roomAmenities = [
-  { icon: Bath, label: 'Lastna kopalnica' },
-  { icon: Wifi, label: 'Brezplačen WiFi' },
-];
+  { icon: Bath, labelKey: 'bathroom' },
+  { icon: Wifi, labelKey: 'wifi' },
+] as const;
 
 const roomTypeImages: Record<string, string> = {
   dvoposteljna: '/images/mayr-sobe-dvoposteljna.jpeg',
@@ -35,7 +45,11 @@ const roomImageFilters: Record<string, string> = {
   stiriposteljna: 'room-heritage-image--family',
 };
 
-export default function SobePage() {
+export default async function SobePage() {
+  const messages = await getMessages();
+  const rooms = messages.rooms;
+  const amenityLabels = rooms.badges;
+
   return (
     <>
       {/* Hero */}
@@ -109,10 +123,10 @@ export default function SobePage() {
                     {room.description}
                   </p>
                   <div className="flex flex-wrap gap-4 mb-8">
-                    {roomAmenities.map(({ icon: Icon, label }) => (
-                      <div key={label} className="flex items-center gap-1.5 text-xs font-body text-bronze">
+                    {roomAmenities.map(({ icon: Icon, labelKey }) => (
+                      <div key={labelKey} className="flex items-center gap-1.5 text-xs font-body text-bronze">
                         <Icon className="w-4 h-4" />
-                        <span>{label}</span>
+                        <span>{amenityLabels[labelKey]}</span>
                       </div>
                     ))}
                   </div>

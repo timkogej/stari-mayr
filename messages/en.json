@@ -1,0 +1,479 @@
+{
+  "site": {
+    "name": "Stari Mayr",
+    "tagline": "Lodging in the old town of Kranj",
+    "description": "Rooms in a century-old house in the heart of Kranj. Free WiFi, breakfast, garden and inner courtyard. 8 km from the airport, 30 km from Bled."
+  },
+  "nav": {
+    "home": "Home",
+    "ponudba": "Offer",
+    "about": "About",
+    "rooms": "Rooms",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "menuLabel": "Navigation"
+  },
+  "cta": {
+    "reserveRoom": "Book a room"
+  },
+  "footer": {
+    "tagline": "More than a century of tradition in the old town",
+    "contact": "Contact",
+    "address": "Glavni trg 16, 4000 Kranj",
+    "addressNote": "Kranj's old town",
+    "phone": "+386 40 420 262",
+    "email": "mayr.doo@siol.net",
+    "follow": "Follow us",
+    "facebookLabel": "Stari Mayr",
+    "copyright": "Mayr d.o.o. · All rights reserved",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Since 1920",
+      "wordmark": "Stari Mayr",
+      "tagline": "Rooms in the old town of Kranj",
+      "scrollLabel": "Discover"
+    },
+    "scrollHero": {
+      "scrollLabel": "Scroll for the story",
+      "introEyebrow": "Since 1920",
+      "introTitle": "Stari Mayr",
+      "introSubtitle": "Rooms in the old town of Kranj",
+      "midpointTitle": "On the main square since 1920",
+      "midpointSubtitle": "A house with history and a thousand stories.",
+      "finalTitle": "Rooms in the heart of Kranj",
+      "finalSubtitle": "Stay by the main square, with the old town at your door.",
+      "ctaPrimary": "See the rooms",
+      "ctaSecondary": "Book your stay"
+    },
+    "intro": {
+      "eyebrow": "Our story",
+      "title": "A hundred years under one roof",
+      "body": "Stari Mayr has welcomed guests in the old town of Kranj since the 1920s. Through the generations, the house has stayed what it always was — a place to sleep for travelers and townspeople alike, a space with its own history.",
+      "link": "Get to know us"
+    },
+    "rooms_preview": {
+      "eyebrow": "Accommodation",
+      "title": "Rooms above the old square",
+      "lead": "The house offers double, triple and quadruple rooms. Each has its own bathroom, quiet privacy and the warmth of an old house, where a day in the city is easy to leave behind.",
+      "link": "All about the rooms",
+      "cards": [
+        {
+          "eyebrow": "3 rooms",
+          "name": "Double room",
+          "description": "Spacious rooms with a double bed or two separate beds, depending on the room. Each has its own bathroom.",
+          "imageLabel": "Double room, Stari Mayr Kranj"
+        },
+        {
+          "eyebrow": "1 room",
+          "name": "Triple room",
+          "description": "The only one of its kind in the house — three beds and a little more room to spread out.",
+          "imageLabel": "Triple room, Stari Mayr Kranj"
+        },
+        {
+          "eyebrow": "4 rooms",
+          "name": "Quadruple room",
+          "description": "Our largest rooms, suitable for up to four people — enough space for a family or a group of friends. An extra bed can be arranged on request, where the room's capacity allows.",
+          "imageLabel": "Quadruple room, Stari Mayr Kranj"
+        }
+      ]
+    },
+    "atrium": {
+      "eyebrow": "Our courtyard",
+      "title": "Behind the front door",
+      "body": "The inner courtyard is a quiet corner of the house, separated from the street by a single passage. We serve breakfast there in summer, and during the day you can sit in a pleasant atmosphere and enjoy the quiet of the old town.",
+      "imageLabel": "Courtyard of the Stari Mayr house",
+      "link": "More about the offer"
+    },
+    "contact": {
+      "eyebrow": "Welcome",
+      "title": "Come stay with us",
+      "body": "Rooms are available year-round. Write or call — we're happy to tell you what's free.",
+      "address": "Glavni trg 16, 4000 Kranj",
+      "phone": "+386 40 420 262",
+      "email": "mayr.doo@siol.net"
+    }
+  },
+  "ponudba": {
+    "hero": {
+      "eyebrow": "What we offer",
+      "title": "Offer",
+      "lead": "The building, the rooms, breakfast and the courtyard — what awaits you at Stari Mayr."
+    },
+    "roof": {
+      "title": "Under one roof",
+      "body": "The building on Glavni trg has stood here since the start of the last century, and has welcomed guests looking for a place to stay in the old town of Kranj the whole time. In its rooms, the quiet of an old house, the closeness of the square and the feeling of being part of the town's story all come together.",
+      "imageLabel": "OFFER — THE BUILDING"
+    },
+    "zajtrk": {
+      "title": "Breakfast",
+      "body": "We prepare breakfast every morning for guests staying with us — self-service, à la carte or continental. If you need a gluten-free, vegetarian or other special version, let us know when you book and it will be ready for you."
+    },
+    "atrij": {
+      "title": "Courtyard",
+      "body": "The inner courtyard with its vaulted colonnade is a quiet corner behind the house, where the pace of the town gives way to stillness. We serve breakfast there in summer, and during the day you're welcome to sit in a pleasant setting, between the garden and the shared space for guests."
+    },
+    "kranj": {
+      "title": "Kranj",
+      "body": "The house stands on Glavni trg, a few steps from Prešernova hiša and grad Khislstein, so you can step straight from your room into the streets of old Kranj. The Kokra canyon is a five-minute walk away, the airport is eight kilometers off, and Bled and Ljubljana are each about thirty kilometers from us."
+    },
+    "closing": {
+      "title": "Come stay with us",
+      "body": "To book a room, click the reservation button below; for other questions, write or call us.",
+      "link": "See the rooms"
+    }
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "Our story",
+      "title": "About",
+      "lead": "From opening its doors in 1920 to today — the story of the house on Glavni trg in Kranj."
+    },
+    "section1": {
+      "title": "The beginnings",
+      "body": "Stari Mayr opened its doors in the early 1920s, on the square where it still stands today. Kranj was then a town of craftsmen and merchants, and the house by the square was a natural stop for anyone arriving from elsewhere. A place to sleep, a warm meal, and a quiet start to a new day."
+    },
+    "section3": {
+      "title": "Through the generations",
+      "body": "The house has changed hands, and each generation left its mark — new windows, different furniture, renovated bathrooms. Over the years the fittings, the rooms and the small details have changed, but everything has stayed true to the same purpose: that a guest feels comfortable and at home with us.",
+      "polaroidCaption": "The house, 1962"
+    },
+    "section4": {
+      "title": "Today",
+      "body": "Today the house offers double, triple and quadruple rooms on the first and second floors. Each has its own bathroom, quiet privacy and the warmth of an old house, where a day in the city is easy to leave behind. Breakfast is served in the courtyard in summer, and you're welcome to stay with us for a night, a weekend, or longer."
+    },
+    "quote": "»The house remains. Only the stories of the people who sleep in it change.«",
+    "imageLabel1": "ABOUT — header",
+    "imageLabel2": "TERRACE — the house terrace"
+  },
+  "rooms": {
+    "hero": {
+      "eyebrow": "Accommodation",
+      "title": "Rooms",
+      "lead": "Quiet rooms in a century-old house, a few steps from the pulse of old Kranj."
+    },
+    "badges": {
+      "bathroom": "Private bathroom",
+      "wifi": "Free WiFi"
+    },
+    "intro": "Stari Mayr offers eight rooms on the first and second floors of a century-old house. Each has its own bathroom, quiet privacy and the warmth of an old house, just steps from Glavni trg and everything the old town of Kranj has to offer.",
+    "types": [
+      {
+        "id": "dvoposteljna",
+        "eyebrow": "For two",
+        "name": "Double room",
+        "count": "3 rooms",
+        "description": "Double rooms are spacious and quiet, with a double bed or two separate beds, depending on the room. Each has its own bathroom and enough room for a comfortable stay in the heart of old Kranj.",
+        "imageLabel": "Double room, Stari Mayr Kranj"
+      },
+      {
+        "id": "troposteljna",
+        "eyebrow": "For three",
+        "name": "Triple room",
+        "count": "1 room",
+        "description": "The triple room is the only one of its kind in the house, with three beds and a little more floor space than the double rooms. It suits three friends, parents with a child, or guests who want a little extra room.",
+        "imageLabel": "Triple room, Stari Mayr Kranj"
+      },
+      {
+        "id": "stiriposteljna",
+        "eyebrow": "For families",
+        "name": "Quadruple room",
+        "count": "4 rooms",
+        "description": "The quadruple rooms are our largest, suitable for up to four people, with enough space for a family or a group of friends. An extra bed can be arranged where the room's capacity allows.",
+        "imageLabel": "Quadruple room, Stari Mayr Kranj"
+      }
+    ],
+    "amenities": {
+      "title": "What's included",
+      "groups": [
+        {
+          "heading": "In the room",
+          "items": [
+            "Private bathroom with shower",
+            "Free toiletries",
+            "Hair dryer",
+            "Linens and towels",
+            "Wardrobe or closet",
+            "Outlet by the bed",
+            "Some rooms with kitchenette and fridge"
+          ]
+        },
+        {
+          "heading": "In the house",
+          "items": [
+            "Free WiFi",
+            "Garden and inner courtyard",
+            "Shared space for guests",
+            "Garden furniture",
+            "Heating",
+            "Daily cleaning",
+            "Meeting space"
+          ]
+        },
+        {
+          "heading": "Services",
+          "items": [
+            "Breakfast — self-service, à la carte or continental",
+            "Early check-in is possible subject to availability and by prior arrangement. Late check-out (until 12:30) is also possible subject to availability and arrangement, for a surcharge of €15 per room.",
+            "Airport transfer (surcharge)",
+            "Pets allowed (surcharge may apply)",
+            "Special-diet menu on request"
+          ]
+        }
+      ]
+    },
+    "airConditioningNote": "Four of the eight rooms are currently air-conditioned. If air conditioning matters for your stay, write or call us before booking and we'll be happy to tell you which rooms have it.",
+    "accessibilityNote": "Rooms are on the first and second floors and reached by stairs. If you need step-free access, write to us — we'll advise you on what's possible.",
+    "nearby": {
+      "title": "Nearby",
+      "items": [
+        {
+          "label": "Jože Pučnik Airport – Ljubljana",
+          "distance": "8 km"
+        },
+        {
+          "label": "Bled",
+          "distance": "approx. 30 km"
+        },
+        {
+          "label": "Ljubljana, old town",
+          "distance": "approx. 30 km"
+        },
+        {
+          "label": "Ljubljana railway station",
+          "distance": "30 km"
+        }
+      ],
+      "note": "We arrange airport transfer on request, for a surcharge."
+    },
+    "priceNote": "Prices on request",
+    "cta": {
+      "title": "Book your room",
+      "lead": "Contact us for availability and prices, or book a room directly with the reservation button below."
+    }
+  },
+  "bookingRating": {
+    "score": "8.2",
+    "label": "Excellent reviews",
+    "reviewsText": "650+ reviews on Booking.com"
+  },
+  "testimonials": {
+    "eyebrow": "Guest reviews",
+    "heading": "What past guests say",
+    "source_note": "Guest reviews from Booking.com",
+    "items": [
+      {
+        "quote": "TODO: paste real review from Booking.com",
+        "author": "TODO: guest name",
+        "country": "TODO: country"
+      },
+      {
+        "quote": "TODO: paste real review from Booking.com",
+        "author": "TODO: guest name",
+        "country": "TODO: country"
+      },
+      {
+        "quote": "TODO: paste real review from Booking.com",
+        "author": "TODO: guest name",
+        "country": "TODO: country"
+      }
+    ]
+  },
+  "contact": {
+    "hero": {
+      "eyebrow": "Write or call",
+      "title": "Contact",
+      "lead": "We're glad to help by phone, email or the form below. You can also book a room directly with the reservation button."
+    },
+    "infoHeading": "Information",
+    "mapTitle": "Location of Stari Mayr, Glavni trg 16, Kranj",
+    "address": "Glavni trg 16, 4000 Kranj",
+    "addressNote": "Kranj's old town",
+    "phone": "+386 40 420 262",
+    "email": "mayr.doo@siol.net",
+    "facebookLabel": "Stari Mayr",
+    "form": {
+      "heading": "Write to us",
+      "name": "Full name",
+      "email": "Email",
+      "message": "Message",
+      "submit": "Send message"
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "This page doesn't exist. Maybe you took a wrong turn?",
+    "link": "Back home"
+  },
+  "languageSwitcher": {
+    "sl": "SI",
+    "en": "EN"
+  },
+  "structuredData": {
+    "wifi": "Free WiFi",
+    "breakfast": "Breakfast",
+    "garden": "Garden",
+    "petsAllowed": "Pets allowed"
+  },
+  "terms": {
+    "eyebrow": "Legal",
+    "title": "Terms & Conditions",
+    "subtitle": "Guesthouse Stari Mayr",
+    "last_updated_note": "TODO: add last-updated date",
+    "sections": [
+      {
+        "number": "1",
+        "heading": "Provider information",
+        "body": [
+          "The accommodation service provider is:",
+          "Mayr d.o.o.\nGlavni trg 16\n4000 Kranj\nSlovenia",
+          "Company registration number: 5520541000\nVAT number: SI38140560\nEmail: mayr.doo@siol.net\nPhone: +386 40 420 262",
+          "These terms and conditions apply to direct reservations of accommodation at Guesthouse Stari Mayr made through our official website and online booking system.",
+          "By submitting a reservation, the guest confirms that they have read, understood, and accepted these terms and conditions."
+        ]
+      },
+      {
+        "number": "2",
+        "heading": "Reservation",
+        "body": [
+          "A reservation is confirmed once the guest successfully completes the booking process and receives a booking confirmation at the email address provided.",
+          "The guest is responsible for the accuracy of all information entered during booking, including the number of adults and children and the ages of any children.",
+          "Prices are stated in EUR and apply to the selected room, dates, number of guests, and selected rate type.",
+          "Extra beds are available only upon prior confirmation by the accommodation and subject to availability and the characteristics of the individual room."
+        ]
+      },
+      {
+        "number": "3",
+        "heading": "Rate types and cancellation",
+        "body": [
+          "Two rate types are available for direct reservations:",
+          "Standard Rate",
+          "The reservation can be cancelled free of charge up to 7 days before the scheduled arrival date.",
+          "If the guest cancels the reservation less than 7 days before arrival, or does not show up (no-show), the accommodation reserves the right to charge the full value of the reservation.",
+          "Changes to the reservation are possible up to 7 days before arrival, subject to availability. If the dates, room, number of guests, or other elements of the reservation are changed, the price may be adjusted accordingly.",
+          "Non-refundable Rate",
+          "The Non-refundable rate is 10% lower than the Standard Rate.",
+          "Reservations at this rate cannot be cancelled free of charge. In the event of cancellation or no-show, the full value of the reservation will be charged.",
+          "Any changes to a Non-refundable reservation are possible only by prior arrangement with the accommodation and are not guaranteed.",
+          "The exact terms of the selected rate type are also shown to the guest during the booking process."
+        ]
+      },
+      {
+        "number": "4",
+        "heading": "Payment and payment card",
+        "body": [
+          "When booking, the guest enters a valid payment card through the secure Stripe payment system.",
+          "Payment card data is processed by Stripe. Guesthouse Stari Mayr and the HBook booking system do not have direct access to the guest's full payment card details.",
+          "For the Standard Rate, the payment card is used to secure the reservation and for a possible pre-authorization. Pre-authorization is not the final payment for the stay.",
+          "The guest settles the accommodation cost directly at Guesthouse Stari Mayr. Payment can be made in cash or by payment card.",
+          "In the event of cancellation after the free cancellation deadline has passed, or in the event of a no-show, an amount may be charged in accordance with the terms of the selected reservation.",
+          "For a Non-refundable reservation, payment or securing of the reservation is carried out in accordance with the terms shown to the guest during the booking process and the technical capabilities of the payment system.",
+          "If pre-authorization or another required card verification is unsuccessful, the accommodation may ask the guest to provide another valid payment card or method of payment."
+        ]
+      },
+      {
+        "number": "5",
+        "heading": "Tourist tax",
+        "body": [
+          "The tourist tax is not included in the online payment for the reservation and is calculated and settled separately at the accommodation.",
+          "The amount of the tourist tax is determined based on the actual number of guests, their age, the number of nights, and applicable regulations.",
+          "The tourist tax is not charged for cancelled reservations or in the event of a no-show, where the stay did not actually take place."
+        ]
+      },
+      {
+        "number": "6",
+        "heading": "Additional services and surcharges",
+        "body": [
+          "The guest may select additional services during the booking process, where available.",
+          "The price of each additional service is shown before the reservation is confirmed.",
+          "Services or extras ordered subsequently, or during the stay, may be charged separately.",
+          "Pets are allowed with prior notice. The surcharge for a pet is 10 EUR per night."
+        ]
+      },
+      {
+        "number": "7",
+        "heading": "Check-in and check-out",
+        "body": [
+          "Check-in is possible from 14:00 onwards.",
+          "Check-out must be completed by 11:00 at the latest on the day of departure.",
+          "Prior to arrival, the guest receives instructions for accessing the accommodation and other important information about the stay.",
+          "Earlier arrival or later departure is possible only by prior arrangement and is subject to availability."
+        ]
+      },
+      {
+        "number": "8",
+        "heading": "Smoking",
+        "body": [
+          "All rooms at Guesthouse Stari Mayr are non-smoking.",
+          "Smoking in the rooms is not permitted. In the event of a violation, the guest will be charged a fee of 200 EUR to cover additional cleaning, odor removal, and preparing the room again."
+        ]
+      },
+      {
+        "number": "9",
+        "heading": "Guest liability and damage",
+        "body": [
+          "The guest is required to use the room, its equipment, and the common areas with care and responsibility.",
+          "The guest is liable for damage caused intentionally or through negligence by themselves or by persons included in their reservation.",
+          "In the event of damage caused, the accommodation reserves the right to claim reimbursement of the costs incurred."
+        ]
+      },
+      {
+        "number": "10",
+        "heading": "House rules",
+        "body": [
+          "Guests must respect the accommodation's house rules and take care to preserve the peace, safety, and comfort of other guests.",
+          "In the event of serious or repeated violations, the accommodation reserves the right to terminate the guest's stay without reimbursement of the unused portion of the reservation."
+        ]
+      },
+      {
+        "number": "11",
+        "heading": "Early departure",
+        "body": [
+          "If, after arrival, the guest decides to end their stay before the departure date stated in the confirmed reservation, unused nights are generally not refunded.",
+          "A different arrangement is possible only by individual agreement with the accommodation."
+        ]
+      },
+      {
+        "number": "12",
+        "heading": "Cancellation by the accommodation",
+        "body": [
+          "In exceptional circumstances, where the accommodation cannot be provided due to force majeure, technical failure, safety reasons, or other unforeseeable circumstances, Guesthouse Stari Mayr will notify the guest as soon as possible.",
+          "If the accommodation is unable to honor a confirmed reservation, the guest will be refunded any amount already paid for the reservation."
+        ]
+      },
+      {
+        "number": "13",
+        "heading": "Complaints",
+        "body": [
+          "The guest may submit a complaint to: mayr.doo@siol.net",
+          "Each complaint will be handled individually based on the circumstances of the specific case, and we will strive to reach an amicable resolution.",
+          "We recommend that the guest notify us of any issue as soon as possible, or during the stay itself where possible, so that we can attempt to resolve it."
+        ]
+      },
+      {
+        "number": "14",
+        "heading": "Personal data protection",
+        "body": [
+          "Guests' personal data is processed for the purpose of carrying out the reservation, communicating with the guest, providing accommodation services, processing payments, and fulfilling legal obligations.",
+          "More detailed information about the processing of personal data, the legal bases, retention periods, recipients of data, and individual rights is provided in the Privacy Policy published on our website."
+        ]
+      },
+      {
+        "number": "15",
+        "heading": "Contact",
+        "body": [
+          "Mayr d.o.o. / Guesthouse Stari Mayr\nGlavni trg 16\n4000 Kranj\nSlovenia",
+          "Email: mayr.doo@siol.net\nPhone: +386 40 420 262"
+        ]
+      }
+    ]
+  },
+  "privacy_policy": {
+    "eyebrow": "Legal",
+    "title": "Privacy Policy",
+    "subtitle": "Guesthouse Stari Mayr",
+    "coming_soon": "Our Privacy Policy is currently being finalised and will be published shortly. For questions about how we handle personal data, please contact us at mayr.doo@siol.net."
+  }
+}

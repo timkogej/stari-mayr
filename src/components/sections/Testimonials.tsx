@@ -1,13 +1,12 @@
 // TODO: Zamenjaj placeholderje s pravimi mnenji z Booking.com profila.
 // Ne izmišljuj mnenj — objava neresničnih mnenj gostov je v EU prepovedana
 // (Direktiva 2005/29/ES, dopolnjena z Omnibus direktivo 2019/2161).
+import { getMessages } from 'next-intl/server';
 import { FadeIn } from '@/components/shared/FadeIn';
-import { getMessages } from '@/lib/content';
 
-const messages = getMessages();
-const testimonials = messages.testimonials;
-
-export function Testimonials() {
+export async function Testimonials() {
+  const messages = await getMessages();
+  const testimonials = messages.testimonials;
   const items = testimonials.items.filter((item) => !item.quote.startsWith('TODO'));
 
   if (items.length === 0) return null;

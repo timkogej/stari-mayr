@@ -1,6 +1,9 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 export function ReservationButtons() {
+  const t = useTranslations('cta');
   // TODO: hook up to booking system or external platform
   const handleRoomReservation = () => {};
 
@@ -10,7 +13,7 @@ export function ReservationButtons() {
       onClick={handleRoomReservation}
       className="font-body uppercase tracking-[0.15em] text-xs px-5 py-3 transition-colors duration-300 bg-terracotta hover:bg-terracotta/90 text-cream"
     >
-      Rezerviraj sobo
+      {t('reserveRoom')}
     </button>
   );
 }

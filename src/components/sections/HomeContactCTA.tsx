@@ -1,11 +1,11 @@
+import { getMessages } from 'next-intl/server';
 import { ReservationButtons } from '@/components/shared/ReservationButtons';
 import { FadeIn } from '@/components/shared/FadeIn';
-import { getMessages } from '@/lib/content';
 
-const messages = getMessages();
-const contact = messages.home.contact;
+export async function HomeContactCTA() {
+  const messages = await getMessages();
+  const contact = messages.home.contact;
 
-export function HomeContactCTA() {
   return (
     <section className="bg-walnut text-cream py-20 lg:py-32">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">

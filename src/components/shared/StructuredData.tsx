@@ -1,10 +1,18 @@
-export function StructuredData() {
+import { getLocale, getMessages } from 'next-intl/server';
+
+export async function StructuredData() {
+  const locale = await getLocale();
+  const messages = await getMessages();
+  const sd = messages.structuredData;
+
   const data = {
     '@context': 'https://schema.org',
     '@type': 'LodgingBusiness',
+    '@id': 'https://stari-mayr.si/#lodging',
     name: 'Stari Mayr',
-    description: 'Prenočišče v stoletni hiši v starem mestnem jedru Kranja.',
-    url: 'https://stari-mayr.si',
+    description: messages.site.description,
+    inLanguage: locale,
+    url: locale === 'sl' ? 'https://stari-mayr.si' : 'https://stari-mayr.si/en',
     telephone: '+386 40 420 262',
     address: {
       '@type': 'PostalAddress',
@@ -14,10 +22,10 @@ export function StructuredData() {
     },
     numberOfRooms: 8,
     amenityFeature: [
-      { '@type': 'LocationFeatureSpecification', name: 'Brezplačen WiFi', value: true },
-      { '@type': 'LocationFeatureSpecification', name: 'Zajtrk', value: true },
-      { '@type': 'LocationFeatureSpecification', name: 'Vrt', value: true },
-      { '@type': 'LocationFeatureSpecification', name: 'Hišni ljubljenčki dovoljeni', value: true },
+      { '@type': 'LocationFeatureSpecification', name: sd.wifi, value: true },
+      { '@type': 'LocationFeatureSpecification', name: sd.breakfast, value: true },
+      { '@type': 'LocationFeatureSpecification', name: sd.garden, value: true },
+      { '@type': 'LocationFeatureSpecification', name: sd.petsAllowed, value: true },
     ],
     petsAllowed: true,
     smokingAllowed: false,

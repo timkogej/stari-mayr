@@ -3,13 +3,12 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
+import { useMessages } from 'next-intl';
 import { ReservationButtons } from '@/components/shared/ReservationButtons';
-import { getMessages } from '@/lib/content';
-
-const messages = getMessages();
-const h = messages.home.hero;
 
 export function Hero() {
+  const messages = useMessages();
+  const h = messages.home.hero;
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);

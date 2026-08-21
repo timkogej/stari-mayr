@@ -1,13 +1,13 @@
-import Link from 'next/link';
 import Image from 'next/image';
+import { getMessages } from 'next-intl/server';
+import { Link } from '@/i18n/navigation';
 import { FadeIn } from '@/components/shared/FadeIn';
 import { SectionHeading } from '@/components/shared/SectionHeading';
-import { getMessages } from '@/lib/content';
 
-const messages = getMessages();
-const atrium = messages.home.atrium;
+export async function HomeAtriumShowcase() {
+  const messages = await getMessages();
+  const atrium = messages.home.atrium;
 
-export function HomeAtriumShowcase() {
   return (
     <section className="py-20 lg:py-32 bg-parchment">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">

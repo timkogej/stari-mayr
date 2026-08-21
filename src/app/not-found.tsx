@@ -1,21 +1,15 @@
-import Link from 'next/link';
-
-export default function NotFound() {
+export default function RootNotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-cream">
-      <div className="text-center px-6">
-        <p className="font-script text-honey text-2xl mb-4">404</p>
-        <h1 className="font-display italic text-4xl md:text-6xl text-coffee mb-6 tracking-wide">
-          Stran ni bila najdena
-        </h1>
-        <p className="font-body text-walnut mb-8">Ta stran ne obstaja. Morda ste zašli?</p>
-        <Link
-          href="/"
-          className="font-body text-sm text-bronze border-b border-bronze/40 hover:border-bronze transition-colors pb-0.5"
-        >
-          Nazaj na domov →
-        </Link>
-      </div>
-    </div>
+    <html lang="sl">
+      <body>
+        <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ textAlign: 'center', padding: '0 1.5rem' }}>
+            <p>404</p>
+            <h1>Stran ni bila najdena / Page not found</h1>
+            <a href="/">Nazaj na domov / Back home</a>
+          </div>
+        </div>
+      </body>
+    </html>
   );
 }

@@ -1,11 +1,11 @@
 import { Share2 } from 'lucide-react';
+import { getMessages } from 'next-intl/server';
 import { ReservationButtons } from '@/components/shared/ReservationButtons';
-import { getMessages } from '@/lib/content';
+import { Link } from '@/i18n/navigation';
 
-const messages = getMessages();
-const f = messages.footer;
-
-export function Footer() {
+export async function Footer() {
+  const messages = await getMessages();
+  const f = messages.footer;
   const year = new Date().getFullYear();
   return (
     <footer className="bg-coffee text-cream/80">
@@ -56,6 +56,15 @@ export function Footer() {
 
         <div className="border-t border-cream/10 pt-6 text-xs font-body text-cream/40">
           © {year} {f.copyright}
+        </div>
+
+        <div className="mt-6 pt-6 border-t border-cream/10 flex flex-wrap gap-x-6 gap-y-2 justify-center text-xs text-cream/50">
+          <Link href="/pogoji-poslovanja" className="hover:text-cream/80 transition-colors">
+            {f.terms}
+          </Link>
+          <Link href="/politika-zasebnosti" className="hover:text-cream/80 transition-colors">
+            {f.privacy}
+          </Link>
         </div>
       </div>
     </footer>

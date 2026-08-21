@@ -1,24 +1,25 @@
 'use client';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Menu } from 'lucide-react';
+import { useMessages } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { ReservationButtons } from '@/components/shared/ReservationButtons';
-import { getMessages } from '@/lib/content';
+import { LanguageSwitcher } from '@/components/shared/LanguageSwitcher';
 import { cn } from '@/lib/utils';
 
-const messages = getMessages();
-const nav = messages.nav;
-
-const links = [
-  { label: nav.home, href: '/' },
-  { label: nav.ponudba, href: '/ponudba' },
-  { label: nav.about, href: '/o-nas' },
-  { label: nav.rooms, href: '/sobe' },
-  { label: nav.contact, href: '/kontakt' },
-];
-
 export function Header() {
+  const messages = useMessages();
+  const nav = messages.nav;
+
+  const links = [
+    { label: nav.home, href: '/' as const },
+    { label: nav.ponudba, href: '/ponudba' as const },
+    { label: nav.about, href: '/o-nas' as const },
+    { label: nav.rooms, href: '/sobe' as const },
+    { label: nav.contact, href: '/kontakt' as const },
+  ];
+
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -66,8 +67,9 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Desktop reservation button */}
-        <div className="hidden lg:flex items-center pr-1">
+        {/* Desktop language switcher + reservation button */}
+        <div className="hidden lg:flex items-center gap-6 pr-1">
+          <LanguageSwitcher />
           <ReservationButtons />
         </div>
 
@@ -80,7 +82,7 @@ export function Header() {
                   'lg:hidden transition-colors duration-500',
                   scrolled ? 'text-coffee' : 'text-cream'
                 )}
-                aria-label="Odpri meni"
+                aria-label={nav.openMenu}
               >
                 <Menu className="w-6 h-6" />
               </button>
@@ -89,7 +91,7 @@ export function Header() {
           <SheetContent side="right" className="bg-cream border-sand w-[min(22rem,92vw)]">
             <div className="flex flex-col h-full pt-8 px-6 pb-6">
               <p className="font-display italic text-2xl text-coffee mb-2">Stari Mayr</p>
-              <p className="font-body text-xs uppercase tracking-[0.2em] text-walnut/60 mb-8">Navigacija</p>
+              <p className="font-body text-xs uppercase tracking-[0.2em] text-walnut/60 mb-8">{nav.menuLabel}</p>
               <nav className="flex flex-col gap-3 flex-1">
                 {links.map((link) => (
                   <Link
@@ -102,7 +104,8 @@ export function Header() {
                   </Link>
                 ))}
               </nav>
-              <div className="pt-6 border-t border-sand/80 flex justify-center py-6">
+              <div className="pt-6 border-t border-sand/80 flex flex-col items-center gap-6 py-6">
+                <LanguageSwitcher />
                 <ReservationButtons />
               </div>
             </div>

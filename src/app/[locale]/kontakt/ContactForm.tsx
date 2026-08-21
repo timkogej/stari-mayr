@@ -1,14 +1,14 @@
 'use client';
-import { getMessages } from '@/lib/content';
-
-const messages = getMessages();
-const contact = messages.contact;
+import { useMessages } from 'next-intl';
 
 export function ContactForm() {
+  const messages = useMessages();
+  const contact = messages.contact;
+
   return (
     <div className="max-w-xl mx-auto">
       <h2 className="font-display text-2xl text-bronze tracking-wide text-center mb-8">
-        Pišite nam
+        {contact.form.heading}
       </h2>
       <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
         {/* TODO: hook up form submission */}

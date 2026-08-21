@@ -1,13 +1,13 @@
 import { ExternalLink } from 'lucide-react';
-import { getMessages } from '@/lib/content';
-
-const messages = getMessages();
-const rating = messages.bookingRating;
+import { getMessages } from 'next-intl/server';
 
 // TODO: potrdi točno oceno in število mnenj ter dodaj pravi Booking.com URL
 const BOOKING_URL = '#';
 
-export function BookingRating() {
+export async function BookingRating() {
+  const messages = await getMessages();
+  const rating = messages.bookingRating;
+
   return (
     <div className="inline-flex items-center gap-4 bg-parchment border border-sand rounded-sm px-6 py-5">
       <span className="font-display italic text-4xl text-bronze">{rating.score}</span>

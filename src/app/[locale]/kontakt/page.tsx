@@ -1,20 +1,34 @@
 import type { Metadata } from 'next';
+import type { AppLocale } from '@/i18n/routing';
 import Image from 'next/image';
 import { MapPin, Phone, Mail, Share2 } from 'lucide-react';
+import { getMessages, getTranslations } from 'next-intl/server';
 import { FadeIn } from '@/components/shared/FadeIn';
 import { ReservationButtons } from '@/components/shared/ReservationButtons';
 import { ContactForm } from './ContactForm';
-import { getMessages } from '@/lib/content';
+import { getAlternateLanguages } from '@/i18n/alternates';
 
-const messages = getMessages();
-const contact = messages.contact;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: AppLocale }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'contact' });
 
-export const metadata: Metadata = {
-  title: 'Kontakt',
-  description: 'Kontakt in lokacija — Stari Mayr, staro mestno jedro Kranja.',
-};
+  return {
+    title: t('hero.title'),
+    description: t('hero.lead'),
+    alternates: {
+      languages: getAlternateLanguages('/kontakt'),
+    },
+  };
+}
 
-export default function KontaktPage() {
+export default async function KontaktPage() {
+  const messages = await getMessages();
+  const contact = messages.contact;
+
   return (
     <>
       {/* Hero */}
@@ -47,7 +61,7 @@ export default function KontaktPage() {
           <FadeIn>
             <div className="bg-parchment border border-sand p-8 md:p-10 h-full">
               <h2 className="font-display text-2xl text-bronze tracking-wide mb-8">
-                Informacije
+                {contact.infoHeading}
               </h2>
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
@@ -97,7 +111,7 @@ export default function KontaktPage() {
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Lokacija Stari Mayr, Glavni trg 16, Kranj"
+              title={contact.mapTitle}
             />
           </FadeIn>
         </div>

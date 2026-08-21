@@ -1,3 +1,6 @@
+import type { Metadata } from 'next';
+import type { AppLocale } from '@/i18n/routing';
+import { getTranslations } from 'next-intl/server';
 import { ScrollVideoHero } from '@/components/sections/ScrollVideoHero';
 import { HomeIntro } from '@/components/sections/HomeIntro';
 import { HomeRoomsPreview } from '@/components/sections/HomeRoomsPreview';
@@ -5,12 +8,23 @@ import { HomeAtriumShowcase } from '@/components/sections/HomeAtriumShowcase';
 import { HomeContactCTA } from '@/components/sections/HomeContactCTA';
 import { SectionDivider } from '@/components/shared/SectionDivider';
 import { StructuredData } from '@/components/shared/StructuredData';
-import type { Metadata } from 'next';
+import { getAlternateLanguages } from '@/i18n/alternates';
 
-export const metadata: Metadata = {
-  description:
-    'Sobe v stoletni hiši v središču Kranja. Brezplačen WiFi, zajtrk, vrt in notranji atrij. 8 km od letališča, 30 km od Bleda.',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: AppLocale }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'site' });
+
+  return {
+    description: t('description'),
+    alternates: {
+      languages: getAlternateLanguages('/'),
+    },
+  };
+}
 
 export default function HomePage() {
   return (

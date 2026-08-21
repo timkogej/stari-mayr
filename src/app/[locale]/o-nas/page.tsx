@@ -1,18 +1,32 @@
 import type { Metadata } from 'next';
+import type { AppLocale } from '@/i18n/routing';
 import Image from 'next/image';
+import { getMessages, getTranslations } from 'next-intl/server';
 import { FadeIn } from '@/components/shared/FadeIn';
 import { SectionDivider } from '@/components/shared/SectionDivider';
-import { getMessages } from '@/lib/content';
+import { getAlternateLanguages } from '@/i18n/alternates';
 
-const messages = getMessages();
-const about = messages.about;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: AppLocale }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'about' });
 
-export const metadata: Metadata = {
-  title: 'O nas',
-  description: 'Zgodba hiše Stari Mayr v starem mestnem jedru Kranja — več kot stoletje gostoljubja.',
-};
+  return {
+    title: t('hero.title'),
+    description: t('hero.lead'),
+    alternates: {
+      languages: getAlternateLanguages('/o-nas'),
+    },
+  };
+}
 
-export default function ONasPage() {
+export default async function ONasPage() {
+  const messages = await getMessages();
+  const about = messages.about;
+
   return (
     <>
       {/* Hero with image */}

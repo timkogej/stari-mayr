@@ -9,7 +9,9 @@
     "ponudba": "Ponudba",
     "about": "O nas",
     "rooms": "Sobe",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "openMenu": "Odpri meni",
+    "menuLabel": "Navigacija"
   },
   "cta": {
     "reserveRoom": "Rezerviraj sobo"
@@ -23,7 +25,9 @@
     "email": "mayr.doo@siol.net",
     "follow": "Sledite nam",
     "facebookLabel": "Stari Mayr",
-    "copyright": "Mayr d.o.o. · Vse pravice pridržane"
+    "copyright": "Mayr d.o.o. · Vse pravice pridržane",
+    "terms": "Pogoji poslovanja",
+    "privacy": "Politika zasebnosti"
   },
   "home": {
     "hero": {
@@ -150,6 +154,10 @@
       "title": "Sobe",
       "lead": "Mirne sobe v stoletni hiši, nekaj korakov od utripa starega Kranja."
     },
+    "badges": {
+      "bathroom": "Lastna kopalnica",
+      "wifi": "Brezplačen WiFi"
+    },
     "intro": "Stari Mayr ponuja osem sob v prvem in drugem nadstropju stoletne hiše. Vsaka ima svojo kopalnico, prijetno zasebnost in toplino stare hiše, le nekaj korakov od Glavnega trga in vsega, kar ponuja staro mestno jedro Kranja.",
     "types": [
       {
@@ -221,10 +229,22 @@
     "nearby": {
       "title": "V bližini",
       "items": [
-        { "label": "Letališče Jožeta Pučnika – Ljubljana", "distance": "8 km" },
-        { "label": "Bled", "distance": "pribl. 30 km" },
-        { "label": "Ljubljana, staro mestno jedro", "distance": "pribl. 30 km" },
-        { "label": "Železniška postaja Ljubljana", "distance": "30 km" }
+        {
+          "label": "Letališče Jožeta Pučnika – Ljubljana",
+          "distance": "8 km"
+        },
+        {
+          "label": "Bled",
+          "distance": "pribl. 30 km"
+        },
+        {
+          "label": "Ljubljana, staro mestno jedro",
+          "distance": "pribl. 30 km"
+        },
+        {
+          "label": "Železniška postaja Ljubljana",
+          "distance": "30 km"
+        }
       ],
       "note": "Letališki prevoz uredimo na zahtevo, za doplačilo."
     },
@@ -244,9 +264,21 @@
     "heading": "Kaj pravijo tisti, ki so že prespali",
     "source_note": "Mnenja gostov z Booking.com",
     "items": [
-      { "quote": "TODO: prilepi pravo mnenje z Booking.com", "author": "TODO: ime gosta", "country": "TODO: država" },
-      { "quote": "TODO: prilepi pravo mnenje z Booking.com", "author": "TODO: ime gosta", "country": "TODO: država" },
-      { "quote": "TODO: prilepi pravo mnenje z Booking.com", "author": "TODO: ime gosta", "country": "TODO: država" }
+      {
+        "quote": "TODO: prilepi pravo mnenje z Booking.com",
+        "author": "TODO: ime gosta",
+        "country": "TODO: država"
+      },
+      {
+        "quote": "TODO: prilepi pravo mnenje z Booking.com",
+        "author": "TODO: ime gosta",
+        "country": "TODO: država"
+      },
+      {
+        "quote": "TODO: prilepi pravo mnenje z Booking.com",
+        "author": "TODO: ime gosta",
+        "country": "TODO: država"
+      }
     ]
   },
   "contact": {
@@ -255,16 +287,193 @@
       "title": "Kontakt",
       "lead": "Za vprašanja smo vam na voljo po telefonu, e-pošti ali prek spodnjega obrazca. Sobo lahko rezervirate tudi s klikom na gumb za rezervacijo."
     },
+    "infoHeading": "Informacije",
+    "mapTitle": "Lokacija Stari Mayr, Glavni trg 16, Kranj",
     "address": "Glavni trg 16, 4000 Kranj",
     "addressNote": "Staro mestno jedro Kranja",
     "phone": "+386 40 420 262",
     "email": "mayr.doo@siol.net",
     "facebookLabel": "Stari Mayr",
     "form": {
+      "heading": "Pišite nam",
       "name": "Ime in priimek",
       "email": "E-pošta",
       "message": "Sporočilo",
       "submit": "Pošlji sporočilo"
     }
+  },
+  "notFound": {
+    "title": "Stran ni bila najdena",
+    "body": "Ta stran ne obstaja. Morda ste zašli?",
+    "link": "Nazaj na domov"
+  },
+  "languageSwitcher": {
+    "sl": "SI",
+    "en": "EN"
+  },
+  "structuredData": {
+    "wifi": "Brezplačen WiFi",
+    "breakfast": "Zajtrk",
+    "garden": "Vrt",
+    "petsAllowed": "Hišni ljubljenčki dovoljeni"
+  },
+  "terms": {
+    "eyebrow": "Pravne informacije",
+    "title": "Pogoji poslovanja",
+    "subtitle": "Guesthouse Stari Mayr",
+    "last_updated_note": "TODO: dodaj datum zadnje posodobitve",
+    "sections": [
+      {
+        "number": "1",
+        "heading": "Podatki o ponudniku",
+        "body": [
+          "Ponudnik nastanitvenih storitev je:",
+          "Mayr d.o.o.\nGlavni trg 16\n4000 Kranj\nSlovenija",
+          "Matična številka: 5520541000\nDavčna številka: SI38140560\nE-pošta: mayr.doo@siol.net\nTelefon: +386 40 420 262",
+          "Ti pogoji poslovanja veljajo za neposredne rezervacije nastanitve Guesthouse Stari Mayr, opravljene preko naše uradne spletne strani in spletnega rezervacijskega sistema.",
+          "Z oddajo rezervacije gost potrjuje, da je prebral, razumel in sprejel te pogoje poslovanja."
+        ]
+      },
+      {
+        "number": "2",
+        "heading": "Rezervacija",
+        "body": [
+          "Rezervacija je potrjena, ko gost uspešno zaključi postopek rezervacije in prejme potrdilo o rezervaciji na navedeni elektronski naslov.",
+          "Gost je odgovoren za pravilnost vseh podatkov, ki jih vnese ob rezervaciji, vključno s številom odraslih in otrok ter starostjo otrok.",
+          "Cene so navedene v EUR in veljajo za izbrano sobo, termin, število gostov in izbrano vrsto cene.",
+          "Dodatna ležišča so na voljo samo po predhodni potrditvi nastanitve in glede na razpoložljivost ter značilnosti posamezne sobe."
+        ]
+      },
+      {
+        "number": "3",
+        "heading": "Vrste cen in odpoved rezervacije",
+        "body": [
+          "Pri neposrednih rezervacijah sta na voljo dve vrsti cen:",
+          "Standard Rate",
+          "Rezervacijo je mogoče brezplačno odpovedati do 7 dni pred predvidenim datumom prihoda.",
+          "Če gost rezervacijo odpove manj kot 7 dni pred prihodom ali se ne pojavi (no-show), si nastanitev pridržuje pravico zaračunati celotno vrednost rezervacije.",
+          "Spremembe rezervacije so do 7 dni pred prihodom možne glede na razpoložljivost. Ob spremembi termina, sobe, števila gostov ali drugih elementov rezervacije se lahko cena ustrezno spremeni.",
+          "Non-refundable Rate",
+          "Non-refundable cena je 10 % nižja od Standard Rate.",
+          "Rezervacije po tej ceni ni mogoče brezplačno odpovedati. V primeru odpovedi ali neprihoda gosta se zaračuna celotna vrednost rezervacije.",
+          "Morebitne spremembe Non-refundable rezervacije so možne samo po predhodnem dogovoru z nastanitvijo in niso zagotovljene.",
+          "Natančni pogoji izbrane vrste cene so gostu prikazani tudi med postopkom rezervacije."
+        ]
+      },
+      {
+        "number": "4",
+        "heading": "Plačilo in plačilna kartica",
+        "body": [
+          "Gost ob rezervaciji vnese veljavno plačilno kartico preko varnega plačilnega sistema Stripe.",
+          "Podatke o plačilni kartici obdeluje Stripe. Guesthouse Stari Mayr in rezervacijski sistem HBook nimata neposrednega dostopa do celotnih podatkov plačilne kartice gosta.",
+          "Plačilna kartica se pri Standard Rate uporablja za zavarovanje rezervacije in morebitno predavtorizacijo. Predavtorizacija ni končno plačilo nastanitve.",
+          "Gost nastanitev poravna neposredno v Guesthouse Stari Mayr. Plačilo je možno z gotovino ali plačilno kartico.",
+          "V primeru odpovedi po poteku roka za brezplačno odpoved oziroma neprihoda gosta se lahko zaračuna znesek v skladu s pogoji izbrane rezervacije.",
+          "Pri Non-refundable rezervaciji se plačilo oziroma zavarovanje rezervacije izvede skladno s pogoji, prikazanimi gostu med postopkom rezervacije in tehničnimi možnostmi plačilnega sistema.",
+          "Če predavtorizacija ali druga potrebna preveritev kartice ni uspešna, lahko nastanitev gosta pozove k zagotovitvi druge veljavne plačilne kartice oziroma načina plačila."
+        ]
+      },
+      {
+        "number": "5",
+        "heading": "Turistična taksa",
+        "body": [
+          "Turistična taksa ni vključena v spletno plačilo rezervacije in se obračuna ter poravna posebej v nastanitvi.",
+          "Višina turistične takse se določi glede na dejansko število gostov, njihovo starost, število nočitev in veljavne predpise.",
+          "Turistična taksa se ne zaračuna za odpovedane rezervacije ali v primeru neprihoda gosta, kadar do bivanja dejansko ni prišlo."
+        ]
+      },
+      {
+        "number": "6",
+        "heading": "Dodatne storitve in doplačila",
+        "body": [
+          "Gost lahko med postopkom rezervacije izbere dodatne storitve, kadar so na voljo.",
+          "Cena posamezne dodatne storitve je prikazana pred potrditvijo rezervacije.",
+          "Storitve ali dodatki, naročeni naknadno oziroma med bivanjem, se lahko obračunajo posebej.",
+          "Hišni ljubljenčki so dovoljeni ob predhodni najavi. Doplačilo za hišnega ljubljenčka znaša 10 EUR na noč."
+        ]
+      },
+      {
+        "number": "7",
+        "heading": "Check-in in check-out",
+        "body": [
+          "Check-in je mogoč od 14.00 dalje.",
+          "Check-out je potrebno opraviti najkasneje do 11.00 na dan odhoda.",
+          "Gost pred prihodom prejme navodila za dostop do nastanitve in druge pomembne informacije glede bivanja.",
+          "Zgodnejši prihod ali poznejši odhod je mogoč samo po predhodnem dogovoru in je odvisen od razpoložljivosti."
+        ]
+      },
+      {
+        "number": "8",
+        "heading": "Kajenje",
+        "body": [
+          "Vse sobe Guesthouse Stari Mayr so nekadilske.",
+          "Kajenje v sobah ni dovoljeno. V primeru kršitve se gostu zaračuna strošek v višini 200 EUR zaradi dodatnega čiščenja, odstranjevanja vonjav in ponovne priprave sobe."
+        ]
+      },
+      {
+        "number": "9",
+        "heading": "Odgovornost gosta in škoda",
+        "body": [
+          "Gost je dolžan uporabljati sobo, opremo in skupne prostore skrbno in odgovorno.",
+          "Gost odgovarja za škodo, ki jo namerno ali iz malomarnosti povzroči sam ali osebe, vključene v njegovo rezervacijo.",
+          "V primeru povzročene škode si nastanitev pridržuje pravico zahtevati povračilo nastalih stroškov."
+        ]
+      },
+      {
+        "number": "10",
+        "heading": "Hišni red",
+        "body": [
+          "Gostje morajo spoštovati hišni red nastanitve ter skrbeti za mir, varnost in udobje drugih gostov.",
+          "V primeru hujših ali ponavljajočih se kršitev si nastanitev pridržuje pravico prekiniti bivanje gosta brez povračila neizkoriščenega dela rezervacije."
+        ]
+      },
+      {
+        "number": "11",
+        "heading": "Predčasni odhod",
+        "body": [
+          "Če se gost po prihodu odloči bivanje zaključiti pred datumom odhoda, navedenim v potrjeni rezervaciji, se neizkoriščene nočitve praviloma ne povrnejo.",
+          "Drugačen dogovor je možen samo po individualnem dogovoru z nastanitvijo."
+        ]
+      },
+      {
+        "number": "12",
+        "heading": "Odpoved s strani nastanitve",
+        "body": [
+          "V izjemnih okoliščinah, ko nastanitve zaradi višje sile, tehnične okvare, varnostnih razlogov ali drugih nepredvidljivih okoliščin ni mogoče zagotoviti, bo Guesthouse Stari Mayr gosta o tem obvestil v najkrajšem možnem času.",
+          "Če nastanitev ne more zagotoviti potrjene rezervacije, bo gostu povrnjen znesek, ki ga je za rezervacijo že plačal."
+        ]
+      },
+      {
+        "number": "13",
+        "heading": "Reklamacije in pritožbe",
+        "body": [
+          "Gost lahko reklamacijo ali pritožbo pošlje na: mayr.doo@siol.net",
+          "Vsako reklamacijo bomo obravnavali individualno glede na okoliščine konkretnega primera in si prizadevali za sporazumno rešitev.",
+          "Priporočamo, da nas gost o morebitni težavi obvesti čim prej oziroma že med bivanjem, kadar je to mogoče, da lahko težavo poskusimo odpraviti."
+        ]
+      },
+      {
+        "number": "14",
+        "heading": "Varstvo osebnih podatkov",
+        "body": [
+          "Osebni podatki gostov se obdelujejo za namen izvedbe rezervacije, komunikacije z gostom, zagotavljanja nastanitvenih storitev, obdelave plačil ter izpolnjevanja zakonskih obveznosti.",
+          "Podrobnejše informacije o obdelavi osebnih podatkov, pravnih podlagah, rokih hrambe, prejemnikih podatkov in pravicah posameznikov so navedene v Politiki zasebnosti, objavljeni na naši spletni strani."
+        ]
+      },
+      {
+        "number": "15",
+        "heading": "Kontakt",
+        "body": [
+          "Mayr d.o.o. / Guesthouse Stari Mayr\nGlavni trg 16\n4000 Kranj\nSlovenija",
+          "E-pošta: mayr.doo@siol.net\nTelefon: +386 40 420 262"
+        ]
+      }
+    ]
+  },
+  "privacy_policy": {
+    "eyebrow": "Pravne informacije",
+    "title": "Politika zasebnosti",
+    "subtitle": "Guesthouse Stari Mayr",
+    "coming_soon": "Politika zasebnosti je trenutno v pripravi in bo objavljena v kratkem. Za vprašanja glede obdelave osebnih podatkov nas kontaktirajte na mayr.doo@siol.net."
   }
 }

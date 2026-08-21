@@ -2,9 +2,9 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import { useMessages } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 import { ChevronDown } from 'lucide-react';
-import { getMessages } from '@/lib/content';
 import {
   usePrefersReducedMotion,
   useIsTouchDevice,
@@ -13,9 +13,6 @@ import {
   smooth,
   lerp,
 } from '@/hooks/useScrollScrubVideo';
-
-const messages = getMessages();
-const c = messages.home.scrollHero;
 
 const VIDEO_1 = '/videos/stari-mayr-scroll-01.mp4';
 const VIDEO_2 = '/videos/stari-mayr-scroll-02.mp4';
@@ -95,6 +92,8 @@ function drawCover(
 /* -------------------------------------------------------------------------- */
 
 function ScrubHero() {
+  const messages = useMessages();
+  const c = messages.home.scrollHero;
   const sectionRef = useRef<HTMLElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
 
@@ -403,6 +402,8 @@ function ScrubHero() {
 /* -------------------------------------------------------------------------- */
 
 function MobileCanvasHero() {
+  const messages = useMessages();
+  const c = messages.home.scrollHero;
   const sectionRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gradientRef = useRef<HTMLDivElement>(null);
@@ -666,6 +667,8 @@ function MobileCanvasHero() {
 }
 
 function StillHeroFallback() {
+  const messages = useMessages();
+  const c = messages.home.scrollHero;
   return (
     <section
       className="relative h-[100svh] min-h-[620px] w-full overflow-hidden bg-coffee"
@@ -698,6 +701,8 @@ function StillHeroFallback() {
 }
 
 function IntroFallbackContent() {
+  const messages = useMessages();
+  const c = messages.home.scrollHero;
   return (
     <div className="relative w-full max-w-[min(90vw,42rem)] border border-honey/45 bg-coffee/50 px-7 py-9 backdrop-blur-[2px] sm:px-16 sm:py-14">
       <span

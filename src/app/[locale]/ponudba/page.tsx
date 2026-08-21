@@ -1,20 +1,34 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import type { AppLocale } from '@/i18n/routing';
 import Image from 'next/image';
+import { getMessages, getTranslations } from 'next-intl/server';
+import { Link } from '@/i18n/navigation';
 import { FadeIn } from '@/components/shared/FadeIn';
 import { SectionDivider } from '@/components/shared/SectionDivider';
 import { ReservationButtons } from '@/components/shared/ReservationButtons';
-import { getMessages } from '@/lib/content';
+import { getAlternateLanguages } from '@/i18n/alternates';
 
-const messages = getMessages();
-const ponudba = messages.ponudba;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: AppLocale }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'ponudba' });
 
-export const metadata: Metadata = {
-  title: 'Ponudba',
-  description: 'Zajtrk, vrt, notranji atrij in prenočišče v stoletni hiši v starem mestnem jedru Kranja.',
-};
+  return {
+    title: t('hero.title'),
+    description: t('hero.lead'),
+    alternates: {
+      languages: getAlternateLanguages('/ponudba'),
+    },
+  };
+}
 
-export default function PonudbaPage() {
+export default async function PonudbaPage() {
+  const messages = await getMessages();
+  const ponudba = messages.ponudba;
+
   return (
     <>
       {/* Hero strip */}

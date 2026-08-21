@@ -1,13 +1,10 @@
-import Link from 'next/link';
 import Image from 'next/image';
+import { getMessages } from 'next-intl/server';
+import { Link } from '@/i18n/navigation';
 import { FadeIn } from '@/components/shared/FadeIn';
 import { SectionHeading } from '@/components/shared/SectionHeading';
 import { SectionDivider } from '@/components/shared/SectionDivider';
 import { ReservationButtons } from '@/components/shared/ReservationButtons';
-import { getMessages } from '@/lib/content';
-
-const messages = getMessages();
-const preview = messages.home.rooms_preview;
 
 const roomCardImages = [
   '/images/mayr-sobe-dvoposteljna.jpeg',
@@ -21,7 +18,10 @@ const roomCardFilters = [
   'room-heritage-image--family',
 ];
 
-export function HomeRoomsPreview() {
+export async function HomeRoomsPreview() {
+  const messages = await getMessages();
+  const preview = messages.home.rooms_preview;
+
   return (
     <section className="py-20 lg:py-32 bg-parchment">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
