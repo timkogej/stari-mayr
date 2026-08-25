@@ -70,13 +70,13 @@ export default async function PonudbaPage() {
 
         {/* Section 2: Full-width image break */}
         <FadeIn className="mb-16">
-          <div className="relative overflow-hidden aspect-video border border-sand shadow-sm">
+          <div className="home-heritage-frame relative overflow-hidden aspect-video border border-sand shadow-sm">
             <Image
-              src="/images/mayr-ponudba-vibe.jpeg"
+              src="/images/stari-mayr-predprostor-3.png"
               alt={ponudba.roof.imageLabel}
               fill
               sizes="(max-width: 1024px) 100vw, 896px"
-              className="object-cover object-[center_88%]"
+              className="home-heritage-image home-heritage-image--atrium object-cover object-center"
             />
           </div>
         </FadeIn>
