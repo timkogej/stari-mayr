@@ -34,12 +34,12 @@ export default async function KontaktPage() {
       {/* Hero */}
       <section className="relative bg-coffee flex items-center justify-center min-h-[50vh] overflow-hidden">
         <Image
-          src="/images/mayr-kontakt-hero.jpeg"
+          src="/images/stari-mayr-kontakt-hero-2.jpeg"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-50"
+          className="object-cover object-center opacity-50"
         />
         <div className="absolute inset-0 bg-coffee/40" />
         <div className="relative z-10 text-center py-20 px-6">
