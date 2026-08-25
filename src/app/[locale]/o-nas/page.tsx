@@ -67,15 +67,15 @@ export default async function ONasPage() {
         </FadeIn>
       </div>
 
-      {/* Centered image break */}
-      <div className="px-6 lg:px-12">
-        <FadeIn className="max-w-3xl mx-auto">
-          <div className="home-heritage-frame relative overflow-hidden aspect-[4/3] border border-sand shadow-sm">
+      {/* Image break */}
+      <div className="max-w-4xl mx-auto px-6 lg:px-12">
+        <FadeIn>
+          <div className="home-heritage-frame relative overflow-hidden aspect-video border border-sand shadow-sm">
             <Image
-              src="/images/stari-mayr-atrij-2.png"
+              src="/images/stari-mayr-atrij-3.png"
               alt=""
               fill
-              sizes="(max-width: 1024px) calc(100vw - 3rem), 768px"
+              sizes="(max-width: 1024px) 100vw, 896px"
               className="home-heritage-image home-heritage-image--atrium object-cover object-center"
             />
           </div>
