@@ -14,25 +14,17 @@ import {
   lerp,
 } from '@/hooks/useScrollScrubVideo';
 
-const VIDEO_1 = '/videos/stari-mayr-scroll-01.mp4';
-const VIDEO_2 = '/videos/stari-mayr-scroll-02.mp4';
-const VIDEO_1_POSTER = '/images/stari-mayr-scroll-poster.jpg';
-const VIDEO_2_POSTER = '/images/stari-mayr-scroll-02-poster.jpg';
+const VIDEO = '/videos/stari-mayr-scroll.mp4';
+const VIDEO_POSTER = '/images/stari-mayr-scroll-hero-poster.jpg';
 const MOBILE_FRAME_COUNT = 50;
-const MOBILE_FRAMES_1 = makeMobileFrames('/frames/stari-mayr-mobile/v1/frame-');
-const MOBILE_FRAMES_2 = makeMobileFrames('/frames/stari-mayr-mobile/v2/frame-');
+const MOBILE_FRAMES = makeMobileFrames('/frames/stari-mayr-mobile/scroll/frame-');
 
 /**
  * Scroll timeline (fraction of total section scroll):
- *  0.00 – 0.35  scrub video 1 from start to end
- *  0.35 – 0.48  hold video 1 final frame, reveal midpoint overlay
- *  0.48 – 0.55  fade out midpoint overlay, crossfade into video 2
- *  0.55 – 0.88  scrub video 2 from start to end
- *  0.88 – 1.00  hold video 2 final frame, reveal final overlay + CTA
+ *  0.00 – 0.80  scrub the video from start to end
+ *  0.80 – 1.00  hold the final frame, reveal final overlay + CTA
  */
-const V1_END = 0.35;
-const V2_START = 0.55;
-const V2_END = 0.88;
+const SCRUB_END = 0.8;
 // Trim a hair off the duration so a finished video never snaps back to frame 0.
 const EPSILON = 0.05;
 // How quickly each frame eases toward the scroll target (lower = smoother/softer).
@@ -97,27 +89,23 @@ function ScrubHero() {
   const sectionRef = useRef<HTMLElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
 
-  const video1Ref = useRef<HTMLVideoElement>(null);
-  const video2Ref = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const gradientRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
-  const midpointRef = useRef<HTMLDivElement>(null);
   const finalRef = useRef<HTMLDivElement>(null);
   const hintRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
-    const video1 = video1Ref.current;
-    const video2 = video2Ref.current;
-    if (!section || !video1 || !video2) return;
+    const video = videoRef.current;
+    if (!section || !video) return;
 
     let rafId = 0;
     let active = false;
 
-    // Smoothed currentTime values we lerp toward the scroll target each frame.
-    let smoothed1 = 0;
-    let smoothed2 = 0;
+    // Smoothed currentTime value we lerp toward the scroll target each frame.
+    let smoothed = 0;
 
     const durationOf = (v: HTMLVideoElement) =>
       Number.isFinite(v.duration) && v.duration > 0 ? v.duration : 0;
@@ -145,30 +133,19 @@ function ScrubHero() {
     const render = () => {
       const p = computeProgress();
 
-      const dur1 = durationOf(video1);
-      const dur2 = durationOf(video2);
+      const dur = durationOf(video);
 
-      // --- Video scrub targets -------------------------------------------
-      if (dur1) {
-        const target1 = ramp(p, 0, V1_END) * dur1;
-        const clamped1 = Math.min(target1, dur1 - EPSILON);
-        smoothed1 = lerp(smoothed1, clamped1, SCRUB_EASE);
-        seek(video1, smoothed1);
+      // --- Video scrub target ---------------------------------------------
+      if (dur) {
+        const target = ramp(p, 0, SCRUB_END) * dur;
+        const clamped = Math.min(target, dur - EPSILON);
+        smoothed = lerp(smoothed, clamped, SCRUB_EASE);
+        seek(video, smoothed);
       }
-      if (dur2) {
-        const target2 = ramp(p, V2_START, V2_END) * dur2;
-        const clamped2 = Math.min(target2, dur2 - EPSILON);
-        smoothed2 = lerp(smoothed2, clamped2, SCRUB_EASE);
-        seek(video2, smoothed2);
-      }
-
-      // --- Crossfade video 1 -> video 2 ----------------------------------
-      const v2Opacity = smooth(ramp(p, V1_END + 0.13, V2_START));
-      if (video2) video2.style.opacity = String(v2Opacity);
 
       // --- Intro overlay ("Stari Mayr") ----------------------------------
       // Gentle, elegant exit: a longer fade with a soft upward lift as you scroll.
-      const introLeave = smooth(ramp(p, 0.04, 0.22));
+      const introLeave = smooth(ramp(p, 0.04, 0.2));
       const introOpacity = 1 - introLeave;
       const introY = -introLeave * 52;
       if (introRef.current) {
@@ -177,22 +154,9 @@ function ScrubHero() {
         introRef.current.style.pointerEvents = introOpacity < 0.05 ? 'none' : 'auto';
       }
 
-      // --- Midpoint overlay ----------------------------------------------
-      // Hold the text through the crossfade and a few frames into video 2, then
-      // let it fade out while the next clip has already started playing.
-      const midEnter = smooth(ramp(p, V1_END, 0.41));
-      const midExit = smooth(ramp(p, V2_START, 0.62));
-      const midOpacity = midEnter * (1 - midExit);
-      const midY = (1 - midEnter) * 28 - midExit * 28;
-      if (midpointRef.current) {
-        midpointRef.current.style.opacity = String(midOpacity);
-        midpointRef.current.style.transform = `translate3d(0, ${midY}px, 0)`;
-      }
-
       // --- Final overlay + CTA -------------------------------------------
-      // Reveal earlier and hold the fully-formed final frame for the last ~15%
-      // of the scroll so the sequence clearly settles before the page continues.
-      const finalEnter = smooth(ramp(p, 0.85, 0.92));
+      // Fade in over the last stretch of the scrub, then hold through the tail.
+      const finalEnter = smooth(ramp(p, SCRUB_END - 0.06, SCRUB_END));
       const finalY = (1 - finalEnter) * 28;
       if (finalRef.current) {
         finalRef.current.style.opacity = String(finalEnter);
@@ -202,7 +166,7 @@ function ScrubHero() {
 
       // --- Readability gradient strength ---------------------------------
       if (gradientRef.current) {
-        const boost = Math.max(introOpacity, midOpacity, finalEnter);
+        const boost = Math.max(introOpacity, finalEnter);
         gradientRef.current.style.opacity = String(0.34 + 0.34 * boost);
       }
 
@@ -224,7 +188,7 @@ function ScrubHero() {
       cancelAnimationFrame(rafId);
     };
 
-    // Initialise both videos to their first frame once metadata is ready.
+    // Initialise the video to its first frame once metadata is ready.
     const initVideo = (v: HTMLVideoElement) => {
       const onMeta = () => {
         try {
@@ -236,8 +200,7 @@ function ScrubHero() {
       if (v.readyState >= 1) onMeta();
       else v.addEventListener('loadedmetadata', onMeta, { once: true });
     };
-    initVideo(video1);
-    initVideo(video2);
+    initVideo(video);
 
     // Only run the rAF loop while the hero is on (or near) screen.
     const io = new IntersectionObserver(
@@ -258,41 +221,24 @@ function ScrubHero() {
   return (
     <section
       ref={sectionRef}
-      className="relative h-[650vh] bg-coffee"
-      aria-label={`${c.midpointTitle}. ${c.finalTitle}.`}
+      className="relative h-[380vh] bg-coffee"
+      aria-label={`${c.introTitle}. ${c.finalTitle}.`}
     >
       <div
         ref={stickyRef}
         className="sticky top-0 h-screen w-full overflow-hidden bg-coffee"
       >
-        {/* Video 1 — base layer */}
         <video
-          ref={video1Ref}
-          className="warm-analog absolute inset-0 h-full w-full object-cover"
-          src={VIDEO_1}
-          poster={VIDEO_1_POSTER}
+          ref={videoRef}
+          className="absolute inset-0 h-full w-full object-cover"
+          src={VIDEO}
+          poster={VIDEO_POSTER}
           muted
           playsInline
           preload="auto"
           aria-hidden="true"
           tabIndex={-1}
         />
-        {/* Video 2 — crossfaded above video 1 */}
-        <video
-          ref={video2Ref}
-          className="warm-analog absolute inset-0 h-full w-full object-cover opacity-0 will-change-[opacity]"
-          src={VIDEO_2}
-          poster={VIDEO_2_POSTER}
-          muted
-          playsInline
-          preload="auto"
-          aria-hidden="true"
-          tabIndex={-1}
-        />
-
-        {/* Warm analog grade: warm wash, then subtle grain + soft vignette */}
-        <div className="warm-analog-wash absolute inset-0" aria-hidden="true" />
-        <div className="warm-analog-grain absolute inset-0" aria-hidden="true" />
 
         {/* Readability gradient */}
         <div
@@ -325,27 +271,6 @@ function ScrubHero() {
             </h1>
             <p className="font-body text-cream/85 uppercase tracking-[0.2em] text-xs sm:text-sm mt-7">
               {c.introSubtitle}
-            </p>
-          </div>
-        </div>
-
-        {/* Midpoint overlay */}
-        <div
-          ref={midpointRef}
-          className="absolute inset-0 flex items-center justify-center px-6 text-center will-change-[opacity,transform]"
-          style={{ opacity: 0 }}
-        >
-          <div className="relative max-w-2xl bg-coffee/50 px-10 py-12 backdrop-blur-[2px] sm:px-16 sm:py-14 border border-honey/45">
-            {/* Inner frame line for a classic, framed look */}
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-[9px] border border-cream/20"
-            />
-            <h2 className="font-display italic font-medium text-cream text-4xl sm:text-6xl lg:text-7xl drop-shadow-[0_2px_24px_rgba(0,0,0,0.55)]">
-              {c.midpointTitle}
-            </h2>
-            <p className="font-body text-cream/85 mt-6 text-base sm:text-lg tracking-wide">
-              {c.midpointSubtitle}
             </p>
           </div>
         </div>
@@ -408,7 +333,6 @@ function MobileCanvasHero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gradientRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
-  const midpointRef = useRef<HTMLDivElement>(null);
   const finalRef = useRef<HTMLDivElement>(null);
   const hintRef = useRef<HTMLDivElement>(null);
 
@@ -418,17 +342,17 @@ function MobileCanvasHero() {
     const ctx = canvas?.getContext('2d');
     if (!section || !canvas || !ctx) return;
 
+    // Mobile timeline (fraction of total section scroll), separate from
+    // ScrubHero's thresholds since the two heroes are independently tuned:
+    //  0.00 – 0.80  scrub the frame sequence from start to end
+    //  0.80 – 1.00  hold the final frame, reveal final overlay + CTA
+    const SCRUB_END = 0.8;
+
     let rafId = 0;
     let active = false;
     let lastDrawn: HTMLImageElement | null = null;
 
-    const frames1 = MOBILE_FRAMES_1.map((src) => {
-      const image = new window.Image();
-      image.decoding = 'async';
-      image.src = src;
-      return image;
-    });
-    const frames2 = MOBILE_FRAMES_2.map((src) => {
+    const frames = MOBILE_FRAMES.map((src) => {
       const image = new window.Image();
       image.decoding = 'async';
       image.src = src;
@@ -457,21 +381,14 @@ function MobileCanvasHero() {
 
       const width = canvas.width;
       const height = canvas.height;
-      const v1 = imageForProgress(frames1, ramp(p, 0, V1_END));
-      const v2 = imageForProgress(frames2, ramp(p, V2_START, V2_END));
-      const v2Opacity = smooth(ramp(p, V1_END + 0.13, V2_START));
+      const frame = imageForProgress(frames, ramp(p, 0, SCRUB_END));
 
       ctx.clearRect(0, 0, width, height);
 
-      const base = v1 ?? lastDrawn;
+      const base = frame ?? lastDrawn;
       if (base) {
         drawCover(ctx, base, width, height);
         lastDrawn = base;
-      }
-
-      if (v2 && v2Opacity > 0.01) {
-        drawCover(ctx, v2, width, height, v2Opacity);
-        if (v2Opacity > 0.98) lastDrawn = v2;
       }
     };
 
@@ -480,7 +397,7 @@ function MobileCanvasHero() {
 
       draw(p);
 
-      const introLeave = smooth(ramp(p, 0.04, 0.22));
+      const introLeave = smooth(ramp(p, 0.04, 0.2));
       const introOpacity = 1 - introLeave;
       const introY = -introLeave * 42;
       if (introRef.current) {
@@ -489,16 +406,7 @@ function MobileCanvasHero() {
         introRef.current.style.pointerEvents = introOpacity < 0.05 ? 'none' : 'auto';
       }
 
-      const midEnter = smooth(ramp(p, V1_END, 0.43));
-      const midExit = smooth(ramp(p, V2_START, 0.64));
-      const midOpacity = midEnter * (1 - midExit);
-      const midY = (1 - midEnter) * 24 - midExit * 24;
-      if (midpointRef.current) {
-        midpointRef.current.style.opacity = String(midOpacity);
-        midpointRef.current.style.transform = `translate3d(0, ${midY}px, 0)`;
-      }
-
-      const finalEnter = smooth(ramp(p, 0.84, 0.92));
+      const finalEnter = smooth(ramp(p, SCRUB_END - 0.06, SCRUB_END));
       const finalY = (1 - finalEnter) * 24;
       if (finalRef.current) {
         finalRef.current.style.opacity = String(finalEnter);
@@ -507,7 +415,7 @@ function MobileCanvasHero() {
       }
 
       if (gradientRef.current) {
-        const boost = Math.max(introOpacity, midOpacity, finalEnter);
+        const boost = Math.max(introOpacity, finalEnter);
         gradientRef.current.style.opacity = String(0.36 + 0.36 * boost);
       }
 
@@ -528,7 +436,7 @@ function MobileCanvasHero() {
       cancelAnimationFrame(rafId);
     };
 
-    frames1[0].addEventListener('load', () => draw(computeProgress()), { once: true });
+    frames[0].addEventListener('load', () => draw(computeProgress()), { once: true });
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) start();
@@ -549,13 +457,13 @@ function MobileCanvasHero() {
   return (
     <section
       ref={sectionRef}
-      className="relative h-[560svh] bg-coffee"
-      aria-label={`${c.midpointTitle}. ${c.finalTitle}.`}
+      className="relative h-[330svh] bg-coffee"
+      aria-label={`${c.introTitle}. ${c.finalTitle}.`}
     >
       <div className="sticky top-0 h-[100svh] min-h-[620px] w-full overflow-hidden bg-coffee">
         <Image
-          className="warm-analog object-cover"
-          src={VIDEO_1_POSTER}
+          className="object-cover"
+          src={VIDEO_POSTER}
           alt=""
           fill
           preload
@@ -564,11 +472,9 @@ function MobileCanvasHero() {
         />
         <canvas
           ref={canvasRef}
-          className="warm-analog absolute inset-0 h-full w-full"
+          className="absolute inset-0 h-full w-full"
           aria-hidden="true"
         />
-        <div className="warm-analog-wash absolute inset-0" aria-hidden="true" />
-        <div className="warm-analog-grain absolute inset-0" aria-hidden="true" />
         <div
           ref={gradientRef}
           aria-hidden="true"
@@ -598,25 +504,6 @@ function MobileCanvasHero() {
             </h1>
             <p className="font-body text-cream/85 uppercase tracking-[0.18em] text-xs mt-6">
               {c.introSubtitle}
-            </p>
-          </div>
-        </div>
-
-        <div
-          ref={midpointRef}
-          className="absolute inset-0 flex items-center justify-center px-6 text-center will-change-[opacity,transform]"
-          style={{ opacity: 0 }}
-        >
-          <div className="relative w-full max-w-[min(88vw,34rem)] border border-honey/45 bg-coffee/50 px-7 py-9 backdrop-blur-[2px]">
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-[9px] border border-cream/20"
-            />
-            <h2 className="font-display italic font-medium text-cream text-4xl drop-shadow-[0_2px_24px_rgba(0,0,0,0.55)]">
-              {c.midpointTitle}
-            </h2>
-            <p className="font-body text-cream/85 mt-5 text-base tracking-wide">
-              {c.midpointSubtitle}
             </p>
           </div>
         </div>
@@ -675,16 +562,14 @@ function StillHeroFallback() {
       aria-label={`${c.introTitle}. ${c.introSubtitle}.`}
     >
       <Image
-        className="warm-analog object-cover"
-        src={VIDEO_1_POSTER}
+        className="object-cover"
+        src={VIDEO_POSTER}
         alt=""
         fill
         preload
         sizes="100vw"
         aria-hidden="true"
       />
-      <div className="warm-analog-wash absolute inset-0" aria-hidden="true" />
-      <div className="warm-analog-grain absolute inset-0" aria-hidden="true" />
       <div
         aria-hidden="true"
         className="absolute inset-0"
