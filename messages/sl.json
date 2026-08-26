@@ -27,7 +27,8 @@
     "facebookLabel": "Stari Mayr",
     "copyright": "Mayr d.o.o. · Vse pravice pridržane",
     "terms": "Pogoji poslovanja",
-    "privacy": "Politika zasebnosti"
+    "privacy": "Politika zasebnosti",
+    "cookieSettings": "Nastavitve piškotkov"
   },
   "home": {
     "hero": {
@@ -41,8 +42,6 @@
       "introEyebrow": "Od leta 1920",
       "introTitle": "Stari Mayr",
       "introSubtitle": "Sobe v starem mestnem jedru Kranja",
-      "midpointTitle": "Od leta 1920 na Glavnem trgu",
-      "midpointSubtitle": "Hiša z zgodovino in tisočerimi zgodbami.",
       "finalTitle": "Sobe v središču Kranja",
       "finalSubtitle": "Prenočišča ob Glavnem trgu, s starim mestom pred vrati.",
       "ctaPrimary": "Oglej si sobe",
@@ -474,6 +473,166 @@
     "eyebrow": "Pravne informacije",
     "title": "Politika zasebnosti",
     "subtitle": "Guesthouse Stari Mayr",
-    "coming_soon": "Politika zasebnosti je trenutno v pripravi in bo objavljena v kratkem. Za vprašanja glede obdelave osebnih podatkov nas kontaktirajte na mayr.doo@siol.net."
+    "intro": [
+      "Upravljavec osebnih podatkov je:",
+      "Mayr d.o.o.\nGlavni trg 16\n4000 Kranj\nSlovenija\nMatična številka: 5520541000\nDavčna številka: SI38140560\nE-pošta: mayr.doo@siol.net\nTelefon: +386 40 420 262",
+      "Ta politika zasebnosti pojasnjuje, katere osebne podatke zbiramo preko spletne strani Guesthouse Stari Mayr, zakaj jih zbiramo, kako jih uporabljamo in katere pravice imate v zvezi z obdelavo svojih osebnih podatkov.",
+      "Osebne podatke obdelujemo v skladu z veljavno zakonodajo o varstvu osebnih podatkov, vključno s Splošno uredbo o varstvu podatkov (GDPR)."
+    ],
+    "sections": [
+      {
+        "number": "1",
+        "heading": "Katere osebne podatke zbiramo",
+        "body": [
+          "Glede na način uporabe spletne strani lahko zbiramo naslednje podatke:",
+          "ime in priimek,\ne-poštni naslov,\ntelefonsko številko,\npodatke, ki jih uporabnik prostovoljno navede v kontaktnem obrazcu,\npodatke, potrebne za izvedbo rezervacije,\npodatke o terminu bivanja, številu in sestavi gostov ter izbrani nastanitvi,\npodatke, potrebne za plačilo ali zavarovanje rezervacije,\ntehnične podatke o uporabi spletne strani, kot so IP-naslov, vrsta naprave, brskalnik in podatki o obisku spletne strani.",
+          "Zbiramo samo podatke, ki so potrebni za posamezen namen obdelave."
+        ]
+      },
+      {
+        "number": "2",
+        "heading": "Namen in pravna podlaga obdelave",
+        "body": [
+          "Osebne podatke lahko obdelujemo za naslednje namene:",
+          "Kontakt in komunikacija\nPodatke, ki nam jih pošljete preko kontaktnega obrazca, e-pošte ali telefona, uporabljamo za odgovor na vaše vprašanje oziroma za nadaljnjo komunikacijo.",
+          "Rezervacije in izvajanje nastanitvenih storitev\nPodatke uporabljamo za pripravo, potrditev in izvajanje rezervacije ter komunikacijo z gostom pred, med in po bivanju.",
+          "Plačila in zavarovanje rezervacij\nPodatki, potrebni za plačilo oziroma zavarovanje rezervacije, se obdelujejo preko ustreznega plačilnega sistema.",
+          "Izpolnjevanje zakonskih obveznosti\nDoločene podatke lahko obdelujemo in hranimo, kadar je to potrebno zaradi računovodskih, davčnih, turističnih, prijavnih ali drugih zakonskih obveznosti.",
+          "Analitika spletne strani\nOb vaši privolitvi uporabljamo Google Analytics za razumevanje uporabe spletne strani in izboljševanje njenega delovanja.",
+          "Pravne podlage za obdelavo so lahko izvajanje pogodbe oziroma ukrepov pred sklenitvijo pogodbe, izpolnjevanje zakonske obveznosti, privolitev ali zakoniti interes, odvisno od posameznega namena obdelave."
+        ]
+      },
+      {
+        "number": "3",
+        "heading": "Kontaktni obrazec",
+        "body": [
+          "Če nam pošljete sporočilo preko kontaktnega obrazca, se podatki iz obrazca pošljejo neposredno na naš e-poštni naslov.",
+          "Podatki iz kontaktnega obrazca se ne shranjujejo v ločeno podatkovno zbirko spletne strani.",
+          "Podatke uporabljamo samo za odgovor na vaše sporočilo in nadaljnjo komunikacijo v zvezi z vašim povpraševanjem."
+        ]
+      },
+      {
+        "number": "4",
+        "heading": "Rezervacijski sistem",
+        "body": [
+          "Za izvajanje neposrednih spletnih rezervacij uporabljamo rezervacijski sistem HBook v povezavi z ustreznimi tehničnimi rešitvami za upravljanje rezervacij.",
+          "V okviru postopka rezervacije se lahko obdelujejo podatki, kot so:",
+          "ime in priimek,\nkontaktni podatki,\ndržava,\npodatki o prihodu in odhodu,\nštevilo in starost gostov,\nizbrana soba,\npodatki o rezervaciji in plačilu,\nposebne želje, ki jih gost prostovoljno navede.",
+          "Ti podatki se uporabljajo za izvedbo rezervacije in nastanitvene storitve."
+        ]
+      },
+      {
+        "number": "5",
+        "heading": "Stripe in podatki o plačilnih karticah",
+        "body": [
+          "Za obdelavo plačilnih kartic oziroma zavarovanje rezervacije uporabljamo Stripe.",
+          "Podatki o plačilni kartici se obdelujejo preko sistema Stripe. Mayr d.o.o. oziroma Guesthouse Stari Mayr ne prejema in ne hrani celotnih podatkov vaše plačilne kartice.",
+          "Stripe lahko osebne podatke obdeluje kot samostojni ponudnik plačilnih storitev v skladu s svojimi pravili varstva osebnih podatkov."
+        ]
+      },
+      {
+        "number": "6",
+        "heading": "Google Analytics",
+        "body": [
+          "Spletna stran uporablja Google Analytics za zbiranje statističnih podatkov o uporabi spletne strani.",
+          "Google lahko pri uporabi svojih storitev prejme določene tehnične podatke, vključno z URL-jem obiskane strani in IP-naslovom, ter lahko uporablja oziroma bere piškotke.",
+          "Google Analytics se uporablja samo na podlagi vaše privolitve preko nastavitev piškotkov.",
+          "Če analitičnih piškotkov ne sprejmete, se ti ne aktivirajo."
+        ]
+      },
+      {
+        "number": "7",
+        "heading": "Google Maps",
+        "body": [
+          "Na strani Kontakt uporabljamo vgrajeni Google Maps zemljevid za prikaz lokacije Guesthouse Stari Mayr.",
+          "Ob uporabi ali prikazu Google Maps lahko pride do povezave z Googlovimi strežniki in obdelave določenih tehničnih podatkov s strani Googla."
+        ]
+      },
+      {
+        "number": "8",
+        "heading": "Piškotki",
+        "body": [
+          "Na spletni strani uporabljamo:",
+          "nujno potrebne piškotke, ki omogočajo pravilno delovanje spletne strani,\nanalitične piškotke Google Analytics, če uporabnik poda privolitev,\nmorebitne piškotke oziroma tehnologije zunanjih storitev, kot je Google Maps.",
+          "Ob prvem obisku spletne strani se prikaže obvestilo o piškotkih.",
+          "Uporabnik lahko sprejme ali zavrne nenujne piškotke in svojo izbiro pozneje spremeni.",
+          "Nujno potrebni piškotki se lahko uporabljajo brez privolitve, analitični in drugi nenujni piškotki pa šele po ustrezni izbiri uporabnika."
+        ]
+      },
+      {
+        "number": "9",
+        "heading": "Prejemniki osebnih podatkov",
+        "body": [
+          "Osebni podatki se lahko posredujejo oziroma so dostopni ponudnikom storitev, kadar je to potrebno za izvajanje storitve, predvsem:",
+          "ponudniku rezervacijskega sistema,\nStripe kot ponudniku plačilnih storitev,\nGooglu pri uporabi Google Analytics in Google Maps,\nponudniku spletnega gostovanja in tehničnega vzdrževanja,\nračunovodskim in drugim strokovnim izvajalcem, kadar je to potrebno,\npristojnim državnim organom, kadar tako določa zakon.",
+          "Podatkov ne prodajamo tretjim osebam."
+        ]
+      },
+      {
+        "number": "10",
+        "heading": "Prenosi podatkov izven Evropskega gospodarskega prostora",
+        "body": [
+          "Pri uporabi nekaterih zunanjih ponudnikov, predvsem Googla in Stripe, lahko v določenih primerih pride do obdelave oziroma prenosa podatkov tudi izven Evropskega gospodarskega prostora.",
+          "Takšni prenosi se izvajajo na podlagi ustreznih pravnih mehanizmov in zaščitnih ukrepov v skladu z GDPR."
+        ]
+      },
+      {
+        "number": "11",
+        "heading": "Hramba osebnih podatkov",
+        "body": [
+          "Osebne podatke hranimo samo toliko časa, kolikor je potrebno za namen, zaradi katerega so bili zbrani, oziroma toliko časa, kot to zahtevajo veljavni predpisi.",
+          "Podatki v zvezi z rezervacijami in poslovnimi dokumenti se lahko hranijo dlje, kadar to zahtevajo računovodski, davčni ali drugi zakonski predpisi.",
+          "Podatke iz povpraševanj, ki ne privedejo do rezervacije ali drugega poslovnega razmerja, hranimo samo toliko časa, kolikor je potrebno za komunikacijo oziroma reševanje konkretnega povpraševanja."
+        ]
+      },
+      {
+        "number": "12",
+        "heading": "Pravice posameznika",
+        "body": [
+          "V skladu z GDPR imate glede svojih osebnih podatkov, kadar so za to izpolnjeni pogoji, pravico do:",
+          "dostopa do osebnih podatkov,\npopravka netočnih podatkov,\nizbrisa podatkov,\nomejitve obdelave,\nugovora obdelavi,\nprenosljivosti podatkov,\npreklica privolitve, kadar obdelava temelji na privolitvi.",
+          "Prav tako imate pravico vložiti pritožbo pri pristojnem nadzornem organu za varstvo osebnih podatkov.",
+          "V Sloveniji je pristojni nadzorni organ Informacijski pooblaščenec Republike Slovenije."
+        ]
+      },
+      {
+        "number": "13",
+        "heading": "Varnost podatkov",
+        "body": [
+          "Uporabljamo razumne tehnične in organizacijske ukrepe za zaščito osebnih podatkov pred nepooblaščenim dostopom, izgubo, spremembo ali zlorabo.",
+          "Kljub temu popolne varnosti prenosa podatkov preko interneta ni mogoče zagotoviti."
+        ]
+      },
+      {
+        "number": "14",
+        "heading": "Spremembe politike zasebnosti",
+        "body": [
+          "Politiko zasebnosti lahko občasno posodobimo, zlasti zaradi sprememb spletne strani, ponudnikov storitev ali veljavne zakonodaje.",
+          "Aktualna različica je vedno objavljena na spletni strani."
+        ]
+      },
+      {
+        "number": "15",
+        "heading": "Kontakt",
+        "body": [
+          "Za vprašanja glede obdelave osebnih podatkov ali uveljavljanje svojih pravic nas lahko kontaktirate:",
+          "Mayr d.o.o.\nGuesthouse Stari Mayr\nGlavni trg 16\n4000 Kranj\nSlovenija",
+          "E-pošta: mayr.doo@siol.net\nTelefon: +386 40 420 262"
+        ]
+      }
+    ]
+  },
+  "cookie_consent": {
+    "message": "Ta spletna stran uporablja nujne piškotke za pravilno delovanje ter analitične piškotke za spremljanje obiska in izboljšanje uporabniške izkušnje. Analitični piškotki se uporabljajo samo z vašim soglasjem.",
+    "learnMore": "Politika zasebnosti",
+    "acceptAll": "Sprejmi vse",
+    "rejectNonEssential": "Zavrni nenujne",
+    "settings": "Nastavitve",
+    "settingsTitle": "Nastavitve piškotkov",
+    "necessaryLabel": "Nujno potrebni piškotki",
+    "necessaryDescription": "Omogočajo osnovno delovanje spletne strani. Vedno aktivni.",
+    "analyticsLabel": "Analitični piškotki (Google Analytics)",
+    "analyticsDescription": "Pomagajo nam razumeti uporabo spletne strani. Aktivni samo z vašim soglasjem.",
+    "saveSettings": "Shrani nastavitve"
   }
 }

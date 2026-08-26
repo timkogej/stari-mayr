@@ -20,6 +20,10 @@ export async function generateMetadata({
 
   return {
     title: t('title'),
+    description:
+      locale === 'sl'
+        ? 'Politika zasebnosti za spletno stran Guesthouse Stari Mayr.'
+        : 'Privacy Policy for the Guesthouse Stari Mayr website.',
     alternates: {
       languages: getAlternateLanguages('/politika-zasebnosti'),
     },

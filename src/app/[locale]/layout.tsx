@@ -7,6 +7,8 @@ import { notFound } from 'next/navigation';
 import '../globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { CookieConsent } from '@/components/shared/CookieConsent';
+import { Analytics } from '@/components/shared/Analytics';
 import { routing } from '@/i18n/routing';
 
 const fontDisplay = Cormorant_Garamond({
@@ -86,6 +88,8 @@ export default async function LocaleLayout({
           <Header />
           <main>{children}</main>
           <Footer />
+          <CookieConsent />
+          <Analytics />
         </NextIntlClientProvider>
       </body>
     </html>

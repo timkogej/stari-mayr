@@ -1,6 +1,7 @@
 import { Share2 } from 'lucide-react';
 import { getMessages } from 'next-intl/server';
 import { ReservationButtons } from '@/components/shared/ReservationButtons';
+import { CookieSettingsButton } from '@/components/shared/CookieSettingsButton';
 import { Link } from '@/i18n/navigation';
 
 export async function Footer() {
@@ -65,6 +66,7 @@ export async function Footer() {
           <Link href="/politika-zasebnosti" className="hover:text-cream/80 transition-colors">
             {f.privacy}
           </Link>
+          <CookieSettingsButton />
         </div>
       </div>
     </footer>
