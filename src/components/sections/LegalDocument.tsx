@@ -8,11 +8,12 @@ type Props = {
   eyebrow: string;
   title: string;
   subtitle: string;
+  intro?: (string | React.ReactNode)[];
   sections?: LegalSection[];
   children?: React.ReactNode;
 };
 
-export function LegalDocument({ eyebrow, title, subtitle, sections, children }: Props) {
+export function LegalDocument({ eyebrow, title, subtitle, intro, sections, children }: Props) {
   return (
     <>
       <section className="relative bg-parchment flex items-center justify-center min-h-[35vh] overflow-hidden border-b border-sand">
@@ -28,13 +29,27 @@ export function LegalDocument({ eyebrow, title, subtitle, sections, children }: 
       </section>
 
       <div className="max-w-3xl mx-auto px-6 py-16 lg:py-24">
+        {intro && (
+          <div className="space-y-3 pb-8">
+            {intro.map((paragraph, i) => (
+              <p
+                key={i}
+                className={`font-body text-sm md:text-base text-walnut leading-relaxed ${
+                  typeof paragraph === 'string' ? 'whitespace-pre-line' : ''
+                }`}
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        )}
         {sections ? (
           <div>
             {sections.map((section, i) => (
               <div
                 key={section.number}
                 id={`section-${section.number}`}
-                className={`py-8 ${i > 0 ? 'border-t border-sand' : ''}`}
+                className={`py-8 ${i > 0 || intro ? 'border-t border-sand' : ''}`}
               >
                 <h2 className="font-display text-xl text-bronze tracking-wide mb-4">
                   {section.number}. {section.heading}
