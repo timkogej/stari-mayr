@@ -4,6 +4,12 @@ import { getMessages, getTranslations } from 'next-intl/server';
 import { LegalDocument } from '@/components/sections/LegalDocument';
 import { getAlternateLanguages } from '@/i18n/alternates';
 
+type LegalSectionData = {
+  number: string;
+  heading: string;
+  body: string[];
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -14,6 +20,10 @@ export async function generateMetadata({
 
   return {
     title: t('title'),
+    description:
+      locale === 'sl'
+        ? 'Politika zasebnosti za spletno stran Guesthouse Stari Mayr.'
+        : 'Privacy Policy for the Guesthouse Stari Mayr website.',
     alternates: {
       languages: getAlternateLanguages('/politika-zasebnosti'),
     },
@@ -26,22 +36,53 @@ export default async function PolitikaZasebnostiPage() {
     eyebrow: string;
     title: string;
     subtitle: string;
-    coming_soon: string;
+    intro: string[];
+    sections: LegalSectionData[];
   };
 
-  const email = 'mayr.doo@siol.net';
-  const [before, after] = privacyPolicy.coming_soon.split(email);
+  const intro = privacyPolicy.intro.map((paragraph) => linkifyEmail(paragraph));
+
+  const sections = privacyPolicy.sections.map((section) => {
+    if (section.number === '15') {
+      return {
+        ...section,
+        body: section.body.map((paragraph) => linkifyEmail(paragraph)),
+      };
+    }
+    return section;
+  });
 
   return (
-    <LegalDocument eyebrow={privacyPolicy.eyebrow} title={privacyPolicy.title} subtitle={privacyPolicy.subtitle}>
-      {/* TODO: replace with real Privacy Policy content once the owner provides it — likely a similarly-structured v8 update */}
-      <p className="font-body text-sm md:text-base text-walnut leading-relaxed text-center">
-        {before}
-        <a href={`mailto:${email}`} className="text-bronze hover:underline">
-          {email}
-        </a>
-        {after}
-      </p>
-    </LegalDocument>
+    <LegalDocument
+      eyebrow={privacyPolicy.eyebrow}
+      title={privacyPolicy.title}
+      subtitle={privacyPolicy.subtitle}
+      intro={intro}
+      sections={sections}
+    />
   );
+}
+
+function linkifyEmail(text: string) {
+  const email = 'mayr.doo@siol.net';
+  if (!text.includes(email)) return text;
+  const [before, after] = text.split(email);
+  return (
+    <>
+      {renderWithBreaks(before)}
+      <a href={`mailto:${email}`} className="text-bronze hover:underline">
+        {email}
+      </a>
+      {renderWithBreaks(after)}
+    </>
+  );
+}
+
+function renderWithBreaks(text: string) {
+  return text.split('\n').map((line, i, arr) => (
+    <span key={i}>
+      {line}
+      {i < arr.length - 1 && <br />}
+    </span>
+  ));
 }

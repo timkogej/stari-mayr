@@ -27,7 +27,8 @@
     "facebookLabel": "Stari Mayr",
     "copyright": "Mayr d.o.o. · All rights reserved",
     "terms": "Terms & Conditions",
-    "privacy": "Privacy Policy"
+    "privacy": "Privacy Policy",
+    "cookieSettings": "Cookie settings"
   },
   "home": {
     "hero": {
@@ -41,8 +42,6 @@
       "introEyebrow": "Since 1920",
       "introTitle": "Stari Mayr",
       "introSubtitle": "Rooms in the old town of Kranj",
-      "midpointTitle": "On the main square since 1920",
-      "midpointSubtitle": "A house with history and a thousand stories.",
       "finalTitle": "Rooms in the heart of Kranj",
       "finalSubtitle": "Stay by the main square, with the old town at your door.",
       "ctaPrimary": "See the rooms",
@@ -318,154 +317,164 @@
     "petsAllowed": "Pets allowed"
   },
   "terms": {
-    "eyebrow": "Legal",
-    "title": "Terms & Conditions",
-    "subtitle": "Guesthouse Stari Mayr",
-    "last_updated_note": "TODO: add last-updated date",
+    "eyebrow": "",
+    "title": "TERMS & CONDITIONS – GUESTHOUSE STARI MAYR",
+    "subtitle": "",
     "sections": [
       {
         "number": "1",
-        "heading": "Provider information",
+        "heading": "SERVICE PROVIDER",
         "body": [
           "The accommodation service provider is:",
-          "Mayr d.o.o.\nGlavni trg 16\n4000 Kranj\nSlovenia",
-          "Company registration number: 5520541000\nVAT number: SI38140560\nEmail: mayr.doo@siol.net\nPhone: +386 40 420 262",
-          "These terms and conditions apply to direct reservations of accommodation at Guesthouse Stari Mayr made through our official website and online booking system.",
-          "By submitting a reservation, the guest confirms that they have read, understood, and accepted these terms and conditions."
+          "Mayr d.o.o.",
+          "Glavni trg 16",
+          "4000 Kranj",
+          "Slovenia",
+          "Company registration number: 5520541000",
+          "VAT number: SI38140560",
+          "Email: mayr.doo@siol.net",
+          "Phone: +386 40 420 262",
+          "These Terms & Conditions apply to direct reservations at Guesthouse Stari Mayr made through our official website and online booking system.",
+          "By completing a reservation, the guest confirms that they have read, understood and accepted these Terms & Conditions."
         ]
       },
       {
         "number": "2",
-        "heading": "Reservation",
+        "heading": "RESERVATIONS",
         "body": [
-          "A reservation is confirmed once the guest successfully completes the booking process and receives a booking confirmation at the email address provided.",
-          "The guest is responsible for the accuracy of all information entered during booking, including the number of adults and children and the ages of any children.",
-          "Prices are stated in EUR and apply to the selected room, dates, number of guests, and selected rate type.",
-          "Extra beds are available only upon prior confirmation by the accommodation and subject to availability and the characteristics of the individual room."
+          "A reservation is confirmed when the guest successfully completes the booking process and receives a booking confirmation at the provided email address.",
+          "The guest is responsible for ensuring that all information provided during the booking process is correct, including the number of adults and children and the ages of children.",
+          "Prices are stated in EUR and apply to the selected room, dates, number of guests and selected rate type.",
+          "Extra beds are available only upon prior confirmation by the property and are subject to availability and the characteristics of the selected room."
         ]
       },
       {
         "number": "3",
-        "heading": "Rate types and cancellation",
+        "heading": "RATE TYPES AND CANCELLATION",
         "body": [
           "Two rate types are available for direct reservations:",
           "Standard Rate",
-          "The reservation can be cancelled free of charge up to 7 days before the scheduled arrival date.",
-          "If the guest cancels the reservation less than 7 days before arrival, or does not show up (no-show), the accommodation reserves the right to charge the full value of the reservation.",
-          "Changes to the reservation are possible up to 7 days before arrival, subject to availability. If the dates, room, number of guests, or other elements of the reservation are changed, the price may be adjusted accordingly.",
+          "The reservation may be cancelled free of charge up to 7 days before the scheduled arrival date.",
+          "If the reservation is cancelled less than 7 days before arrival or in the event of a no-show, the property reserves the right to charge the full value of the reservation.",
+          "Changes to the reservation are possible up to 7 days before arrival, subject to availability. Changes to dates, room type, number of guests or other elements of the reservation may result in a change in price.",
           "Non-refundable Rate",
-          "The Non-refundable rate is 10% lower than the Standard Rate.",
-          "Reservations at this rate cannot be cancelled free of charge. In the event of cancellation or no-show, the full value of the reservation will be charged.",
-          "Any changes to a Non-refundable reservation are possible only by prior arrangement with the accommodation and are not guaranteed.",
-          "The exact terms of the selected rate type are also shown to the guest during the booking process."
+          "The Non-refundable Rate is 10% lower than the Standard Rate.",
+          "Reservations made under this rate cannot be cancelled free of charge. In the event of cancellation or no-show, the full value of the reservation will be charged.",
+          "Changes to a Non-refundable reservation are only possible by prior agreement with the property and are not guaranteed.",
+          "The specific conditions applicable to the selected rate are also displayed during the booking process."
         ]
       },
       {
         "number": "4",
-        "heading": "Payment and payment card",
+        "heading": "PAYMENT AND PAYMENT CARD",
         "body": [
-          "When booking, the guest enters a valid payment card through the secure Stripe payment system.",
-          "Payment card data is processed by Stripe. Guesthouse Stari Mayr and the HBook booking system do not have direct access to the guest's full payment card details.",
-          "For the Standard Rate, the payment card is used to secure the reservation and for a possible pre-authorization. Pre-authorization is not the final payment for the stay.",
-          "The guest settles the accommodation cost directly at Guesthouse Stari Mayr. Payment can be made in cash or by payment card.",
-          "In the event of cancellation after the free cancellation deadline has passed, or in the event of a no-show, an amount may be charged in accordance with the terms of the selected reservation.",
-          "For a Non-refundable reservation, payment or securing of the reservation is carried out in accordance with the terms shown to the guest during the booking process and the technical capabilities of the payment system.",
-          "If pre-authorization or another required card verification is unsuccessful, the accommodation may ask the guest to provide another valid payment card or method of payment."
+          "Guests provide a valid payment card through the secure Stripe payment system when making a reservation.",
+          "Payment card information is processed by Stripe. Guesthouse Stari Mayr and the HBook booking system do not have direct access to the guest's complete payment card details.",
+          "For Standard Rate reservations, the payment card is used to guarantee the reservation and may be subject to pre-authorisation. A pre-authorisation does not constitute final payment for the accommodation.",
+          "The accommodation is paid directly at Guesthouse Stari Mayr. Payment can be made in cash or by payment card.",
+          "In the event of a late cancellation or no-show, the applicable amount may be charged in accordance with the conditions of the selected reservation.",
+          "For Non-refundable reservations, payment or reservation guarantee will be processed according to the conditions displayed to the guest during the booking process and the technical capabilities of the payment system.",
+          "If a pre-authorisation or other required card verification is unsuccessful, the property may request another valid payment card or payment method."
         ]
       },
       {
         "number": "5",
-        "heading": "Tourist tax",
+        "heading": "TOURIST TAX",
         "body": [
-          "The tourist tax is not included in the online payment for the reservation and is calculated and settled separately at the accommodation.",
-          "The amount of the tourist tax is determined based on the actual number of guests, their age, the number of nights, and applicable regulations.",
-          "The tourist tax is not charged for cancelled reservations or in the event of a no-show, where the stay did not actually take place."
+          "Tourist tax is not included in the online reservation payment and is calculated and paid separately at the property.",
+          "The applicable tourist tax is determined according to the actual number of guests, their ages, number of nights and applicable regulations.",
+          "Tourist tax is not charged for cancelled reservations or no-shows where the accommodation service was not actually provided."
         ]
       },
       {
         "number": "6",
-        "heading": "Additional services and surcharges",
+        "heading": "ADDITIONAL SERVICES AND CHARGES",
         "body": [
-          "The guest may select additional services during the booking process, where available.",
-          "The price of each additional service is shown before the reservation is confirmed.",
-          "Services or extras ordered subsequently, or during the stay, may be charged separately.",
-          "Pets are allowed with prior notice. The surcharge for a pet is 10 EUR per night."
+          "Guests may select additional services during the booking process where available.",
+          "The price of each additional service is displayed before the reservation is confirmed.",
+          "Services or additional items requested later or during the stay may be charged separately.",
+          "Pets are permitted with prior notice. A pet supplement of EUR 10 per night applies."
         ]
       },
       {
         "number": "7",
-        "heading": "Check-in and check-out",
+        "heading": "CHECK-IN AND CHECK-OUT",
         "body": [
-          "Check-in is possible from 14:00 onwards.",
-          "Check-out must be completed by 11:00 at the latest on the day of departure.",
-          "Prior to arrival, the guest receives instructions for accessing the accommodation and other important information about the stay.",
-          "Earlier arrival or later departure is possible only by prior arrangement and is subject to availability."
+          "Check-in is available from 14:00.",
+          "Check-out must be completed by 11:00 on the day of departure.",
+          "Guests will receive access instructions and other important information regarding their stay before arrival.",
+          "Early check-in or late check-out is only possible by prior arrangement and is subject to availability."
         ]
       },
       {
         "number": "8",
-        "heading": "Smoking",
+        "heading": "SMOKING",
         "body": [
           "All rooms at Guesthouse Stari Mayr are non-smoking.",
-          "Smoking in the rooms is not permitted. In the event of a violation, the guest will be charged a fee of 200 EUR to cover additional cleaning, odor removal, and preparing the room again."
+          "Smoking inside guest rooms is prohibited. In the event of a violation, a charge of EUR 200 will apply to cover additional cleaning, odour removal and preparation of the room."
         ]
       },
       {
         "number": "9",
-        "heading": "Guest liability and damage",
+        "heading": "GUEST RESPONSIBILITY AND DAMAGE",
         "body": [
-          "The guest is required to use the room, its equipment, and the common areas with care and responsibility.",
-          "The guest is liable for damage caused intentionally or through negligence by themselves or by persons included in their reservation.",
-          "In the event of damage caused, the accommodation reserves the right to claim reimbursement of the costs incurred."
+          "Guests are required to use the room, equipment and common areas carefully and responsibly.",
+          "Guests are responsible for damage caused intentionally or through negligence by themselves or persons included in their reservation.",
+          "In the event of damage, the property reserves the right to request reimbursement of the resulting costs."
         ]
       },
       {
         "number": "10",
-        "heading": "House rules",
+        "heading": "HOUSE RULES",
         "body": [
-          "Guests must respect the accommodation's house rules and take care to preserve the peace, safety, and comfort of other guests.",
-          "In the event of serious or repeated violations, the accommodation reserves the right to terminate the guest's stay without reimbursement of the unused portion of the reservation."
+          "Guests are required to respect the house rules and the peace, safety and comfort of other guests.",
+          "In the event of serious or repeated violations, the property reserves the right to terminate the guest's stay without refund of the unused portion of the reservation."
         ]
       },
       {
         "number": "11",
-        "heading": "Early departure",
+        "heading": "EARLY DEPARTURE",
         "body": [
-          "If, after arrival, the guest decides to end their stay before the departure date stated in the confirmed reservation, unused nights are generally not refunded.",
-          "A different arrangement is possible only by individual agreement with the accommodation."
+          "If a guest decides after arrival to end their stay before the departure date stated in the confirmed reservation, unused nights are generally non-refundable.",
+          "A different arrangement may be made only by individual agreement with the property."
         ]
       },
       {
         "number": "12",
-        "heading": "Cancellation by the accommodation",
+        "heading": "CANCELLATION BY THE PROPERTY",
         "body": [
-          "In exceptional circumstances, where the accommodation cannot be provided due to force majeure, technical failure, safety reasons, or other unforeseeable circumstances, Guesthouse Stari Mayr will notify the guest as soon as possible.",
-          "If the accommodation is unable to honor a confirmed reservation, the guest will be refunded any amount already paid for the reservation."
+          "In exceptional circumstances where accommodation cannot be provided due to force majeure, technical failure, safety reasons or other unforeseen circumstances, Guesthouse Stari Mayr will inform the guest as soon as reasonably possible.",
+          "If the property is unable to provide the confirmed accommodation, any amount already paid for the reservation will be refunded."
         ]
       },
       {
         "number": "13",
-        "heading": "Complaints",
+        "heading": "COMPLAINTS",
         "body": [
-          "The guest may submit a complaint to: mayr.doo@siol.net",
-          "Each complaint will be handled individually based on the circumstances of the specific case, and we will strive to reach an amicable resolution.",
-          "We recommend that the guest notify us of any issue as soon as possible, or during the stay itself where possible, so that we can attempt to resolve it."
+          "Guests may submit complaints to:",
+          "mayr.doo@siol.net",
+          "Each complaint will be considered individually according to the circumstances of the particular case, and we will endeavour to reach an amicable solution.",
+          "Where possible, guests are encouraged to inform us of any issue as soon as possible, preferably during their stay, so that we have an opportunity to resolve it."
         ]
       },
       {
         "number": "14",
-        "heading": "Personal data protection",
+        "heading": "PRIVACY AND PERSONAL DATA",
         "body": [
-          "Guests' personal data is processed for the purpose of carrying out the reservation, communicating with the guest, providing accommodation services, processing payments, and fulfilling legal obligations.",
-          "More detailed information about the processing of personal data, the legal bases, retention periods, recipients of data, and individual rights is provided in the Privacy Policy published on our website."
+          "Guests' personal data is processed for the purposes of managing reservations, communicating with guests, providing accommodation services, processing payments and complying with legal obligations.",
+          "More detailed information regarding the processing of personal data, legal bases, retention periods, recipients of personal data and individual rights is provided in our Privacy Policy available on our website."
         ]
       },
       {
         "number": "15",
-        "heading": "Contact",
+        "heading": "CONTACT",
         "body": [
-          "Mayr d.o.o. / Guesthouse Stari Mayr\nGlavni trg 16\n4000 Kranj\nSlovenia",
-          "Email: mayr.doo@siol.net\nPhone: +386 40 420 262"
+          "Mayr d.o.o. / Guesthouse Stari Mayr",
+          "Glavni trg 16",
+          "4000 Kranj",
+          "Slovenia",
+          "Email: mayr.doo@siol.net",
+          "Phone: +386 40 420 262"
         ]
       }
     ]
@@ -474,6 +483,158 @@
     "eyebrow": "Legal",
     "title": "Privacy Policy",
     "subtitle": "Guesthouse Stari Mayr",
-    "coming_soon": "Our Privacy Policy is currently being finalised and will be published shortly. For questions about how we handle personal data, please contact us at mayr.doo@siol.net."
+    "intro": [
+      "Data controller:",
+      "Mayr d.o.o.\nGlavni trg 16\n4000 Kranj\nSlovenia\nCompany registration number: 5520541000\nVAT number: SI38140560\nE-mail: mayr.doo@siol.net\nPhone: +386 40 420 262",
+      "This Privacy Policy explains what personal data we collect through the Guesthouse Stari Mayr website, why we collect it, how we use it and what rights you have regarding the processing of your personal data.",
+      "We process personal data in accordance with applicable data protection legislation, including the General Data Protection Regulation (GDPR)."
+    ],
+    "sections": [
+      {
+        "number": "1",
+        "heading": "Personal data we collect",
+        "body": [
+          "Depending on how you use our website, we may collect:",
+          "first and last name,\ne-mail address,\ntelephone number,\ninformation voluntarily provided through our contact form,\ninformation required to make and manage a reservation,\ndates of stay, number and composition of guests and selected accommodation,\ninformation required for payment or reservation guarantee,\ntechnical data such as IP address, device type, browser and website usage information."
+        ]
+      },
+      {
+        "number": "2",
+        "heading": "Purposes and legal bases for processing",
+        "body": [
+          "We may process personal data for:",
+          "responding to enquiries and communicating with guests,\ncreating, confirming and managing reservations,\nproviding accommodation services,\nprocessing or securing payments,\ncomplying with legal obligations,\nwebsite analytics with the user's consent.",
+          "Depending on the purpose, processing may be based on performance of a contract, steps taken before entering into a contract, compliance with a legal obligation, consent or legitimate interests."
+        ]
+      },
+      {
+        "number": "3",
+        "heading": "Contact form",
+        "body": [
+          "When you submit a message through our contact form, the information is sent directly to our e-mail address.",
+          "The information is not stored in a separate website database.",
+          "We use it to respond to your enquiry and communicate with you regarding your request."
+        ]
+      },
+      {
+        "number": "4",
+        "heading": "Booking system",
+        "body": [
+          "We use the HBook booking system and related technical solutions to manage direct online reservations.",
+          "During the booking process we may process:",
+          "name and surname,\ncontact details,\ncountry,\narrival and departure dates,\nnumber and ages of guests,\nselected room,\nreservation and payment information,\nspecial requests voluntarily provided by the guest.",
+          "These data are processed for the purpose of managing the reservation and providing accommodation services."
+        ]
+      },
+      {
+        "number": "5",
+        "heading": "Stripe and payment card information",
+        "body": [
+          "We use Stripe for payment card processing and/or reservation guarantees.",
+          "Payment card details are processed through Stripe. Mayr d.o.o. and Guesthouse Stari Mayr do not receive or store the guest's complete payment card details.",
+          "Stripe may process personal data in accordance with its own privacy policies."
+        ]
+      },
+      {
+        "number": "6",
+        "heading": "Google Analytics",
+        "body": [
+          "We use Google Analytics to understand how visitors use our website and to improve its performance.",
+          "Google Analytics is activated only where the visitor has provided the required consent through the cookie settings."
+        ]
+      },
+      {
+        "number": "7",
+        "heading": "Google Maps",
+        "body": [
+          "The Contact page contains an embedded Google Maps map to display the location of Guesthouse Stari Mayr.",
+          "When Google Maps is displayed or used, certain technical information may be transmitted to Google."
+        ]
+      },
+      {
+        "number": "8",
+        "heading": "Cookies",
+        "body": [
+          "Our website may use:",
+          "strictly necessary cookies,\nGoogle Analytics cookies where the user has consented,\ncookies or similar technologies related to external services such as Google Maps.",
+          "When you first visit the website, you will be shown a cookie notice.",
+          "You may accept or reject non-essential cookies and may change your preferences later."
+        ]
+      },
+      {
+        "number": "9",
+        "heading": "Recipients of personal data",
+        "body": [
+          "Personal data may be processed by or disclosed to service providers where necessary, including:",
+          "booking system providers,\nStripe,\nGoogle in connection with Google Analytics and Google Maps,\nwebsite hosting and technical service providers,\naccounting and other professional service providers,\npublic authorities where required by law.",
+          "We do not sell personal data to third parties."
+        ]
+      },
+      {
+        "number": "10",
+        "heading": "International data transfers",
+        "body": [
+          "Some service providers, including Google and Stripe, may process personal data outside the European Economic Area in certain circumstances.",
+          "Where applicable, such transfers are carried out using appropriate legal mechanisms and safeguards in accordance with the GDPR."
+        ]
+      },
+      {
+        "number": "11",
+        "heading": "Data retention",
+        "body": [
+          "We keep personal data only for as long as necessary for the purpose for which it was collected or for as long as required by applicable law.",
+          "Reservation and business records may be retained for longer periods where required by accounting, tax or other legal obligations.",
+          "Information from enquiries that do not result in a booking or other business relationship is retained only for as long as necessary to respond to and handle the enquiry."
+        ]
+      },
+      {
+        "number": "12",
+        "heading": "Your rights",
+        "body": [
+          "Subject to the conditions provided by applicable law, you may have the right to:",
+          "access your personal data,\nrequest correction of inaccurate data,\nrequest deletion,\nrequest restriction of processing,\nobject to processing,\nrequest data portability,\nwithdraw your consent where processing is based on consent.",
+          "You also have the right to lodge a complaint with the competent data protection supervisory authority.",
+          "In Slovenia, the competent supervisory authority is the Information Commissioner of the Republic of Slovenia."
+        ]
+      },
+      {
+        "number": "13",
+        "heading": "Data security",
+        "body": [
+          "We use reasonable technical and organisational measures to protect personal data against unauthorised access, loss, alteration or misuse.",
+          "However, no transmission of information over the internet can be guaranteed to be completely secure."
+        ]
+      },
+      {
+        "number": "14",
+        "heading": "Changes to this Privacy Policy",
+        "body": [
+          "We may update this Privacy Policy from time to time, particularly if the website, service providers or applicable legal requirements change.",
+          "The current version will always be available on our website."
+        ]
+      },
+      {
+        "number": "15",
+        "heading": "Contact",
+        "body": [
+          "For questions regarding the processing of personal data or to exercise your rights, please contact:",
+          "Mayr d.o.o.\nGuesthouse Stari Mayr\nGlavni trg 16\n4000 Kranj\nSlovenia",
+          "E-mail: mayr.doo@siol.net\nPhone: +386 40 420 262"
+        ]
+      }
+    ]
+  },
+  "cookie_consent": {
+    "message": "This website uses necessary cookies for proper operation and analytics cookies to understand website usage and improve the user experience. Analytics cookies are used only with your consent.",
+    "learnMore": "Privacy Policy",
+    "acceptAll": "Accept all",
+    "rejectNonEssential": "Reject non-essential",
+    "settings": "Settings",
+    "settingsTitle": "Cookie settings",
+    "necessaryLabel": "Necessary cookies",
+    "necessaryDescription": "Required for the website to function properly. Always active.",
+    "analyticsLabel": "Analytics cookies (Google Analytics)",
+    "analyticsDescription": "Help us understand website usage. Active only with your consent.",
+    "saveSettings": "Save settings"
   }
 }

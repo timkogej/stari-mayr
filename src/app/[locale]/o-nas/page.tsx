@@ -33,23 +33,24 @@ export default async function ONasPage() {
       <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-coffee">
         <div className="absolute inset-0">
           <Image
-            src="/images/mayr-o-nas-hero-2.jpeg"
+            src="/images/stari-mayr-o-nas-hero-3.jpg"
             alt=""
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center"
+            className="object-cover object-[58%_50%] md:object-center"
           />
-          <div className="absolute inset-0 bg-coffee/50" />
+          <div className="absolute inset-0 bg-coffee/45" />
+          <div className="absolute inset-0 bg-gradient-to-b from-coffee/35 via-coffee/25 to-coffee/65" />
         </div>
         <div className="relative z-10 text-center py-24 px-6">
           <p className="font-display uppercase tracking-[0.3em] text-xs text-honey mb-4">
             {about.hero.eyebrow}
           </p>
-          <h1 className="font-display italic text-cream text-5xl md:text-7xl tracking-wide mb-4">
+          <h1 className="font-display italic text-cream text-5xl md:text-7xl tracking-wide mb-4 drop-shadow-sm">
             {about.hero.title}
           </h1>
-          <p className="font-body text-cream/70 text-sm max-w-lg mx-auto">
+          <p className="font-body text-cream/80 text-sm max-w-lg mx-auto drop-shadow-sm">
             {about.hero.lead}
           </p>
         </div>
@@ -67,15 +68,15 @@ export default async function ONasPage() {
         </FadeIn>
       </div>
 
-      {/* Centered image break */}
-      <div className="px-6 lg:px-12">
-        <FadeIn className="max-w-3xl mx-auto">
-          <div className="home-heritage-frame relative overflow-hidden aspect-[4/3] border border-sand shadow-sm">
+      {/* Image break */}
+      <div className="max-w-4xl mx-auto px-6 lg:px-12">
+        <FadeIn>
+          <div className="home-heritage-frame relative overflow-hidden aspect-video border border-sand shadow-sm">
             <Image
-              src="/images/stari-mayr-atrij-2.png"
+              src="/images/stari-mayr-atrij-3.jpg"
               alt=""
               fill
-              sizes="(max-width: 1024px) calc(100vw - 3rem), 768px"
+              sizes="(max-width: 1024px) 100vw, 896px"
               className="home-heritage-image home-heritage-image--atrium object-cover object-center"
             />
           </div>

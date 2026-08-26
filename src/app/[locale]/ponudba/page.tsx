@@ -72,7 +72,7 @@ export default async function PonudbaPage() {
         <FadeIn className="mb-16">
           <div className="home-heritage-frame relative overflow-hidden aspect-video border border-sand shadow-sm">
             <Image
-              src="/images/stari-mayr-predprostor-3.png"
+              src="/images/stari-mayr-predprostor-4.jpg"
               alt={ponudba.roof.imageLabel}
               fill
               sizes="(max-width: 1024px) 100vw, 896px"

@@ -38,7 +38,7 @@ export function Header() {
           : 'bg-transparent'
       )}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 h-16 flex items-center justify-between gap-8">
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-12 h-16 flex items-center justify-between gap-8">
         {/* Wordmark */}
         <Link
           href="/"
@@ -51,7 +51,9 @@ export function Header() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-8">
+        <nav
+          className="hidden lg:flex lg:absolute lg:left-1/2 lg:-translate-x-1/2 items-center gap-8"
+        >
           {links.map((link) => (
             <Link
               key={link.href}
