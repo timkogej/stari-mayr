@@ -16,15 +16,15 @@ type Props = {
 export function LegalDocument({ eyebrow, title, subtitle, intro, sections, children }: Props) {
   return (
     <>
-      <section className="relative bg-parchment flex items-center justify-center min-h-[35vh] overflow-hidden border-b border-sand">
+      <section className="relative bg-coffee flex items-center justify-center min-h-[35vh] overflow-hidden">
         <div className="relative z-10 text-center py-16 px-6">
           <p className="font-display uppercase tracking-[0.3em] text-xs text-honey mb-4">
             {eyebrow}
           </p>
-          <h1 className="font-display italic text-coffee text-4xl md:text-6xl tracking-wide mb-3">
+          <h1 className="font-display italic text-cream text-4xl md:text-6xl tracking-wide mb-3">
             {title}
           </h1>
-          <p className="font-body text-walnut/60 text-sm">{subtitle}</p>
+          <p className="font-body text-cream/60 text-sm">{subtitle}</p>
         </div>
       </section>
 

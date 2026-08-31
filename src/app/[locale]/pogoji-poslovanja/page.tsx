@@ -90,7 +90,7 @@ function renderWithBreaks(text: string) {
 function linkifyPrivacyPolicy(text: string) {
   const markers = [
     'Politiki zasebnosti, objavljeni na naši spletni strani',
-    'Privacy Policy published on our website',
+    'Privacy Policy available on our website',
   ];
   const marker = markers.find((m) => text.includes(m));
   if (!marker) return text;
