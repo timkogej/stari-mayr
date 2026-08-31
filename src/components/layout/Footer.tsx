@@ -3,6 +3,7 @@ import { getMessages } from 'next-intl/server';
 import { ReservationButtons } from '@/components/shared/ReservationButtons';
 import { CookieSettingsButton } from '@/components/shared/CookieSettingsButton';
 import { Link } from '@/i18n/navigation';
+import { Logo } from '@/components/shared/Logo';
 
 export async function Footer() {
   const messages = await getMessages();
@@ -14,9 +15,8 @@ export async function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-8">
           {/* Column 1: Wordmark */}
           <div>
-            <p className="font-display italic text-2xl text-cream tracking-wide mb-2">
-              Stari Mayr
-            </p>
+            {/* Footer sits on bg-coffee (#2C1F17), so the beige variant is the legible one. */}
+            <Logo variant="beige" className="h-12 lg:h-14 w-auto mb-4" sizes="(min-width: 1024px) 222px, 190px" />
             <p className="font-script text-honey text-lg">{f.tagline}</p>
           </div>
 
