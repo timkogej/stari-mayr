@@ -6,6 +6,7 @@ import { Link } from '@/i18n/navigation';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { ReservationButtons } from '@/components/shared/ReservationButtons';
 import { LanguageSwitcher } from '@/components/shared/LanguageSwitcher';
+import { Logo, LOGO_ALT, LOGO_ASPECT } from '@/components/shared/Logo';
 import { cn } from '@/lib/utils';
 
 export function Header() {
@@ -38,16 +39,40 @@ export function Header() {
           : 'bg-transparent'
       )}
     >
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-12 h-16 flex items-center justify-between gap-8">
-        {/* Wordmark */}
+      <div
+        className={cn(
+          'relative max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-8',
+          'transition-[height] duration-500',
+          scrolled ? 'h-16 lg:h-20' : 'h-20 lg:h-24'
+        )}
+      >
+        {/* Wordmark — the two variants are stacked and cross-faded on scroll.
+            Both files share one canvas, so this is pure opacity, no shift. */}
         <Link
           href="/"
-          className={cn(
-            'font-display italic text-xl tracking-wide shrink-0 transition-colors duration-500',
-            scrolled ? 'text-coffee' : 'text-cream'
-          )}
+          aria-label={LOGO_ALT}
+          className="relative block h-9 lg:h-12 shrink-0"
+          style={{ aspectRatio: LOGO_ASPECT }}
         >
-          Stari Mayr
+          <Logo
+            variant="beige"
+            alt=""
+            preload
+            sizes="(min-width: 1024px) 190px, 143px"
+            className={cn(
+              'absolute inset-0 h-full w-full transition-opacity duration-500',
+              scrolled ? 'opacity-0' : 'opacity-100'
+            )}
+          />
+          <Logo
+            variant="black"
+            alt=""
+            sizes="(min-width: 1024px) 190px, 143px"
+            className={cn(
+              'absolute inset-0 h-full w-full transition-opacity duration-500',
+              scrolled ? 'opacity-100' : 'opacity-0'
+            )}
+          />
         </Link>
 
         {/* Desktop nav */}
@@ -92,7 +117,8 @@ export function Header() {
           />
           <SheetContent side="right" className="bg-cream border-sand w-[min(22rem,92vw)]">
             <div className="flex flex-col h-full pt-8 px-6 pb-6">
-              <p className="font-display italic text-2xl text-coffee mb-2">Stari Mayr</p>
+              {/* Sheet surface is bg-cream (#F5EFE6), so the black variant is the legible one. */}
+              <Logo variant="black" className="h-10 w-auto mb-3" sizes="158px" />
               <p className="font-body text-xs uppercase tracking-[0.2em] text-walnut/60 mb-8">{nav.menuLabel}</p>
               <nav className="flex flex-col gap-3 flex-1">
                 {links.map((link) => (
