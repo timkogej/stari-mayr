@@ -19,14 +19,20 @@ export function Analytics() {
   const [consented, setConsented] = useState(false);
 
   useEffect(() => {
-    setConsented(readCookieConsent()?.analytics ?? false);
+    let active = true;
+    queueMicrotask(() => {
+      if (active) setConsented(readCookieConsent()?.analytics ?? false);
+    });
 
     const handleUpdate = (event: Event) => {
       const detail = (event as CustomEvent<CookieConsentValue>).detail;
       setConsented(detail?.analytics ?? false);
     };
     window.addEventListener(COOKIE_CONSENT_UPDATED_EVENT, handleUpdate);
-    return () => window.removeEventListener(COOKIE_CONSENT_UPDATED_EVENT, handleUpdate);
+    return () => {
+      active = false;
+      window.removeEventListener(COOKIE_CONSENT_UPDATED_EVENT, handleUpdate);
+    };
   }, []);
 
   if (!GA_MEASUREMENT_ID || !consented) return null;

@@ -37,7 +37,7 @@ export async function Footer() {
             <p className="font-body uppercase text-xs tracking-[0.2em] text-honey mb-4">
               {f.follow}
             </p>
-            {/* TODO: Verify exact Facebook URL for Stari Mayr */}
+            {/* TODO: replace with the confirmed Facebook page URL once available */}
             <a
               href="https://www.facebook.com/search/top?q=stari%20mayr%20kranj"
               target="_blank"
