@@ -18,7 +18,10 @@ export async function generateMetadata({
 
   return {
     title: t('hero.title'),
-    description: t('hero.lead'),
+    description:
+      locale === 'sl'
+        ? 'Kontaktirajte Guesthouse Stari Mayr v Kranju po telefonu, e-pošti ali prek spletnega obrazca.'
+        : 'Contact Guesthouse Stari Mayr in Kranj by phone, email or through the website form.',
     alternates: {
       languages: getAlternateLanguages('/kontakt'),
     },

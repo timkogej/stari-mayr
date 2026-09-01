@@ -60,7 +60,7 @@ export async function generateMetadata({
       url: locale === 'sl' ? 'https://stari-mayr.si' : 'https://stari-mayr.si/en',
       title,
       description,
-      // TODO: dodaj /public/og-image.jpg (1200x630)
+      // TODO: replace with a real photo-based OG image once hero photography is finalized.
       images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Stari Mayr, Kranj' }],
     },
     twitter: {

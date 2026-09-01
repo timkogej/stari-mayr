@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useMessages } from 'next-intl';
 import { Link } from '@/i18n/navigation';
+import { ReservationButtons } from '@/components/shared/ReservationButtons';
 import { ChevronDown } from 'lucide-react';
 import {
   usePrefersReducedMotion,
@@ -106,6 +107,7 @@ function ScrubHero() {
 
     // Smoothed currentTime value we lerp toward the scroll target each frame.
     let smoothed = 0;
+    let hasSeekableFrame = false;
 
     const durationOf = (v: HTMLVideoElement) =>
       Number.isFinite(v.duration) && v.duration > 0 ? v.duration : 0;
@@ -139,7 +141,14 @@ function ScrubHero() {
       if (dur) {
         const target = ramp(p, 0, SCRUB_END) * dur;
         const clamped = Math.min(target, dur - EPSILON);
-        smoothed = lerp(smoothed, clamped, SCRUB_EASE);
+        // If loading finishes after the visitor has already scrolled, begin at
+        // the current target instead of visibly catching up from time zero.
+        if (!hasSeekableFrame && video.readyState >= 2) {
+          smoothed = clamped;
+          hasSeekableFrame = true;
+        } else if (hasSeekableFrame) {
+          smoothed = lerp(smoothed, clamped, SCRUB_EASE);
+        }
         seek(video, smoothed);
       }
 
@@ -299,12 +308,7 @@ function ScrubHero() {
               >
                 {c.ctaPrimary}
               </Link>
-              <Link
-                href="/kontakt"
-                className="font-body uppercase tracking-[0.15em] text-xs px-6 py-3.5 transition-colors duration-300 border border-cream/50 text-cream hover:bg-cream/10"
-              >
-                {c.ctaSecondary}
-              </Link>
+              <ReservationButtons />
             </div>
           </div>
         </div>
@@ -531,12 +535,7 @@ function MobileCanvasHero() {
               >
                 {c.ctaPrimary}
               </Link>
-              <Link
-                href="/kontakt"
-                className="font-body uppercase tracking-[0.15em] text-xs px-6 py-3.5 transition-colors duration-300 border border-cream/50 text-cream hover:bg-cream/10"
-              >
-                {c.ctaSecondary}
-              </Link>
+              <ReservationButtons />
             </div>
           </div>
         </div>
@@ -610,12 +609,7 @@ function IntroFallbackContent() {
         >
           {c.ctaPrimary}
         </Link>
-        <Link
-          href="/kontakt"
-          className="font-body uppercase tracking-[0.15em] text-xs px-6 py-3.5 transition-colors duration-300 border border-cream/50 text-cream hover:bg-cream/10"
-        >
-          {c.ctaSecondary}
-        </Link>
+        <ReservationButtons />
       </div>
     </div>
   );

@@ -18,10 +18,14 @@ export function CookieConsent() {
   const [analyticsChoice, setAnalyticsChoice] = useState(false);
 
   useEffect(() => {
-    const existing = readCookieConsent();
-    setHasDecision(existing !== null);
-    setAnalyticsChoice(existing?.analytics ?? false);
-    setMounted(true);
+    let active = true;
+    queueMicrotask(() => {
+      if (!active) return;
+      const existing = readCookieConsent();
+      setHasDecision(existing !== null);
+      setAnalyticsChoice(existing?.analytics ?? false);
+      setMounted(true);
+    });
 
     const handleOpenSettings = () => {
       const current = readCookieConsent();
@@ -29,7 +33,10 @@ export function CookieConsent() {
       setSettingsOpen(true);
     };
     window.addEventListener(COOKIE_CONSENT_OPEN_SETTINGS_EVENT, handleOpenSettings);
-    return () => window.removeEventListener(COOKIE_CONSENT_OPEN_SETTINGS_EVENT, handleOpenSettings);
+    return () => {
+      active = false;
+      window.removeEventListener(COOKIE_CONSENT_OPEN_SETTINGS_EVENT, handleOpenSettings);
+    };
   }, []);
 
   if (!mounted) return null;

@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function RootNotFound() {
   return (
     <html lang="sl">
@@ -6,7 +8,7 @@ export default function RootNotFound() {
           <div style={{ textAlign: 'center', padding: '0 1.5rem' }}>
             <p>404</p>
             <h1>Stran ni bila najdena / Page not found</h1>
-            <a href="/">Nazaj na domov / Back home</a>
+            <Link href="/">Nazaj na domov / Back home</Link>
           </div>
         </div>
       </body>

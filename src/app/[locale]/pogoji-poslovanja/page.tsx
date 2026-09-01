@@ -23,8 +23,8 @@ export async function generateMetadata({
     title: t('title'),
     description:
       locale === 'sl'
-        ? 'Pogoji poslovanja za neposredne rezervacije nastanitve Guesthouse Stari Mayr.'
-        : 'Terms and conditions for direct reservations at Guesthouse Stari Mayr.',
+        ? 'Pogoji poslovanja za neposredne rezervacije nastanitve Guesthouse Stari Mayr v Kranju.'
+        : 'Terms and conditions for direct reservations at Guesthouse Stari Mayr in Kranj.',
     alternates: {
       languages: getAlternateLanguages('/pogoji-poslovanja'),
     },

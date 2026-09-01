@@ -1,8 +1,10 @@
 import { ExternalLink } from 'lucide-react';
 import { getMessages } from 'next-intl/server';
 
-// TODO: potrdi točno oceno in število mnenj ter dodaj pravi Booking.com URL
-const BOOKING_URL = '#';
+// TODO: confirm the exact rating/review count and replace this search URL with
+// the direct Booking.com property link once it is available.
+const BOOKING_URL =
+  'https://www.booking.com/searchresults.html?ss=Guesthouse+Stari+Mayr+Kranj';
 
 export async function BookingRating() {
   const messages = await getMessages();

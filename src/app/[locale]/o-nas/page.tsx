@@ -111,7 +111,7 @@ export default async function ONasPage() {
         <FadeIn className="mt-20">
           <blockquote className="text-center">
             <p className="font-display italic text-2xl md:text-3xl text-bronze leading-relaxed">
-              »{about.quote}«
+              {about.quote}
             </p>
           </blockquote>
         </FadeIn>

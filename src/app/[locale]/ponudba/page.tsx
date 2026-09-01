@@ -18,7 +18,10 @@ export async function generateMetadata({
 
   return {
     title: t('hero.title'),
-    description: t('hero.lead'),
+    description:
+      locale === 'sl'
+        ? 'Stavba, sobe, zajtrk in atrij — odkrijte ponudbo Stari Mayr v Kranju.'
+        : 'Rooms, breakfast and a courtyard at Stari Mayr in Kranj — discover what awaits you.',
     alternates: {
       languages: getAlternateLanguages('/ponudba'),
     },
