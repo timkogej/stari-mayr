@@ -16,7 +16,7 @@
  * This normalises both variants to one canvas with the ink at one scale, so the
  * cross-fade is pure opacity: no shift, no scale pop.
  *
- * Reads public/images/_orig/ and writes public/images/ — safe to re-run.
+ * Reads assets/images/_orig/ and writes public/images/ — safe to re-run.
  *
  *   node scripts/normalize-logo.mjs
  */
@@ -25,7 +25,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const SRC_DIR = path.join(ROOT, 'public/images/_orig');
+const SRC_DIR = path.join(ROOT, 'assets/images/_orig');
 const OUT_DIR = path.join(ROOT, 'public/images');
 const FILES = ['stari-mayr-logo-black.png', 'stari-mayr-logo-beige.png'];
 
