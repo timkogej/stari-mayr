@@ -2,7 +2,7 @@
   "site": {
     "name": "Stari Mayr",
     "tagline": "Lodging in the old town of Kranj",
-    "description": "Rooms in a century-old house in the heart of Kranj. Free WiFi, breakfast, garden and inner courtyard. 8 km from the airport, 30 km from Bled."
+    "description": "Rooms in an 1852 house in the heart of Kranj. Free WiFi, breakfast, garden and inner courtyard. 8 km from the airport, 30 km from Bled."
   },
   "nav": {
     "home": "Home",
@@ -17,12 +17,12 @@
     "reserveRoom": "Book a room"
   },
   "footer": {
-    "tagline": "More than a century of tradition in the old town",
+    "tagline": "Over 170 years of tradition in the old town",
     "contact": "Contact",
     "address": "Glavni trg 16, 4000 Kranj",
     "addressNote": "Kranj's old town",
     "phone": "+386 40 420 262",
-    "email": "mayr.doo@siol.net",
+    "email": "stari-mayr@t-2.net",
     "follow": "Follow us",
     "facebookLabel": "Stari Mayr",
     "copyright": "Mayr d.o.o. · All rights reserved",
@@ -32,14 +32,14 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Since 1920",
+      "eyebrow": "Since 1852",
       "wordmark": "Stari Mayr",
       "tagline": "Rooms in the old town of Kranj",
       "scrollLabel": "Discover"
     },
     "scrollHero": {
       "scrollLabel": "Scroll for the story",
-      "introEyebrow": "Since 1920",
+      "introEyebrow": "Since 1852",
       "introTitle": "Stari Mayr",
       "introSubtitle": "Rooms in the old town of Kranj",
       "finalTitle": "Rooms in the heart of Kranj",
@@ -49,8 +49,8 @@
     },
     "intro": {
       "eyebrow": "Our story",
-      "title": "A hundred years under one roof",
-      "body": "Stari Mayr has welcomed guests in the old town of Kranj since the 1920s. Through the generations, the house has stayed what it always was — a place to sleep for travelers and townspeople alike, a space with its own history.",
+      "title": "Since 1852, under one roof",
+      "body": "Stari Mayr has welcomed guests in the old town of Kranj since 1852. Through the generations, the house has stayed what it always was — a place to sleep for travelers and townspeople alike, a space with its own history.",
       "link": "Get to know us"
     },
     "rooms_preview": {
@@ -92,7 +92,7 @@
       "body": "Rooms are available year-round. Write or call — we're happy to tell you what's free.",
       "address": "Glavni trg 16, 4000 Kranj",
       "phone": "+386 40 420 262",
-      "email": "mayr.doo@siol.net"
+      "email": "stari-mayr@t-2.net"
     }
   },
   "ponudba": {
@@ -103,7 +103,7 @@
     },
     "roof": {
       "title": "Under one roof",
-      "body": "The building on Glavni trg has stood here since the start of the last century, and has welcomed guests looking for a place to stay in the old town of Kranj the whole time. In its rooms, the quiet of an old house, the closeness of the square and the feeling of being part of the town's story all come together.",
+      "body": "The building on Glavni trg has stood here since 1852, and has welcomed guests looking for a place to stay in the old town of Kranj the whole time. In its rooms, the quiet of an old house, the closeness of the square and the feeling of being part of the town's story all come together.",
       "imageLabel": "OFFER — THE BUILDING"
     },
     "zajtrk": {
@@ -128,11 +128,11 @@
     "hero": {
       "eyebrow": "Our story",
       "title": "About",
-      "lead": "From opening its doors in 1920 to today — the story of the house on Glavni trg in Kranj."
+      "lead": "From opening its doors in 1852 to today — the story of the house on Glavni trg in Kranj."
     },
     "section1": {
       "title": "The beginnings",
-      "body": "Stari Mayr opened its doors in the early 1920s, on the square where it still stands today. Kranj was then a town of craftsmen and merchants, and the house by the square was a natural stop for anyone arriving from elsewhere. A place to sleep, a quiet night, and a new day ahead."
+      "body": "Stari Mayr opened its doors in 1852, on the square where it still stands today. Kranj was then a town of craftsmen and merchants, and the house by the square was a natural stop for anyone arriving from elsewhere. A place to sleep, a quiet night, and a new day ahead."
     },
     "section3": {
       "title": "Through the generations",
@@ -151,13 +151,13 @@
     "hero": {
       "eyebrow": "Accommodation",
       "title": "Rooms",
-      "lead": "Quiet rooms in a century-old house, a few steps from the pulse of old Kranj."
+      "lead": "Quiet rooms in a house dating to 1852, a few steps from the pulse of old Kranj."
     },
     "badges": {
       "bathroom": "Private bathroom",
       "wifi": "Free WiFi"
     },
-    "intro": "Stari Mayr offers eight rooms on the first and second floors of a century-old house. Each has its own bathroom, quiet privacy and the warmth of an old house, just steps from Glavni trg and everything the old town of Kranj has to offer.",
+    "intro": "Stari Mayr offers eight rooms on the first and second floors of a house dating to 1852. Each has its own bathroom, quiet privacy and the warmth of an old house, just steps from Glavni trg and everything the old town of Kranj has to offer.",
     "types": [
       {
         "id": "dvoposteljna",
@@ -291,14 +291,17 @@
     "address": "Glavni trg 16, 4000 Kranj",
     "addressNote": "Kranj's old town",
     "phone": "+386 40 420 262",
-    "email": "mayr.doo@siol.net",
+    "email": "stari-mayr@t-2.net",
     "facebookLabel": "Stari Mayr",
     "form": {
       "heading": "Write to us",
       "name": "Full name",
       "email": "Email",
       "message": "Message",
-      "submit": "Send message"
+      "submit": "Send message",
+      "sending": "Sending …",
+      "success": "Thank you, your message has been sent. We'll get back to you as soon as possible.",
+      "error": "Your message could not be sent. Please try again or email us at stari-mayr@t-2.net."
     }
   },
   "notFound": {
@@ -332,7 +335,7 @@
           "Slovenia",
           "Company registration number: 5520541000",
           "VAT number: SI38140560",
-          "Email: mayr.doo@siol.net",
+          "Email: stari-mayr@t-2.net",
           "Phone: +386 40 420 262",
           "These Terms & Conditions apply to direct reservations at Guesthouse Stari Mayr made through our official website and online booking system.",
           "By completing a reservation, the guest confirms that they have read, understood and accepted these Terms & Conditions."
@@ -452,7 +455,7 @@
         "heading": "COMPLAINTS",
         "body": [
           "Guests may submit complaints to:",
-          "mayr.doo@siol.net",
+          "stari-mayr@t-2.net",
           "Each complaint will be considered individually according to the circumstances of the particular case, and we will endeavour to reach an amicable solution.",
           "Where possible, guests are encouraged to inform us of any issue as soon as possible, preferably during their stay, so that we have an opportunity to resolve it."
         ]
@@ -473,7 +476,7 @@
           "Glavni trg 16",
           "4000 Kranj",
           "Slovenia",
-          "Email: mayr.doo@siol.net",
+          "Email: stari-mayr@t-2.net",
           "Phone: +386 40 420 262"
         ]
       }
@@ -485,7 +488,7 @@
     "subtitle": "Guesthouse Stari Mayr",
     "intro": [
       "Data controller:",
-      "Mayr d.o.o.\nGlavni trg 16\n4000 Kranj\nSlovenia\nCompany registration number: 5520541000\nVAT number: SI38140560\nE-mail: mayr.doo@siol.net\nPhone: +386 40 420 262",
+      "Mayr d.o.o.\nGlavni trg 16\n4000 Kranj\nSlovenia\nCompany registration number: 5520541000\nVAT number: SI38140560\nE-mail: stari-mayr@t-2.net\nPhone: +386 40 420 262",
       "This Privacy Policy explains what personal data we collect through the Guesthouse Stari Mayr website, why we collect it, how we use it and what rights you have regarding the processing of your personal data.",
       "We process personal data in accordance with applicable data protection legislation, including the General Data Protection Regulation (GDPR)."
     ],
@@ -620,7 +623,7 @@
         "body": [
           "For questions regarding the processing of personal data or to exercise your rights, please contact:",
           "Mayr d.o.o.\nGuesthouse Stari Mayr\nGlavni trg 16\n4000 Kranj\nSlovenia",
-          "E-mail: mayr.doo@siol.net\nPhone: +386 40 420 262"
+          "E-mail: stari-mayr@t-2.net\nPhone: +386 40 420 262"
         ]
       }
     ]

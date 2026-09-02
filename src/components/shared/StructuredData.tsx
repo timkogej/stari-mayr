@@ -20,6 +20,7 @@ export async function StructuredData() {
       addressLocality: 'Kranj',
       addressCountry: 'SI',
     },
+    foundingDate: '1852',
     numberOfRooms: 8,
     amenityFeature: [
       { '@type': 'LocationFeatureSpecification', name: sd.wifi, value: true },

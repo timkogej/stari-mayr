@@ -64,7 +64,7 @@ export default async function PogojiPoslovanjaPage() {
 }
 
 function linkifyEmail(text: string) {
-  const email = 'mayr.doo@siol.net';
+  const email = 'stari-mayr@t-2.net';
   if (!text.includes(email)) return text;
   const [before, after] = text.split(email);
   return (
