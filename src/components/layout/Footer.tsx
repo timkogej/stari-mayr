@@ -37,9 +37,8 @@ export async function Footer() {
             <p className="font-body uppercase text-xs tracking-[0.2em] text-honey mb-4">
               {f.follow}
             </p>
-            {/* TODO: replace with the confirmed Facebook page URL once available */}
             <a
-              href="https://www.facebook.com/search/top?q=stari%20mayr%20kranj"
+              href="https://www.facebook.com/starimayr/?locale=sl_SI"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-sm font-body hover:text-honey transition-colors"

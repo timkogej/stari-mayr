@@ -87,7 +87,7 @@ export default async function KontaktPage() {
                 <div className="flex items-center gap-4">
                   <Share2 className="w-4 h-4 text-honey shrink-0" />
                   <a
-                    href="https://www.facebook.com/search/top?q=stari%20mayr%20kranj"
+                    href="https://www.facebook.com/starimayr/?locale=sl_SI"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-body text-coffee text-sm hover:text-bronze transition-colors"

@@ -354,14 +354,54 @@ function MobileCanvasHero() {
 
     let rafId = 0;
     let active = false;
+    let cancelled = false;
     let lastDrawn: HTMLImageElement | null = null;
+    // The canvas stays transparent (poster shows through) until every frame is
+    // decoded. Drawing from a half-loaded sequence is what produced the
+    // hold-then-jump stutter: imageForProgress() returns null for a frame that
+    // has not arrived, so the canvas held the previous frame and then snapped
+    // forward once the late frame landed.
+    let ready = false;
 
     const frames = MOBILE_FRAMES.map((src) => {
       const image = new window.Image();
       image.decoding = 'async';
-      image.src = src;
+      // src is assigned by preloadFrames() so downloads stay throttled.
+      image.dataset.src = src;
       return image;
     });
+
+    // Fetch a few at a time, in playback order, instead of firing all 50
+    // requests at once — 50 parallel downloads split the connection so many
+    // evenly, the middle of the sequence is always the last to arrive.
+    const PRELOAD_CONCURRENCY = 6;
+
+    // decode() resolves only once the bitmap is ready to paint, so the first
+    // drawImage() of a frame never pays a decode cost mid-scroll.
+    const loadFrame = async (image: HTMLImageElement) => {
+      image.src = image.dataset.src ?? '';
+      try {
+        await image.decode();
+      } catch {
+        /* missing or undecodable frame — skipped so it cannot stall the rest */
+      }
+    };
+
+    const preloadFrames = async () => {
+      let next = 0;
+      const worker = async () => {
+        while (!cancelled && next < frames.length) {
+          await loadFrame(frames[next++]);
+        }
+      };
+      await Promise.all(
+        Array.from({ length: Math.min(PRELOAD_CONCURRENCY, frames.length) }, worker)
+      );
+      if (cancelled) return;
+      ready = true;
+      canvas.style.opacity = '1';
+      draw(computeProgress());
+    };
 
     const computeProgress = () => {
       const rect = section.getBoundingClientRect();
@@ -381,6 +421,10 @@ function MobileCanvasHero() {
     };
 
     const draw = (p: number) => {
+      // Until the whole sequence is decoded, leave the canvas clear so the
+      // static poster underneath carries the hero.
+      if (!ready) return;
+
       resizeCanvas();
 
       const width = canvas.width;
@@ -440,7 +484,8 @@ function MobileCanvasHero() {
       cancelAnimationFrame(rafId);
     };
 
-    frames[0].addEventListener('load', () => draw(computeProgress()), { once: true });
+    void preloadFrames();
+
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) start();
@@ -452,6 +497,7 @@ function MobileCanvasHero() {
     window.addEventListener('resize', resizeCanvas);
 
     return () => {
+      cancelled = true;
       io.disconnect();
       window.removeEventListener('resize', resizeCanvas);
       stop();
@@ -476,7 +522,8 @@ function MobileCanvasHero() {
         />
         <canvas
           ref={canvasRef}
-          className="absolute inset-0 h-full w-full"
+          className="absolute inset-0 h-full w-full transition-opacity duration-500"
+          style={{ opacity: 0 }}
           aria-hidden="true"
         />
         <div
