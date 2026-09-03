@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type RefObject } from 'react';
 import Image from 'next/image';
 import { useMessages } from 'next-intl';
 import { Link } from '@/i18n/navigation';
@@ -17,8 +17,6 @@ import {
 
 const VIDEO = '/videos/stari-mayr-scroll.mp4';
 const VIDEO_POSTER = '/images/stari-mayr-scroll-hero-poster.jpg';
-const MOBILE_FRAME_COUNT = 50;
-const MOBILE_FRAMES = makeMobileFrames('/frames/stari-mayr-mobile/scroll/frame-');
 
 /**
  * Scroll timeline (fraction of total section scroll):
@@ -39,67 +37,62 @@ export function ScrollVideoHero() {
     return <StillHeroFallback />;
   }
 
-  // Scroll-scrubbing MP4 with currentTime is unreliable on iOS Safari. Touch
-  // devices get a canvas frame sequence driven by scroll instead.
+  // Both viewports now scrub the same MP4; only the framing and type scale
+  // differ. See useScrubTimeline for why the mobile frame sequence is gone.
   if (isTouch) {
-    return <MobileCanvasHero />;
+    return <MobileScrubHero />;
   }
 
   return <ScrubHero />;
 }
 
-function makeMobileFrames(basePath: string) {
-  return Array.from(
-    { length: MOBILE_FRAME_COUNT },
-    (_, i) => `${basePath}${String(i + 1).padStart(3, '0')}.jpg`
-  );
-}
+/** Per-viewport tuning of the overlay choreography. Module-level so the
+ *  identity stays stable and the timeline effect is not torn down each render. */
+type ScrubTuning = {
+  /** How far the intro block lifts as it leaves, in px. */
+  introLift: number;
+  /** How far the final block travels as it settles in, in px. */
+  finalLift: number;
+  /** Readability gradient at rest, and how much a visible panel strengthens it. */
+  gradientBase: number;
+  gradientBoost: number;
+};
+
+const DESKTOP_TUNING: ScrubTuning = {
+  introLift: 52,
+  finalLift: 28,
+  gradientBase: 0.34,
+  gradientBoost: 0.34,
+};
+
+const MOBILE_TUNING: ScrubTuning = {
+  introLift: 42,
+  finalLift: 24,
+  gradientBase: 0.36,
+  gradientBoost: 0.36,
+};
 
 /**
- * Which frame of the sequence a 0..1 progress value lands on. Kept separate from
- * the lookup so the draw loop can compare indices and skip a repaint when scroll
- * moved but the frame it maps to did not.
+ * Drives a scroll-scrubbed <video> plus the overlay choreography on top of it.
+ *
+ * Shared by both heroes. Mobile used to paint a 50-frame JPEG sequence into a
+ * <canvas> instead, because iOS Safari could not be trusted to paint a frame
+ * while seeking a paused video. That workaround cost more than it bought: the
+ * canvas backing store is sized in CSS pixels, so on a 3x phone the hero
+ * resolved at a third of the screen's pixels and then got upscaled — which is
+ * what read as "badly made", far more than the JPEG quality did. It also held
+ * ~174MB of decoded bitmaps. A real <video> is composited at native resolution
+ * with none of that.
  */
-function frameIndexForProgress(frameCount: number, progress: number) {
-  return Math.round(clamp(progress) * (frameCount - 1));
-}
-
-function drawCover(
-  ctx: CanvasRenderingContext2D,
-  image: HTMLImageElement,
-  width: number,
-  height: number,
-  alpha = 1
+function useScrubTimeline(
+  sectionRef: RefObject<HTMLElement | null>,
+  videoRef: RefObject<HTMLVideoElement | null>,
+  gradientRef: RefObject<HTMLDivElement | null>,
+  introRef: RefObject<HTMLDivElement | null>,
+  finalRef: RefObject<HTMLDivElement | null>,
+  hintRef: RefObject<HTMLDivElement | null>,
+  tuning: ScrubTuning
 ) {
-  const scale = Math.max(width / image.naturalWidth, height / image.naturalHeight);
-  const drawWidth = image.naturalWidth * scale;
-  const drawHeight = image.naturalHeight * scale;
-  const x = (width - drawWidth) / 2;
-  const y = (height - drawHeight) / 2;
-
-  ctx.save();
-  ctx.globalAlpha = alpha;
-  ctx.drawImage(image, x, y, drawWidth, drawHeight);
-  ctx.restore();
-}
-
-/* -------------------------------------------------------------------------- */
-/*  Cinematic scroll-scrub hero (default experience)                          */
-/* -------------------------------------------------------------------------- */
-
-function ScrubHero() {
-  const messages = useMessages();
-  const c = messages.home.scrollHero;
-  const sectionRef = useRef<HTMLElement>(null);
-  const stickyRef = useRef<HTMLDivElement>(null);
-
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  const gradientRef = useRef<HTMLDivElement>(null);
-  const introRef = useRef<HTMLDivElement>(null);
-  const finalRef = useRef<HTMLDivElement>(null);
-  const hintRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     const section = sectionRef.current;
     const video = videoRef.current;
@@ -135,9 +128,40 @@ function ScrubHero() {
       return clamp(-rect.top / scrollable);
     };
 
+    // Last values handed to the compositor. Rewriting a style property with the
+    // string it already holds still dirties the element, so each is written only
+    // when it has actually moved. The scrub itself is deliberately not guarded
+    // this way: `smoothed` eases toward its target, so it still has ground to
+    // cover on frames where scroll position did not change.
+    let lastIntroOpacity = -1;
+    let lastFinalEnter = -1;
+    let lastGradient = -1;
+    let lastHint = -1;
+    /** Below this, a change is far too small to be visible. */
+    const STYLE_EPSILON = 0.002;
+    const moved = (next: number, prev: number) =>
+      Math.abs(next - prev) > STYLE_EPSILON;
+
+    /**
+     * A panel that is fully faded out still costs the compositor its
+     * backdrop-filter blur on every repaint underneath it. Dropping the filter
+     * while it is invisible is free visually and takes that work out of the
+     * middle of the scrub, where neither panel is on screen.
+     */
+    const setPanel = (
+      el: HTMLElement,
+      opacity: number,
+      y: number,
+      interactive: boolean
+    ) => {
+      el.style.opacity = String(opacity);
+      el.style.transform = `translate3d(0, ${y}px, 0)`;
+      el.style.pointerEvents = interactive ? 'auto' : 'none';
+      el.style.backdropFilter = opacity < 0.05 ? 'none' : '';
+    };
+
     const render = () => {
       const p = computeProgress();
-
       const dur = durationOf(video);
 
       // --- Video scrub target ---------------------------------------------
@@ -156,35 +180,44 @@ function ScrubHero() {
       }
 
       // --- Intro overlay ("Stari Mayr") ----------------------------------
-      // Gentle, elegant exit: a longer fade with a soft upward lift as you scroll.
       const introLeave = smooth(ramp(p, 0.04, 0.2));
       const introOpacity = 1 - introLeave;
-      const introY = -introLeave * 52;
-      if (introRef.current) {
-        introRef.current.style.opacity = String(introOpacity);
-        introRef.current.style.transform = `translate3d(0, ${introY}px, 0)`;
-        introRef.current.style.pointerEvents = introOpacity < 0.05 ? 'none' : 'auto';
+      if (introRef.current && moved(introOpacity, lastIntroOpacity)) {
+        lastIntroOpacity = introOpacity;
+        setPanel(
+          introRef.current,
+          introOpacity,
+          -introLeave * tuning.introLift,
+          introOpacity >= 0.05
+        );
       }
 
       // --- Final overlay + CTA -------------------------------------------
-      // Fade in over the last stretch of the scrub, then hold through the tail.
       const finalEnter = smooth(ramp(p, SCRUB_END - 0.06, SCRUB_END));
-      const finalY = (1 - finalEnter) * 28;
-      if (finalRef.current) {
-        finalRef.current.style.opacity = String(finalEnter);
-        finalRef.current.style.transform = `translate3d(0, ${finalY}px, 0)`;
-        finalRef.current.style.pointerEvents = finalEnter > 0.5 ? 'auto' : 'none';
+      if (finalRef.current && moved(finalEnter, lastFinalEnter)) {
+        lastFinalEnter = finalEnter;
+        setPanel(
+          finalRef.current,
+          finalEnter,
+          (1 - finalEnter) * tuning.finalLift,
+          finalEnter > 0.5
+        );
       }
 
       // --- Readability gradient strength ---------------------------------
-      if (gradientRef.current) {
-        const boost = Math.max(introOpacity, finalEnter);
-        gradientRef.current.style.opacity = String(0.34 + 0.34 * boost);
+      const gradient =
+        tuning.gradientBase +
+        tuning.gradientBoost * Math.max(introOpacity, finalEnter);
+      if (gradientRef.current && moved(gradient, lastGradient)) {
+        lastGradient = gradient;
+        gradientRef.current.style.opacity = String(gradient);
       }
 
       // --- Scroll hint ----------------------------------------------------
-      if (hintRef.current) {
-        hintRef.current.style.opacity = String(1 - smooth(ramp(p, 0.02, 0.1)));
+      const hint = 1 - smooth(ramp(p, 0.02, 0.1));
+      if (hintRef.current && moved(hint, lastHint)) {
+        lastHint = hint;
+        hintRef.current.style.opacity = String(hint);
       }
 
       rafId = requestAnimationFrame(render);
@@ -201,18 +234,15 @@ function ScrubHero() {
     };
 
     // Initialise the video to its first frame once metadata is ready.
-    const initVideo = (v: HTMLVideoElement) => {
-      const onMeta = () => {
-        try {
-          v.currentTime = 0;
-        } catch {
-          /* seeking before ready — ignored */
-        }
-      };
-      if (v.readyState >= 1) onMeta();
-      else v.addEventListener('loadedmetadata', onMeta, { once: true });
+    const onMeta = () => {
+      try {
+        video.currentTime = 0;
+      } catch {
+        /* seeking before ready — ignored */
+      }
     };
-    initVideo(video);
+    if (video.readyState >= 1) onMeta();
+    else video.addEventListener('loadedmetadata', onMeta, { once: true });
 
     // Only run the rAF loop while the hero is on (or near) screen.
     const io = new IntersectionObserver(
@@ -225,10 +255,39 @@ function ScrubHero() {
     io.observe(section);
 
     return () => {
+      video.removeEventListener('loadedmetadata', onMeta);
       io.disconnect();
       stop();
     };
-  }, []);
+  }, [sectionRef, videoRef, gradientRef, introRef, finalRef, hintRef, tuning]);
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Cinematic scroll-scrub hero (default experience)                          */
+/* -------------------------------------------------------------------------- */
+
+function ScrubHero() {
+  const messages = useMessages();
+  const c = messages.home.scrollHero;
+  const sectionRef = useRef<HTMLElement>(null);
+  const stickyRef = useRef<HTMLDivElement>(null);
+
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const gradientRef = useRef<HTMLDivElement>(null);
+  const introRef = useRef<HTMLDivElement>(null);
+  const finalRef = useRef<HTMLDivElement>(null);
+  const hintRef = useRef<HTMLDivElement>(null);
+
+  useScrubTimeline(
+    sectionRef,
+    videoRef,
+    gradientRef,
+    introRef,
+    finalRef,
+    hintRef,
+    DESKTOP_TUNING
+  );
 
   return (
     <section
@@ -333,235 +392,25 @@ function ScrubHero() {
 /*  Touch / reduced-motion fallbacks                                          */
 /* -------------------------------------------------------------------------- */
 
-function MobileCanvasHero() {
+function MobileScrubHero() {
   const messages = useMessages();
   const c = messages.home.scrollHero;
   const sectionRef = useRef<HTMLElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const gradientRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
   const finalRef = useRef<HTMLDivElement>(null);
   const hintRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    const canvas = canvasRef.current;
-    const ctx = canvas?.getContext('2d');
-    if (!section || !canvas || !ctx) return;
-
-    // Mobile timeline (fraction of total section scroll), separate from
-    // ScrubHero's thresholds since the two heroes are independently tuned:
-    //  0.00 – 0.80  scrub the frame sequence from start to end
-    //  0.80 – 1.00  hold the final frame, reveal final overlay + CTA
-    const SCRUB_END = 0.8;
-
-    let rafId = 0;
-    let active = false;
-    let cancelled = false;
-    let lastDrawn: HTMLImageElement | null = null;
-    // The canvas stays transparent (poster shows through) until every frame is
-    // decoded. Drawing from a half-loaded sequence is what produced the
-    // hold-then-jump stutter: imageForProgress() returns null for a frame that
-    // has not arrived, so the canvas held the previous frame and then snapped
-    // forward once the late frame landed.
-    let ready = false;
-
-    const frames = MOBILE_FRAMES.map((src) => {
-      const image = new window.Image();
-      image.decoding = 'async';
-      // src is assigned by preloadFrames() so downloads stay throttled.
-      image.dataset.src = src;
-      return image;
-    });
-
-    // Fetch a few at a time, in playback order, instead of firing all 50
-    // requests at once — 50 parallel downloads split the connection so many
-    // evenly, the middle of the sequence is always the last to arrive.
-    const PRELOAD_CONCURRENCY = 6;
-
-    // decode() resolves only once the bitmap is ready to paint, so the first
-    // drawImage() of a frame never pays a decode cost mid-scroll.
-    const loadFrame = async (image: HTMLImageElement) => {
-      image.src = image.dataset.src ?? '';
-      try {
-        await image.decode();
-      } catch {
-        /* missing or undecodable frame — skipped so it cannot stall the rest */
-      }
-    };
-
-    const preloadFrames = async () => {
-      let next = 0;
-      const worker = async () => {
-        while (!cancelled && next < frames.length) {
-          await loadFrame(frames[next++]);
-        }
-      };
-      await Promise.all(
-        Array.from({ length: Math.min(PRELOAD_CONCURRENCY, frames.length) }, worker)
-      );
-      if (cancelled) return;
-      ready = true;
-      canvas.style.opacity = '1';
-      resizeCanvas();
-      draw(computeProgress());
-    };
-
-    const computeProgress = () => {
-      const rect = section.getBoundingClientRect();
-      const scrollable = section.offsetHeight - window.innerHeight;
-      if (scrollable <= 0) return 0;
-      return clamp(-rect.top / scrollable);
-    };
-
-    // Which frame is currently painted. -1 forces the next draw to repaint,
-    // which is also how a resize re-asserts itself: setting canvas.width blanks
-    // the backing store, so the frame on screen has to be drawn again.
-    let lastIndex = -1;
-
-    // Measuring the canvas is a layout read, so it happens on mount and on
-    // resize only — never inside the draw path, which runs on every frame.
-    const resizeCanvas = () => {
-      const rect = canvas.getBoundingClientRect();
-      const width = Math.max(1, Math.round(rect.width));
-      const height = Math.max(1, Math.round(rect.height));
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-        lastIndex = -1;
-      }
-    };
-
-    const draw = (p: number) => {
-      // Until the whole sequence is decoded, leave the canvas clear so the
-      // static poster underneath carries the hero.
-      if (!ready) return;
-
-      // 50 frames spread over ~1550px of scroll means a new frame every ~32px.
-      // Scrolling slowly, that is one new frame per ~9 animation frames; parked
-      // mid-hero it is none at all. Repainting regardless burned an upscaled
-      // full-canvas blit every tick for a canvas that had not changed, and made
-      // the compositor re-blur the overlays' backdrop-filter along with it.
-      const index = frameIndexForProgress(frames.length, ramp(p, 0, SCRUB_END));
-      if (index === lastIndex) return;
-
-      const frame = frames[index];
-      const usable = !!frame?.complete && frame.naturalWidth > 0;
-      const base = usable ? frame : lastDrawn;
-      if (!base) return;
-
-      // No clearRect: drawCover scales to cover, so it always overwrites every
-      // pixel of the canvas.
-      drawCover(ctx, base, canvas.width, canvas.height);
-      lastDrawn = base;
-      // Only bank the index if that frame is what actually got painted;
-      // otherwise the substituted frame would be mistaken for it and the real
-      // one would never be drawn. preloadFrames() makes this unreachable today.
-      if (usable) lastIndex = index;
-    };
-
-    // Last values handed to the compositor. Rewriting a style property with the
-    // string it already holds still dirties the element, so each is written only
-    // when it has actually moved.
-    let lastIntroOpacity = -1;
-    let lastFinalEnter = -1;
-    let lastGradient = -1;
-    let lastHint = -1;
-    let lastProgress = -1;
-    /** Below this, a change is far too small to be visible. */
-    const STYLE_EPSILON = 0.002;
-    const moved = (next: number, prev: number) =>
-      Math.abs(next - prev) > STYLE_EPSILON;
-
-    /**
-     * A panel that is fully faded out still costs the compositor its
-     * backdrop-filter blur on every canvas repaint underneath it. Dropping the
-     * filter while it is invisible is free visually and removes that work from
-     * the middle of the scrub, where neither overlay is on screen.
-     */
-    const setPanelVisibility = (el: HTMLElement, opacity: number, y: number) => {
-      el.style.opacity = String(opacity);
-      el.style.transform = `translate3d(0, ${y}px, 0)`;
-      const hidden = opacity < 0.05;
-      el.style.pointerEvents = hidden ? 'none' : 'auto';
-      el.style.backdropFilter = hidden ? 'none' : '';
-    };
-
-    const render = () => {
-      const p = computeProgress();
-
-      // Parked mid-hero — nothing downstream of progress can have changed.
-      if (p !== lastProgress) {
-        lastProgress = p;
-
-        draw(p);
-
-        const introLeave = smooth(ramp(p, 0.04, 0.2));
-        const introOpacity = 1 - introLeave;
-        if (introRef.current && moved(introOpacity, lastIntroOpacity)) {
-          lastIntroOpacity = introOpacity;
-          setPanelVisibility(introRef.current, introOpacity, -introLeave * 42);
-        }
-
-        const finalEnter = smooth(ramp(p, SCRUB_END - 0.06, SCRUB_END));
-        if (finalRef.current && moved(finalEnter, lastFinalEnter)) {
-          lastFinalEnter = finalEnter;
-          setPanelVisibility(finalRef.current, finalEnter, (1 - finalEnter) * 24);
-        }
-
-        const gradient = 0.36 + 0.36 * Math.max(introOpacity, finalEnter);
-        if (gradientRef.current && moved(gradient, lastGradient)) {
-          lastGradient = gradient;
-          gradientRef.current.style.opacity = String(gradient);
-        }
-
-        const hint = 1 - smooth(ramp(p, 0.02, 0.1));
-        if (hintRef.current && moved(hint, lastHint)) {
-          lastHint = hint;
-          hintRef.current.style.opacity = String(hint);
-        }
-      }
-
-      rafId = requestAnimationFrame(render);
-    };
-
-    const start = () => {
-      if (active) return;
-      active = true;
-      rafId = requestAnimationFrame(render);
-    };
-    const stop = () => {
-      active = false;
-      cancelAnimationFrame(rafId);
-    };
-
-    resizeCanvas();
-    void preloadFrames();
-
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) start();
-        else stop();
-      },
-      { rootMargin: '200px 0px' }
-    );
-    io.observe(section);
-
-    // Resizing blanks the backing store, and scroll progress alone may be
-    // unchanged, so the loop is told to treat the next tick as a fresh one.
-    const onResize = () => {
-      resizeCanvas();
-      lastProgress = -1;
-    };
-    window.addEventListener('resize', onResize);
-
-    return () => {
-      cancelled = true;
-      io.disconnect();
-      window.removeEventListener('resize', onResize);
-      stop();
-    };
-  }, []);
+  useScrubTimeline(
+    sectionRef,
+    videoRef,
+    gradientRef,
+    introRef,
+    finalRef,
+    hintRef,
+    MOBILE_TUNING
+  );
 
   return (
     <section
@@ -579,11 +428,19 @@ function MobileCanvasHero() {
           sizes="100vw"
           aria-hidden="true"
         />
-        <canvas
-          ref={canvasRef}
-          className="absolute inset-0 h-full w-full transition-opacity duration-500"
-          style={{ opacity: 0 }}
+        {/* The poster <Image> above paints immediately and stays underneath, so
+            if a device ever refuses to paint a seeked frame the hero degrades
+            to that still rather than to a blank panel. */}
+        <video
+          ref={videoRef}
+          className="absolute inset-0 h-full w-full object-cover"
+          src={VIDEO}
+          poster={VIDEO_POSTER}
+          muted
+          playsInline
+          preload="auto"
           aria-hidden="true"
+          tabIndex={-1}
         />
         <div
           ref={gradientRef}
