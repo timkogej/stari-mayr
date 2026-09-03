@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import type { AppLocale } from '@/i18n/routing';
 import Image from 'next/image';
+import heroImage from '../../../../public/images/mayr-ponudba-hero.jpeg';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { FadeIn } from '@/components/shared/FadeIn';
@@ -37,10 +38,11 @@ export default async function PonudbaPage() {
       {/* Hero strip */}
       <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-coffee">
         <Image
-          src="/images/mayr-ponudba-hero.jpeg"
+          src={heroImage}
           alt=""
           fill
-          priority
+          preload
+          placeholder="blur"
           sizes="100vw"
           className="object-cover opacity-50"
         />

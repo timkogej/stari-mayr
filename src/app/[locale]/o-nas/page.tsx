@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import type { AppLocale } from '@/i18n/routing';
 import Image from 'next/image';
+import heroImage from '../../../../public/images/stari-mayr-o-nas-hero-3.jpg';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { FadeIn } from '@/components/shared/FadeIn';
 import { SectionDivider } from '@/components/shared/SectionDivider';
@@ -33,10 +34,11 @@ export default async function ONasPage() {
       <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-coffee">
         <div className="absolute inset-0">
           <Image
-            src="/images/stari-mayr-o-nas-hero-3.jpg"
+            src={heroImage}
             alt=""
             fill
-            priority
+            preload
+            placeholder="blur"
             sizes="100vw"
             className="object-cover object-[58%_50%] md:object-center"
           />

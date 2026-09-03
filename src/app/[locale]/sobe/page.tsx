@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import type { AppLocale } from '@/i18n/routing';
 import Image from 'next/image';
+import heroImage from '../../../../public/images/mayr-sobe-hero-closeup.jpeg';
 import { Bath, Wifi } from 'lucide-react';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { PlaceholderImage } from '@/components/shared/PlaceholderImage';
@@ -56,10 +57,11 @@ export default async function SobePage() {
       <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-coffee">
         <div className="absolute inset-0 opacity-30">
           <Image
-            src="/images/mayr-sobe-hero-closeup.jpeg"
+            src={heroImage}
             alt=""
             fill
-            priority
+            preload
+            placeholder="blur"
             sizes="100vw"
             className="object-cover object-[center_65%]"
           />

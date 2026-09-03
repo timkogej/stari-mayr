@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import type { AppLocale } from '@/i18n/routing';
 import Image from 'next/image';
+import heroImage from '../../../../public/images/stari-mayr-kontakt-hero-2.jpeg';
 import { MapPin, Phone, Mail, Share2 } from 'lucide-react';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { FadeIn } from '@/components/shared/FadeIn';
@@ -37,10 +38,11 @@ export default async function KontaktPage() {
       {/* Hero */}
       <section className="relative bg-coffee flex items-center justify-center min-h-[50vh] overflow-hidden">
         <Image
-          src="/images/stari-mayr-kontakt-hero-2.jpeg"
+          src={heroImage}
           alt=""
           fill
-          priority
+          preload
+          placeholder="blur"
           sizes="100vw"
           className="object-cover object-center opacity-50"
         />
