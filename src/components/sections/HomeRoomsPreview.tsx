@@ -1,6 +1,6 @@
-import Image from 'next/image';
 import { getMessages } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
+import { RoomPreviewCard } from '@/components/sections/RoomPreviewCard';
 import { FadeIn } from '@/components/shared/FadeIn';
 import { SectionHeading } from '@/components/shared/SectionHeading';
 import { SectionDivider } from '@/components/shared/SectionDivider';
@@ -39,37 +39,15 @@ export async function HomeRoomsPreview() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {preview.cards.map((card, i) => (
             <FadeIn key={card.name} delay={i * 0.08}>
-              <div className="room-heritage-frame group relative aspect-[3/4] overflow-hidden border border-sand shadow-sm">
-                <Image
-                  src={roomCardImages[i]}
-                  alt={card.imageLabel}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className={`room-heritage-image ${roomCardFilters[i] ?? ''} object-cover`}
-                />
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background:
-                      'linear-gradient(to top, rgba(44,31,23,0.92) 0%, rgba(44,31,23,0.55) 32%, rgba(44,31,23,0.05) 60%, transparent 75%)',
-                  }}
-                />
-                <div className="absolute inset-x-0 bottom-0 p-6">
-                  <p className="font-display uppercase tracking-widest text-honey text-xs mb-1">
-                    {card.eyebrow}
-                  </p>
-                  <h3 className="font-display italic text-2xl text-cream mb-2">
-                    {card.name}
-                  </h3>
-                  <p
-                    className="font-body text-sm text-cream/85 leading-relaxed max-h-0 opacity-0
-                    -translate-y-1 overflow-hidden transition-all duration-500 ease-out
-                    group-hover:max-h-32 group-hover:opacity-100 group-hover:translate-y-0"
-                  >
-                    {card.description}
-                  </p>
-                </div>
-              </div>
+              <RoomPreviewCard
+                src={roomCardImages[i]}
+                filterClass={roomCardFilters[i] ?? ''}
+                eyebrow={card.eyebrow}
+                name={card.name}
+                description={card.description}
+                imageLabel={card.imageLabel}
+                revealLabel={`${card.name} — ${preview.revealHint}`}
+              />
             </FadeIn>
           ))}
         </div>

@@ -58,6 +58,7 @@
       "title": "Rooms above the old square",
       "lead": "The house offers double, triple and quadruple rooms. Each has its own bathroom, quiet privacy and the warmth of an old house, where a day in the city is easy to leave behind.",
       "link": "All about the rooms",
+      "revealHint": "show description",
       "cards": [
         {
           "eyebrow": "3 rooms",

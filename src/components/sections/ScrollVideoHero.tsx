@@ -55,10 +55,13 @@ function makeMobileFrames(basePath: string) {
   );
 }
 
-function imageForProgress(images: HTMLImageElement[], progress: number) {
-  const index = Math.round(clamp(progress) * (images.length - 1));
-  const image = images[index];
-  return image?.complete && image.naturalWidth > 0 ? image : null;
+/**
+ * Which frame of the sequence a 0..1 progress value lands on. Kept separate from
+ * the lookup so the draw loop can compare indices and skip a repaint when scroll
+ * moved but the frame it maps to did not.
+ */
+function frameIndexForProgress(frameCount: number, progress: number) {
+  return Math.round(clamp(progress) * (frameCount - 1));
 }
 
 function drawCover(
@@ -400,6 +403,7 @@ function MobileCanvasHero() {
       if (cancelled) return;
       ready = true;
       canvas.style.opacity = '1';
+      resizeCanvas();
       draw(computeProgress());
     };
 
@@ -410,6 +414,13 @@ function MobileCanvasHero() {
       return clamp(-rect.top / scrollable);
     };
 
+    // Which frame is currently painted. -1 forces the next draw to repaint,
+    // which is also how a resize re-asserts itself: setting canvas.width blanks
+    // the backing store, so the frame on screen has to be drawn again.
+    let lastIndex = -1;
+
+    // Measuring the canvas is a layout read, so it happens on mount and on
+    // resize only — never inside the draw path, which runs on every frame.
     const resizeCanvas = () => {
       const rect = canvas.getBoundingClientRect();
       const width = Math.max(1, Math.round(rect.width));
@@ -417,6 +428,7 @@ function MobileCanvasHero() {
       if (canvas.width !== width || canvas.height !== height) {
         canvas.width = width;
         canvas.height = height;
+        lastIndex = -1;
       }
     };
 
@@ -425,50 +437,89 @@ function MobileCanvasHero() {
       // static poster underneath carries the hero.
       if (!ready) return;
 
-      resizeCanvas();
+      // 50 frames spread over ~1550px of scroll means a new frame every ~32px.
+      // Scrolling slowly, that is one new frame per ~9 animation frames; parked
+      // mid-hero it is none at all. Repainting regardless burned an upscaled
+      // full-canvas blit every tick for a canvas that had not changed, and made
+      // the compositor re-blur the overlays' backdrop-filter along with it.
+      const index = frameIndexForProgress(frames.length, ramp(p, 0, SCRUB_END));
+      if (index === lastIndex) return;
 
-      const width = canvas.width;
-      const height = canvas.height;
-      const frame = imageForProgress(frames, ramp(p, 0, SCRUB_END));
+      const frame = frames[index];
+      const usable = !!frame?.complete && frame.naturalWidth > 0;
+      const base = usable ? frame : lastDrawn;
+      if (!base) return;
 
-      ctx.clearRect(0, 0, width, height);
+      // No clearRect: drawCover scales to cover, so it always overwrites every
+      // pixel of the canvas.
+      drawCover(ctx, base, canvas.width, canvas.height);
+      lastDrawn = base;
+      // Only bank the index if that frame is what actually got painted;
+      // otherwise the substituted frame would be mistaken for it and the real
+      // one would never be drawn. preloadFrames() makes this unreachable today.
+      if (usable) lastIndex = index;
+    };
 
-      const base = frame ?? lastDrawn;
-      if (base) {
-        drawCover(ctx, base, width, height);
-        lastDrawn = base;
-      }
+    // Last values handed to the compositor. Rewriting a style property with the
+    // string it already holds still dirties the element, so each is written only
+    // when it has actually moved.
+    let lastIntroOpacity = -1;
+    let lastFinalEnter = -1;
+    let lastGradient = -1;
+    let lastHint = -1;
+    let lastProgress = -1;
+    /** Below this, a change is far too small to be visible. */
+    const STYLE_EPSILON = 0.002;
+    const moved = (next: number, prev: number) =>
+      Math.abs(next - prev) > STYLE_EPSILON;
+
+    /**
+     * A panel that is fully faded out still costs the compositor its
+     * backdrop-filter blur on every canvas repaint underneath it. Dropping the
+     * filter while it is invisible is free visually and removes that work from
+     * the middle of the scrub, where neither overlay is on screen.
+     */
+    const setPanelVisibility = (el: HTMLElement, opacity: number, y: number) => {
+      el.style.opacity = String(opacity);
+      el.style.transform = `translate3d(0, ${y}px, 0)`;
+      const hidden = opacity < 0.05;
+      el.style.pointerEvents = hidden ? 'none' : 'auto';
+      el.style.backdropFilter = hidden ? 'none' : '';
     };
 
     const render = () => {
       const p = computeProgress();
 
-      draw(p);
+      // Parked mid-hero — nothing downstream of progress can have changed.
+      if (p !== lastProgress) {
+        lastProgress = p;
 
-      const introLeave = smooth(ramp(p, 0.04, 0.2));
-      const introOpacity = 1 - introLeave;
-      const introY = -introLeave * 42;
-      if (introRef.current) {
-        introRef.current.style.opacity = String(introOpacity);
-        introRef.current.style.transform = `translate3d(0, ${introY}px, 0)`;
-        introRef.current.style.pointerEvents = introOpacity < 0.05 ? 'none' : 'auto';
-      }
+        draw(p);
 
-      const finalEnter = smooth(ramp(p, SCRUB_END - 0.06, SCRUB_END));
-      const finalY = (1 - finalEnter) * 24;
-      if (finalRef.current) {
-        finalRef.current.style.opacity = String(finalEnter);
-        finalRef.current.style.transform = `translate3d(0, ${finalY}px, 0)`;
-        finalRef.current.style.pointerEvents = finalEnter > 0.5 ? 'auto' : 'none';
-      }
+        const introLeave = smooth(ramp(p, 0.04, 0.2));
+        const introOpacity = 1 - introLeave;
+        if (introRef.current && moved(introOpacity, lastIntroOpacity)) {
+          lastIntroOpacity = introOpacity;
+          setPanelVisibility(introRef.current, introOpacity, -introLeave * 42);
+        }
 
-      if (gradientRef.current) {
-        const boost = Math.max(introOpacity, finalEnter);
-        gradientRef.current.style.opacity = String(0.36 + 0.36 * boost);
-      }
+        const finalEnter = smooth(ramp(p, SCRUB_END - 0.06, SCRUB_END));
+        if (finalRef.current && moved(finalEnter, lastFinalEnter)) {
+          lastFinalEnter = finalEnter;
+          setPanelVisibility(finalRef.current, finalEnter, (1 - finalEnter) * 24);
+        }
 
-      if (hintRef.current) {
-        hintRef.current.style.opacity = String(1 - smooth(ramp(p, 0.02, 0.1)));
+        const gradient = 0.36 + 0.36 * Math.max(introOpacity, finalEnter);
+        if (gradientRef.current && moved(gradient, lastGradient)) {
+          lastGradient = gradient;
+          gradientRef.current.style.opacity = String(gradient);
+        }
+
+        const hint = 1 - smooth(ramp(p, 0.02, 0.1));
+        if (hintRef.current && moved(hint, lastHint)) {
+          lastHint = hint;
+          hintRef.current.style.opacity = String(hint);
+        }
       }
 
       rafId = requestAnimationFrame(render);
@@ -484,6 +535,7 @@ function MobileCanvasHero() {
       cancelAnimationFrame(rafId);
     };
 
+    resizeCanvas();
     void preloadFrames();
 
     const io = new IntersectionObserver(
@@ -494,12 +546,19 @@ function MobileCanvasHero() {
       { rootMargin: '200px 0px' }
     );
     io.observe(section);
-    window.addEventListener('resize', resizeCanvas);
+
+    // Resizing blanks the backing store, and scroll progress alone may be
+    // unchanged, so the loop is told to treat the next tick as a fresh one.
+    const onResize = () => {
+      resizeCanvas();
+      lastProgress = -1;
+    };
+    window.addEventListener('resize', onResize);
 
     return () => {
       cancelled = true;
       io.disconnect();
-      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('resize', onResize);
       stop();
     };
   }, []);

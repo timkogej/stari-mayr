@@ -195,7 +195,11 @@
   will-change: filter, transform;
 }
 
+/* [data-revealed] is the touch equivalent of :hover — set by RoomPreviewCard
+   when a card is tapped open, so the image responds the same way it does to a
+   pointer hover on desktop. */
 .room-heritage-frame:hover .room-heritage-image,
+.room-heritage-frame[data-revealed='true'] .room-heritage-image,
 .home-heritage-frame:hover .home-heritage-image {
   filter: var(--room-heritage-filter-hover, sepia(0.18) saturate(1.12) contrast(0.98) brightness(1.05) hue-rotate(-3deg));
   transform: scale(1.035);
