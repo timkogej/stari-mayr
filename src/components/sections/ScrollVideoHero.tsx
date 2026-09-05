@@ -312,12 +312,20 @@ function MobileStaticHero() {
     if (!section) return;
 
     // Mobile timeline (fraction of total section scroll). The background is a
-    // still photograph now, but the overlay choreography is unchanged: the
-    // intro leaves early, and the final panel is still withheld until the
-    // visitor has scrolled the length of the hero.
-    //  0.00 - 0.80  intro clears, image holds
-    //  0.80 - 1.00  final overlay + CTA reveal
-    const REVEAL_AT = 0.8;
+    // still photograph, so any stretch where neither overlay is moving reads as
+    // scrolling gone dead — there is no animating image to confirm the gesture
+    // did anything. The section is therefore shorter than the desktop scrub
+    // (240svh, was 330svh) and the reveal lands earlier, which cuts that idle
+    // middle from ~124svh of travel to ~48svh.
+    //  0.04 - 0.24  intro clears
+    //  0.24 - 0.58  image holds (the short remaining gap)
+    //  0.58 - 0.68  final overlay + CTA reveal
+    //  0.68 - 1.00  hold the CTA through the tail
+    // Thresholds widen as the section shrinks: the fades are tuned in absolute
+    // scroll distance, and a fraction of a shorter section is fewer pixels.
+    const INTRO_LEAVE_END = 0.24;
+    const REVEAL_AT = 0.68;
+    const REVEAL_FADE = 0.1;
 
     let rafId = 0;
     let active = false;
@@ -362,14 +370,14 @@ function MobileStaticHero() {
       if (p !== lastProgress) {
         lastProgress = p;
 
-        const introLeave = smooth(ramp(p, 0.04, 0.2));
+        const introLeave = smooth(ramp(p, 0.04, INTRO_LEAVE_END));
         const introOpacity = 1 - introLeave;
         if (introRef.current && moved(introOpacity, lastIntroOpacity)) {
           lastIntroOpacity = introOpacity;
           setPanelVisibility(introRef.current, introOpacity, -introLeave * 42);
         }
 
-        const finalEnter = smooth(ramp(p, REVEAL_AT - 0.06, REVEAL_AT));
+        const finalEnter = smooth(ramp(p, REVEAL_AT - REVEAL_FADE, REVEAL_AT));
         if (finalRef.current && moved(finalEnter, lastFinalEnter)) {
           lastFinalEnter = finalEnter;
           setPanelVisibility(finalRef.current, finalEnter, (1 - finalEnter) * 24);
@@ -420,18 +428,21 @@ function MobileStaticHero() {
   return (
     <section
       ref={sectionRef}
-      className="relative h-[330svh] bg-coffee"
+      className="relative h-[240svh] bg-coffee"
       aria-label={`${c.introTitle}. ${c.finalTitle}.`}
     >
       <div className="sticky top-0 h-[100svh] min-h-[620px] w-full overflow-hidden bg-coffee">
         {/* CROP POSITION — the source is a wide landscape photo being cropped
             into a portrait phone viewport, so this one value decides which part
-            of it you see. Currently left-weighted (the old-town street and
-            church tower). Change just this to try others: 'center',
-            'right center' (the hanging sign), or a percentage like '30% center'. */}
+            of it you see. At 35% the whole hanging 'Stari Mayr' sign sits in
+            frame — medallion, cutlery mark and lettering all legible — with the
+            wrought-iron bracket and drainpipe filling the right edge. Lower
+            values pan back toward the old-town street and church tower ('left
+            center' shows only those); higher values clip the sign's left edge
+            (by 40% the medallion is already cut). Change just this value. */}
         <Image
           className="object-cover"
-          style={{ objectPosition: 'left center' }}
+          style={{ objectPosition: '35% center' }}
           src={mainHeroImage}
           alt=""
           fill
