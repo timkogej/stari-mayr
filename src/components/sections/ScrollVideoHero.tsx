@@ -433,21 +433,24 @@ function MobileStaticHero() {
     >
       <div className="sticky top-0 h-[100svh] min-h-[620px] w-full overflow-hidden bg-coffee">
         {/* CROP POSITION — wide landscape source cropped into a portrait phone
-            viewport. Currently 15%: the church steeple and clock face, the
-            sunlit cobbled street and its pastel houses, and the left half of
-            the hanging sign (cutlery mark, 'Stari M') — the atmospheric
-            town-plus-sign framing the owner asked for, at the cost of the
-            sign's right lettering running off the edge.
-            Direction matters here: street and tower live at 0-22% of the
-            source and the sign at 27-42%, so LOWER values pan toward the town,
-            higher ones toward the sign and then bare wall (45% loses the town
-            entirely and still clips the sign). The viewport shows only ~26% of
-            the source width while tower and sign together span ~31%, so no
-            value fits both whole — 20% is the nearest alternative, trading the
-            steeple for the full 'Stari Mayr' lettering. Adjust just this. */}
+            viewport. Currently 14%: the church steeple whole (finial, clock
+            face and roof, which 15% clipped on its left edge), the sunlit
+            cobbled street and its pastel houses, and the left half of the
+            hanging sign — cutlery mark and 'Stari M', the rest of the
+            lettering running off the right edge.
+            The tower occupies 10.5-15.5% of the source, so 14% is the highest
+            value that clears it; below ~13% the sign starts losing letters for
+            nothing but extra sky. Direction matters: street and tower live at
+            0-22% of the source and the sign at 27-42%, so LOWER values pan
+            toward the town, higher ones toward the sign and then bare wall
+            (45% loses the town entirely and still clips the sign). The
+            viewport shows only ~26% of the source width while tower and sign
+            together span ~31%, so no value fits both whole — 20% is the
+            nearest alternative, trading the steeple for the full 'Stari Mayr'
+            lettering. Adjust just this. */}
         <Image
           className="object-cover"
-          style={{ objectPosition: '15% center' }}
+          style={{ objectPosition: '14% center' }}
           src={mainHeroImage}
           alt=""
           fill
