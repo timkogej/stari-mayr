@@ -100,7 +100,7 @@
     "hero": {
       "eyebrow": "Kaj ponujamo",
       "title": "Ponudba",
-      "lead": "Stavba, sobe, zajtrk in atrij — kaj vas čaka pri Stari Mayr."
+      "lead": "Stavba, sobe, zajtrk in atrij — kaj vas čaka v Starem Mayrju."
     },
     "roof": {
       "title": "Pod isto streho",
@@ -109,7 +109,7 @@
     },
     "zajtrk": {
       "title": "Zajtrk",
-      "body": "Zajtrk pripravimo vsako jutro za goste, ki pri nas prespijo — samopostrežnega, à la carte ali kontinentalnega. Če potrebujete brezglutensko, vegetarijansko ali kakšno drugo posebno različico, nam sporočite ob rezervaciji in bo pripravljeno za vas."
+      "body": "Za goste, ki pri nas prespijo, vsako jutro pripravimo zajtrk s samopostrežno ponudbo in jedmi po naročilu. Če potrebujete brezglutensko, vegetarijansko ali kakšno drugo posebno različico, nam sporočite ob rezervaciji in bo pripravljeno za vas."
     },
     "atrij": {
       "title": "Atrij",
