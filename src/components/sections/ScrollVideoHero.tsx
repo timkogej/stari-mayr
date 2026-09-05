@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import mainHeroImage from '../../../public/images/stari-mayr-main-hero.jpeg';
 import { useMessages } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { ReservationButtons } from '@/components/shared/ReservationButtons';
@@ -17,8 +18,6 @@ import {
 
 const VIDEO = '/videos/stari-mayr-scroll.mp4';
 const VIDEO_POSTER = '/images/stari-mayr-scroll-hero-poster.jpg';
-const MOBILE_FRAME_COUNT = 50;
-const MOBILE_FRAMES = makeMobileFrames('/frames/stari-mayr-mobile/scroll/frame-');
 
 /**
  * Scroll timeline (fraction of total section scroll):
@@ -39,48 +38,14 @@ export function ScrollVideoHero() {
     return <StillHeroFallback />;
   }
 
-  // Scroll-scrubbing MP4 with currentTime is unreliable on iOS Safari. Touch
-  // devices get a canvas frame sequence driven by scroll instead.
+  // The scroll-scrubbed video does not hold up on touch devices, and cropping
+  // its landscape frames into a portrait phone viewport read poorly. Mobile
+  // gets a still photograph with the same overlay choreography over it.
   if (isTouch) {
-    return <MobileCanvasHero />;
+    return <MobileStaticHero />;
   }
 
   return <ScrubHero />;
-}
-
-function makeMobileFrames(basePath: string) {
-  return Array.from(
-    { length: MOBILE_FRAME_COUNT },
-    (_, i) => `${basePath}${String(i + 1).padStart(3, '0')}.jpg`
-  );
-}
-
-/**
- * Which frame of the sequence a 0..1 progress value lands on. Kept separate from
- * the lookup so the draw loop can compare indices and skip a repaint when scroll
- * moved but the frame it maps to did not.
- */
-function frameIndexForProgress(frameCount: number, progress: number) {
-  return Math.round(clamp(progress) * (frameCount - 1));
-}
-
-function drawCover(
-  ctx: CanvasRenderingContext2D,
-  image: HTMLImageElement,
-  width: number,
-  height: number,
-  alpha = 1
-) {
-  const scale = Math.max(width / image.naturalWidth, height / image.naturalHeight);
-  const drawWidth = image.naturalWidth * scale;
-  const drawHeight = image.naturalHeight * scale;
-  const x = (width - drawWidth) / 2;
-  const y = (height - drawHeight) / 2;
-
-  ctx.save();
-  ctx.globalAlpha = alpha;
-  ctx.drawImage(image, x, y, drawWidth, drawHeight);
-  ctx.restore();
 }
 
 /* -------------------------------------------------------------------------- */
@@ -333,11 +298,10 @@ function ScrubHero() {
 /*  Touch / reduced-motion fallbacks                                          */
 /* -------------------------------------------------------------------------- */
 
-function MobileCanvasHero() {
+function MobileStaticHero() {
   const messages = useMessages();
   const c = messages.home.scrollHero;
   const sectionRef = useRef<HTMLElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const gradientRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
   const finalRef = useRef<HTMLDivElement>(null);
@@ -345,119 +309,24 @@ function MobileCanvasHero() {
 
   useEffect(() => {
     const section = sectionRef.current;
-    const canvas = canvasRef.current;
-    const ctx = canvas?.getContext('2d');
-    if (!section || !canvas || !ctx) return;
+    if (!section) return;
 
-    // Mobile timeline (fraction of total section scroll), separate from
-    // ScrubHero's thresholds since the two heroes are independently tuned:
-    //  0.00 – 0.80  scrub the frame sequence from start to end
-    //  0.80 – 1.00  hold the final frame, reveal final overlay + CTA
-    const SCRUB_END = 0.8;
+    // Mobile timeline (fraction of total section scroll). The background is a
+    // still photograph now, but the overlay choreography is unchanged: the
+    // intro leaves early, and the final panel is still withheld until the
+    // visitor has scrolled the length of the hero.
+    //  0.00 - 0.80  intro clears, image holds
+    //  0.80 - 1.00  final overlay + CTA reveal
+    const REVEAL_AT = 0.8;
 
     let rafId = 0;
     let active = false;
-    let cancelled = false;
-    let lastDrawn: HTMLImageElement | null = null;
-    // The canvas stays transparent (poster shows through) until every frame is
-    // decoded. Drawing from a half-loaded sequence is what produced the
-    // hold-then-jump stutter: imageForProgress() returns null for a frame that
-    // has not arrived, so the canvas held the previous frame and then snapped
-    // forward once the late frame landed.
-    let ready = false;
-
-    const frames = MOBILE_FRAMES.map((src) => {
-      const image = new window.Image();
-      image.decoding = 'async';
-      // src is assigned by preloadFrames() so downloads stay throttled.
-      image.dataset.src = src;
-      return image;
-    });
-
-    // Fetch a few at a time, in playback order, instead of firing all 50
-    // requests at once — 50 parallel downloads split the connection so many
-    // evenly, the middle of the sequence is always the last to arrive.
-    const PRELOAD_CONCURRENCY = 6;
-
-    // decode() resolves only once the bitmap is ready to paint, so the first
-    // drawImage() of a frame never pays a decode cost mid-scroll.
-    const loadFrame = async (image: HTMLImageElement) => {
-      image.src = image.dataset.src ?? '';
-      try {
-        await image.decode();
-      } catch {
-        /* missing or undecodable frame — skipped so it cannot stall the rest */
-      }
-    };
-
-    const preloadFrames = async () => {
-      let next = 0;
-      const worker = async () => {
-        while (!cancelled && next < frames.length) {
-          await loadFrame(frames[next++]);
-        }
-      };
-      await Promise.all(
-        Array.from({ length: Math.min(PRELOAD_CONCURRENCY, frames.length) }, worker)
-      );
-      if (cancelled) return;
-      ready = true;
-      canvas.style.opacity = '1';
-      resizeCanvas();
-      draw(computeProgress());
-    };
 
     const computeProgress = () => {
       const rect = section.getBoundingClientRect();
       const scrollable = section.offsetHeight - window.innerHeight;
       if (scrollable <= 0) return 0;
       return clamp(-rect.top / scrollable);
-    };
-
-    // Which frame is currently painted. -1 forces the next draw to repaint,
-    // which is also how a resize re-asserts itself: setting canvas.width blanks
-    // the backing store, so the frame on screen has to be drawn again.
-    let lastIndex = -1;
-
-    // Measuring the canvas is a layout read, so it happens on mount and on
-    // resize only — never inside the draw path, which runs on every frame.
-    const resizeCanvas = () => {
-      const rect = canvas.getBoundingClientRect();
-      const width = Math.max(1, Math.round(rect.width));
-      const height = Math.max(1, Math.round(rect.height));
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-        lastIndex = -1;
-      }
-    };
-
-    const draw = (p: number) => {
-      // Until the whole sequence is decoded, leave the canvas clear so the
-      // static poster underneath carries the hero.
-      if (!ready) return;
-
-      // 50 frames spread over ~1550px of scroll means a new frame every ~32px.
-      // Scrolling slowly, that is one new frame per ~9 animation frames; parked
-      // mid-hero it is none at all. Repainting regardless burned an upscaled
-      // full-canvas blit every tick for a canvas that had not changed, and made
-      // the compositor re-blur the overlays' backdrop-filter along with it.
-      const index = frameIndexForProgress(frames.length, ramp(p, 0, SCRUB_END));
-      if (index === lastIndex) return;
-
-      const frame = frames[index];
-      const usable = !!frame?.complete && frame.naturalWidth > 0;
-      const base = usable ? frame : lastDrawn;
-      if (!base) return;
-
-      // No clearRect: drawCover scales to cover, so it always overwrites every
-      // pixel of the canvas.
-      drawCover(ctx, base, canvas.width, canvas.height);
-      lastDrawn = base;
-      // Only bank the index if that frame is what actually got painted;
-      // otherwise the substituted frame would be mistaken for it and the real
-      // one would never be drawn. preloadFrames() makes this unreachable today.
-      if (usable) lastIndex = index;
     };
 
     // Last values handed to the compositor. Rewriting a style property with the
@@ -475,9 +344,8 @@ function MobileCanvasHero() {
 
     /**
      * A panel that is fully faded out still costs the compositor its
-     * backdrop-filter blur on every canvas repaint underneath it. Dropping the
-     * filter while it is invisible is free visually and removes that work from
-     * the middle of the scrub, where neither overlay is on screen.
+     * backdrop-filter blur on every repaint underneath it. Dropping the filter
+     * while it is invisible is free visually.
      */
     const setPanelVisibility = (el: HTMLElement, opacity: number, y: number) => {
       el.style.opacity = String(opacity);
@@ -490,11 +358,9 @@ function MobileCanvasHero() {
     const render = () => {
       const p = computeProgress();
 
-      // Parked mid-hero — nothing downstream of progress can have changed.
+      // Parked mid-hero - nothing downstream of progress can have changed.
       if (p !== lastProgress) {
         lastProgress = p;
-
-        draw(p);
 
         const introLeave = smooth(ramp(p, 0.04, 0.2));
         const introOpacity = 1 - introLeave;
@@ -503,7 +369,7 @@ function MobileCanvasHero() {
           setPanelVisibility(introRef.current, introOpacity, -introLeave * 42);
         }
 
-        const finalEnter = smooth(ramp(p, SCRUB_END - 0.06, SCRUB_END));
+        const finalEnter = smooth(ramp(p, REVEAL_AT - 0.06, REVEAL_AT));
         if (finalRef.current && moved(finalEnter, lastFinalEnter)) {
           lastFinalEnter = finalEnter;
           setPanelVisibility(finalRef.current, finalEnter, (1 - finalEnter) * 24);
@@ -535,9 +401,7 @@ function MobileCanvasHero() {
       cancelAnimationFrame(rafId);
     };
 
-    resizeCanvas();
-    void preloadFrames();
-
+    // Only run the rAF loop while the hero is on (or near) screen.
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) start();
@@ -547,18 +411,8 @@ function MobileCanvasHero() {
     );
     io.observe(section);
 
-    // Resizing blanks the backing store, and scroll progress alone may be
-    // unchanged, so the loop is told to treat the next tick as a fresh one.
-    const onResize = () => {
-      resizeCanvas();
-      lastProgress = -1;
-    };
-    window.addEventListener('resize', onResize);
-
     return () => {
-      cancelled = true;
       io.disconnect();
-      window.removeEventListener('resize', onResize);
       stop();
     };
   }, []);
@@ -570,19 +424,20 @@ function MobileCanvasHero() {
       aria-label={`${c.introTitle}. ${c.finalTitle}.`}
     >
       <div className="sticky top-0 h-[100svh] min-h-[620px] w-full overflow-hidden bg-coffee">
+        {/* CROP POSITION — the source is a wide landscape photo being cropped
+            into a portrait phone viewport, so this one value decides which part
+            of it you see. Currently left-weighted (the old-town street and
+            church tower). Change just this to try others: 'center',
+            'right center' (the hanging sign), or a percentage like '30% center'. */}
         <Image
           className="object-cover"
-          src={VIDEO_POSTER}
+          style={{ objectPosition: 'left center' }}
+          src={mainHeroImage}
           alt=""
           fill
           preload
+          placeholder="blur"
           sizes="100vw"
-          aria-hidden="true"
-        />
-        <canvas
-          ref={canvasRef}
-          className="absolute inset-0 h-full w-full transition-opacity duration-500"
-          style={{ opacity: 0 }}
           aria-hidden="true"
         />
         <div

@@ -3,12 +3,8 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { renderAdminNotificationEmail } from '@/lib/email-templates/admin-notification';
 
 /** Where the notification lands. `info@` has no inbox — replies go to the visitor. */
-// TEMPORARY — using Tim's own jedroplus.com addresses to preview the
-// email template before the stari-mayr.si domain is verified in Resend.
-// Revert both `from` and `to` back to the real values
-// (info@stari-mayr.si / the confirmed business inbox) before shipping.
-const FROM = 'Stari Mayr Test <info@jedroplus.com>';
-const TO = 'tim.kogej@jedroplus.com';
+const FROM = 'Kontaktni obrazec — Stari Mayr <info@stari-mayr.si>';
+const TO = 'stari-mayr@t-2.net';
 
 const MAX_NAME = 200;
 const MAX_EMAIL = 320;
