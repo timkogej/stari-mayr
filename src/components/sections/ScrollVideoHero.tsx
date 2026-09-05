@@ -432,17 +432,22 @@ function MobileStaticHero() {
       aria-label={`${c.introTitle}. ${c.finalTitle}.`}
     >
       <div className="sticky top-0 h-[100svh] min-h-[620px] w-full overflow-hidden bg-coffee">
-        {/* CROP POSITION — the source is a wide landscape photo being cropped
-            into a portrait phone viewport, so this one value decides which part
-            of it you see. At 35% the whole hanging 'Stari Mayr' sign sits in
-            frame — medallion, cutlery mark and lettering all legible — with the
-            wrought-iron bracket and drainpipe filling the right edge. Lower
-            values pan back toward the old-town street and church tower ('left
-            center' shows only those); higher values clip the sign's left edge
-            (by 40% the medallion is already cut). Change just this value. */}
+        {/* CROP POSITION — wide landscape source cropped into a portrait phone
+            viewport. Currently 15%: the church steeple and clock face, the
+            sunlit cobbled street and its pastel houses, and the left half of
+            the hanging sign (cutlery mark, 'Stari M') — the atmospheric
+            town-plus-sign framing the owner asked for, at the cost of the
+            sign's right lettering running off the edge.
+            Direction matters here: street and tower live at 0-22% of the
+            source and the sign at 27-42%, so LOWER values pan toward the town,
+            higher ones toward the sign and then bare wall (45% loses the town
+            entirely and still clips the sign). The viewport shows only ~26% of
+            the source width while tower and sign together span ~31%, so no
+            value fits both whole — 20% is the nearest alternative, trading the
+            steeple for the full 'Stari Mayr' lettering. Adjust just this. */}
         <Image
           className="object-cover"
-          style={{ objectPosition: '35% center' }}
+          style={{ objectPosition: '15% center' }}
           src={mainHeroImage}
           alt=""
           fill
