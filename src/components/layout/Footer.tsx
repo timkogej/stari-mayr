@@ -54,8 +54,19 @@ export async function Footer() {
           <ReservationButtons />
         </div>
 
-        <div className="border-t border-cream/10 pt-6 text-xs font-body text-cream/40">
-          © {year} {f.copyright}
+        <div className="border-t border-cream/10 pt-6 text-xs font-body text-cream/40 flex flex-wrap gap-x-3 gap-y-1">
+          <span>© {year} {f.copyright}</span>
+          <span>
+            {f.creditPrefix}{' '}
+            <a
+              href="https://www.jedroplus.com/agencija"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-cream/80 transition-colors"
+            >
+              {f.creditName}
+            </a>
+          </span>
         </div>
 
         <div className="mt-6 pt-6 border-t border-cream/10 flex flex-wrap gap-x-6 gap-y-2 justify-center text-xs text-cream/50">

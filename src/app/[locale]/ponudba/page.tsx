@@ -111,13 +111,13 @@ export default async function PonudbaPage() {
                 {ponudba.atrij.body}
               </p>
             </div>
-            <div className="relative overflow-hidden aspect-[4/3] border border-sand shadow-sm">
+            <div className="home-heritage-frame relative overflow-hidden aspect-[4/3] border border-sand shadow-sm">
               <Image
                 src="/images/mayr-domov-atrij.jpeg"
                 alt={messages.home.atrium.imageLabel}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
+                className="home-heritage-image home-heritage-image--atrium object-cover"
               />
             </div>
           </div>
